@@ -1,0 +1,21 @@
+{
+  "name": "my-fitness-journey",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "create-css": "npx @tailwindcss/cli -i ./static/src/input.css -o ./static/css/main.css --watch"
+  },
+  "keywords": [],
+  "author": "Angel Andrade",
+  "license": "MIT",
+  "description": "Document your fitness journey, visualize progress, and achieve your goals without any cost or limitations.",
+  "dependencies": {
+    "@commitlint/prompt-cli": "^19.8.1",
+    "@tailwindcss/cli": "^4.1.8",
+    "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1"
+  }
+}
