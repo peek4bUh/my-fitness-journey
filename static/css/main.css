@@ -34,9 +34,6 @@
     --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-gray-800: oklch(27.8% 0.033 256.848);
     --color-gray-900: oklch(21% 0.034 264.665);
-    --color-stone-100: oklch(97% 0.001 106.424);
-    --color-stone-200: oklch(92.3% 0.003 48.717);
-    --color-stone-500: oklch(55.3% 0.013 58.071);
     --color-stone-600: oklch(44.4% 0.011 73.639);
     --color-stone-950: oklch(14.7% 0.004 49.25);
     --color-white: #fff;
@@ -463,9 +460,6 @@
   .overflow-hidden {
     overflow: hidden;
   }
-  .scroll-smooth {
-    scroll-behavior: smooth;
-  }
   .rounded {
     border-radius: 0.25rem;
   }
@@ -517,9 +511,6 @@
   .border-orange-600 {
     border-color: var(--color-orange-600);
   }
-  .border-red-300 {
-    border-color: var(--color-red-300);
-  }
   .border-white {
     border-color: var(--color-white);
   }
@@ -537,12 +528,6 @@
   }
   .bg-orange-100 {
     background-color: var(--color-orange-100);
-  }
-  .bg-orange-300 {
-    background-color: var(--color-orange-300);
-  }
-  .bg-orange-400 {
-    background-color: var(--color-orange-400);
   }
   .bg-orange-600 {
     background-color: var(--color-orange-600);
@@ -656,6 +641,10 @@
   .text-xs {
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .leading-none {
+    --tw-leading: 1;
+    line-height: 1;
   }
   .leading-normal {
     --tw-leading: var(--leading-normal);
@@ -782,10 +771,6 @@
     --tw-duration: 300ms;
     transition-duration: 300ms;
   }
-  .duration-600 {
-    --tw-duration: 600ms;
-    transition-duration: 600ms;
-  }
   .group-hover\:bg-orange-200 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -810,13 +795,6 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-orange-200);
-      }
-    }
-  }
-  .hover\:bg-gray-100 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-gray-100);
       }
     }
   }

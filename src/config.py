@@ -3,7 +3,7 @@
 class Config(object):
     """Base config, uses staging database server."""
     TESTING = False
-    DB_NAME = "db.sqlite"
+    DB_NAME = "test.db"
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{DB_NAME}"
 
 

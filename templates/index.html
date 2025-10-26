@@ -13,8 +13,8 @@
     <header class="border-b border-gray-200 bg-white/95 backdrop-blur-sm sticky top-0 z-100">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center" __v0_r="0,3121,3188"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                <div class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center" __v0_r="0,3121,3188">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-dumbbell w-5 h-5 text-white" __v0_r="0,3224,3244">
                         <path d="M14.4 14.4 9.6 9.6"></path>
@@ -26,18 +26,20 @@
                         <path
                             d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z">
                         </path>
-                    </svg></div>
-                <span class="text-xl font-bold text-gray-900">MyFitnessJourney</span>
+                    </svg>
+                </div>
+                <h1 class="text-xl font-bold text-gray-900 ">MyFitnessJourney</h1>
             </div>
             <nav class="hidden md:flex items-center space-x-6 font-medium">
                 <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
                 <a href="#reasons" class="text-gray-600 hover:text-gray-900 transition-colors">Reasons</a>
                 <a href="#opensource" class="text-gray-600 hover:text-gray-900 transition-colors">Open Source</a>
-                <a href=" {{ url_for('auth.login') }}"
+                <a href=" {{ url_for('auth.login_user') }}"
                     class="block rounded-md bg-transparent border-2 border-orange-600 text-stone-600 hover:text-white transition-all duration-200 hover:bg-orange-600 px-6 py-2">
                     Log In
                 </a>
-                <a href=" {{ url_for('auth.login') }}"
+                <!-- TODO: Change url_for path -->
+                <a href=" {{ url_for('auth.register_user') }}"
                     class="block rounded-md border-2 border-orange-600 bg-orange-600 text-white hover:bg-orange-400 transition-all duration-200 px-8 py-2">
                     Go To App
                 </a>
@@ -54,17 +56,17 @@
                         class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-white text-stone-600 mb-4">
                         🚀 Open Source & Free Forever
                     </span>
-                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                         Open Source
                         <span class="text-orange-600"> Fitness Tool </span>
                         Tracker
-                    </h1>
+                    </h2>
                     <p class="text-xl mb-8 leading-relaxed">
                         A completely free and open source fitness tracking app. Document your fitness journey, visualize
                         progress, and achieve your goals without any cost or limitations.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 mb-8 text-lg font-medium text-white">
-                        <a href=" {{ url_for('auth.login') }}"
+                        <a href=" {{ url_for('auth.login_user') }}"
                             class="block rounded-md bg-orange-600 hover:bg-orange-700 px-8 py-3 transition-all duration-200">
                             Join For Free
                         </a>
