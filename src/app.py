@@ -1,10 +1,11 @@
 from flask import Flask
 
-from config.profiles import DevelopmentProfile
+from config import DevelopmentConfig
 
 
 def create_app():
     app = Flask(__name__)
+    app.config.from_object(DevelopmentConfig())
 
     app = Flask(__name__,
                 template_folder='../templates',

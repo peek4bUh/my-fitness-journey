@@ -1,6 +1,6 @@
 from flask import render_template
 
-from config.constants.pages import PAGE_INDEX
+from globals import PAGE_INDEX
 
 
 class IndexService:

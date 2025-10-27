@@ -2,10 +2,15 @@ from flask import jsonify, redirect, render_template, request, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from models.user import UserModel
-from config.constants.pages import PAGE_DASHBOARD, PAGE_LOGIN, PAGE_SIGNUP
-from config.constants.messages import MSG_ERROR_INVALID_CREDENTIALS, MSG_ERROR_USER_TAKEN
-from config.constants.globals import HTTP_200_OK
 from repository.user_repository import UserRepository
+from globals import (
+    PAGE_DASHBOARD,
+    PAGE_LOGIN,
+    PAGE_SIGNUP,
+    MSG_ERROR_INVALID_CREDENTIALS,
+    MSG_ERROR_USER_TAKEN,
+    HTTP_200_OK
+)
 
 
 class AuthService:
