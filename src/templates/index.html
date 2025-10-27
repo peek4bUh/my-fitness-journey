@@ -23,12 +23,11 @@
                 <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
                 <a href="#reasons" class="text-gray-600 hover:text-gray-900 transition-colors">Reasons</a>
                 <a href="#opensource" class="text-gray-600 hover:text-gray-900 transition-colors">Open Source</a>
-                <a href=" {{ url_for('auth.login') }}"
+                <a href=" {{ url_for('api.auth.login') }}"
                     class="block rounded-md bg-transparent border-2 border-orange-600 text-stone-600 hover:text-white transition-all duration-200 hover:bg-orange-600 px-6 py-2">
                     Log In
                 </a>
-                <!-- TODO: Change url_for path -->
-                <a href=" {{ url_for('auth.register') }}"
+                <a href=" {{ url_for('api.auth.register') }}"
                     class="block rounded-md border-2 border-orange-600 bg-orange-600 text-white hover:bg-orange-400 transition-all duration-200 px-8 py-2">
                     Go To App
                 </a>
@@ -55,7 +54,7 @@
                         progress, and achieve your goals without any cost or limitations.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 mb-8 text-lg font-medium text-white">
-                        <a href=" {{ url_for('auth.login') }}"
+                        <a href=" {{ url_for('api.auth.login') }}"
                             class="block rounded-md bg-orange-600 hover:bg-orange-700 px-8 py-3 transition-all duration-200">
                             Join For Free
                         </a>
