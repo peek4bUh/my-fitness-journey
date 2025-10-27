@@ -1,6 +1,6 @@
 from flask import jsonify
 
-from models.user_model import UserModel
+from models.user import UserModel
 
 
 class UserService:

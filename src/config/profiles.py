@@ -1,20 +1,20 @@
 # https://flask.palletsprojects.com/en/stable/config/#development-production
 
-class Config(object):
+class DefaultProfile(object):
     """Base config, uses staging database server."""
     TESTING = False
     DB_NAME = "test.db"
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{DB_NAME}"
 
 
-class DevelopmentConfig(Config):
+class DevelopmentProfile(DefaultProfile):
     pass
 
 
-class ProductionConfig(Config):
+class ProductionProfile(DefaultProfile):
     pass
 
 
-class TestingConfig(Config):
+class TestingProfile(DefaultProfile):
     DATABASE_URI = 'sqlite:///:memory:'
     TESTING = True

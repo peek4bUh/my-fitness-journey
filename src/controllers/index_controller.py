@@ -1,5 +1,9 @@
-from routes.blueprints import index_bp
+from flask import Blueprint
+
 from services.index_service import IndexService
+
+
+index_bp = Blueprint('index', __name__)
 
 
 @index_bp.route("/")
