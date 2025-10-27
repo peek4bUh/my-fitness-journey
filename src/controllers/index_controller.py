@@ -4,9 +4,9 @@ from services.index_service import IndexService
 
 
 index_bp = Blueprint('index', __name__)
+index_service = IndexService()
 
 
 @index_bp.route("/")
-@index_bp.route("/index")
 def index():
-    return IndexService.index()
+    return index_service.index()

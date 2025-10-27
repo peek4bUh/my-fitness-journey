@@ -1,8 +1,9 @@
 from flask import render_template
 
+from config.constants.pages import PAGE_INDEX
+
 
 class IndexService:
 
-    @staticmethod
-    def index():
-        return render_template("index.html")
+    def index(self):
+        return render_template(PAGE_INDEX)

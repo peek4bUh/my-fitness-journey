@@ -4,47 +4,41 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import UserModel
 from config.constants.pages import PAGE_DASHBOARD, PAGE_LOGIN, PAGE_SIGNUP
 from config.constants.messages import MSG_ERROR_INVALID_CREDENTIALS, MSG_ERROR_USER_TAKEN
-from config.constants.globals import METHOD_GET, METHOD_POST
+from config.constants.globals import HTTP_200_OK
+from repository.user_repository import UserRepository
 
 
 class AuthService:
 
-    @staticmethod
-    def login_user():
-        if request.method == METHOD_GET:
-            return render_template(PAGE_LOGIN)
+    def __init__(self):
+        self.user_repository = UserRepository()
 
-        if request.method == METHOD_POST:
-            request_username = request.form.get("username")
-            request_password = request.form.get("password")
-            user = UserModel.query.filter_by(username=request_username).first()
+    def login_user(self):
+        data = request.get_json()
+        request_username = data.get("username")
+        request_password = data.get("password")
+        user = UserModel.query.filter_by(username=request_username).first()
 
-            if user and check_password_hash(user.password, request_password):
-                return redirect(url_for(PAGE_DASHBOARD))
-            else:
-                return render_template(PAGE_LOGIN, error=MSG_ERROR_INVALID_CREDENTIALS)
+        if user and check_password_hash(user.password, request_password):
+            return redirect(url_for(PAGE_DASHBOARD))
+        else:
+            return render_template(PAGE_LOGIN, error=MSG_ERROR_INVALID_CREDENTIALS)
 
-    @staticmethod
-    def register_user():
-        if request.method == METHOD_GET:
-            return render_template(PAGE_SIGNUP)
+    def register_user(self):
+        data = request.get_json()
 
-        if request.method == METHOD_POST:
-            data = request.get_json()
-            request_username = data.get("username")
-            request_password = data.get("password")
-            request_email = data.get("email")
+        from dto.user import UserDto
+        user_dto = UserDto()
+        user_dto.set_username(data.get("username"))
+        hashed_password = generate_password_hash(data.get("password"))
+        user_dto.set_password(hashed_password)
+        user_dto.set_email(data.get("email"))
 
-            if UserModel.query.filter_by(username=request_username).first():
-                return render_template(PAGE_SIGNUP, error=MSG_ERROR_USER_TAKEN)
+        self.__check_if_user_exists()
+        self.user_repository.create_user(user_dto)
 
-            # hashed_password = generate_password_hash(password, method="pbkdf2:sha256")
-            new_user = UserModel(username=request_username,
-                                 password=request_password,
-                                 email=request_email)
+        return jsonify({"message": "User created successfully."}), HTTP_200_OK
 
-            from database import db
-            db.session.add(new_user)
-            db.session.commit()
-
-            return jsonify({"message": "OK"}), 200
+    def __check_if_user_exists(self, username: str) -> str:
+        if self.user_repository.find_user_by_username(username):
+            return render_template(PAGE_SIGNUP, error=MSG_ERROR_USER_TAKEN)

@@ -10,12 +10,8 @@ def create_app():
                 static_folder='../static')
     app.config.from_object(DevelopmentProfile())
 
-    from controllers.index_controller import index_bp
-    from controllers.auth_controller import auth_bp
-    from controllers.user_controller import api_bp
-    app.register_blueprint(index_bp)
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(api_bp)
+    from controllers import blueprints
+    [app.register_blueprint(bp) for bp in blueprints]
 
     from database import db
     db.init_app(app)
