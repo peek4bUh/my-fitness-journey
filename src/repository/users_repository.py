@@ -1,10 +1,12 @@
+from flask import jsonify
+
 from dto.user import UserDto
 from models.user import UserModel
 
 
-class UserRepository:
+class UsersRepository:
 
-    def create_user(sefl, user: UserDto) -> None:
+    def create_user(self, user: UserDto) -> None:
         new_user = UserModel(username=user.username,
                              password=user.password,
                              email=user.email)

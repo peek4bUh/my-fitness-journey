@@ -2,7 +2,7 @@ from flask import jsonify, redirect, render_template, request, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from models.user import UserModel
-from repository.user_repository import UserRepository
+from repository.users_repository import UsersRepository
 from globals import (
     PAGE_DASHBOARD,
     PAGE_LOGIN,
@@ -13,10 +13,10 @@ from globals import (
 )
 
 
-class AuthService:
+class UsersService:
 
     def __init__(self):
-        self.user_repository = UserRepository()
+        self.users_repository = UsersRepository()
 
     def login_user(self):
         data = request.get_json()
@@ -39,11 +39,11 @@ class AuthService:
         user_dto.set_password(hashed_password)
         user_dto.set_email(data.get("email"))
 
-        self.__check_if_user_exists()
-        self.user_repository.create_user(user_dto)
+        self.__check_if_user_exists(user_dto.get_username())
+        self.users_repository.create_user(user_dto)
 
         return jsonify({"message": "User created successfully."}), HTTP_200_OK
 
     def __check_if_user_exists(self, username: str) -> str:
-        if self.user_repository.find_user_by_username(username):
+        if self.users_repository.find_user_by_username(username):
             return render_template(PAGE_SIGNUP, error=MSG_ERROR_USER_TAKEN)

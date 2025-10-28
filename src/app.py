@@ -4,16 +4,15 @@ from config import DevelopmentConfig
 
 
 def create_app():
-    app = Flask(__name__)
-    app.config.from_object(DevelopmentConfig())
-
     app = Flask(__name__,
                 template_folder='../templates',
                 static_folder='../static')
-    app.config.from_object(DevelopmentProfile())
+    app.config.from_object(DevelopmentConfig())
 
-    from controllers import blueprints
-    [app.register_blueprint(bp) for bp in blueprints]
+    from routes.api import api_bp
+    from routes.web import web_bp
+    app.register_blueprint(api_bp)
+    app.register_blueprint(web_bp)
 
     from database import db
     db.init_app(app)
