@@ -2,411 +2,403 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MyFitnessJourney</title>
-    <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyFitnessJourney</title>
+  <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
 </head>
 
 <body class="leading-normal tracking-normal text-white bg-gray-50">
-    <!-- Header -->
-    <header class="border-b border-gray-200 bg-white/95 backdrop-blur-sm sticky top-0 z-100">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center" __v0_r="0,3121,3188">
-                    <img class="w-5 h-5" alt="MyFitnessJourney Logo"
-                        src="{{url_for('static', filename='images/logo.svg')}}" />
-                </div>
-                <h1 class="text-xl font-bold text-gray-900">MyFitnessJourney</h1>
-            </div>
-            <nav class="hidden md:flex items-center space-x-6 font-medium">
-                <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
-                <a href="#reasons" class="text-gray-600 hover:text-gray-900 transition-colors">Reasons</a>
-                <a href="#opensource" class="text-gray-600 hover:text-gray-900 transition-colors">Open Source</a>
-                <a href=" {{ url_for('web.auth.navigate_to_login') }}"
-                    class="block rounded-md bg-transparent border-2 border-orange-600 text-stone-600 hover:text-white transition-all duration-200 hover:bg-orange-600 px-6 py-2">
-                    Log In
-                </a>
-                <a href=" {{ url_for('web.auth.navigate_to_signup') }}"
-                    class="block rounded-md border-2 border-orange-600 bg-orange-600 text-white hover:bg-orange-400 transition-all duration-200 px-8 py-2">
-                    Register
-                </a>
-            </nav>
+  <!-- Header -->
+  <header class="border-b border-gray-200 bg-white/95 backdrop-blur-sm sticky top-0 z-100">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center" __v0_r="0,3121,3188">
+          <img class="w-5 h-5" alt="MyFitnessJourney Logo" src="{{url_for('static', filename='images/logo.svg')}}" />
         </div>
-    </header>
+        <h1 class="text-xl font-bold text-gray-900">MyFitnessJourney</h1>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 font-medium">
+        <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+        <a href="#reasons" class="text-gray-600 hover:text-gray-900 transition-colors">Reasons</a>
+        <a href="#opensource" class="text-gray-600 hover:text-gray-900 transition-colors">Open Source</a>
+        <a href=" {{ url_for('web.auth.login_page') }}"
+          class="block rounded-md bg-transparent border-2 border-orange-600 text-stone-600 hover:text-white transition-all duration-200 hover:bg-orange-600 px-6 py-2">
+          Log In
+        </a>
+        <a href=" {{ url_for('web.auth.signup_page') }}"
+          class="block rounded-md border-2 border-orange-600 bg-orange-600 text-white hover:bg-orange-400 transition-all duration-200 px-8 py-2">
+          Register
+        </a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <span
-                        class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-white text-stone-600 mb-4">
-                        🚀 Open Source & Free Forever
-                    </span>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                        Open Source
-                        <span class="text-orange-600"> Fitness Tool </span>
-                        Tracker
-                    </h2>
-                    <p class="text-xl mb-8 leading-relaxed">
-                        A completely free and open source fitness tracking app. Document your fitness journey, visualize
-                        progress, and achieve your goals without any cost or limitations.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 mb-8 text-lg font-medium text-white">
-                        <a href=" {{ url_for('web.auth.navigate_to_login') }}"
-                            class="block rounded-md bg-orange-600 hover:bg-orange-700 px-8 py-3 transition-all duration-200">
-                            Join For Free
-                        </a>
-                        <a href="https://github.com/peek4bUh/my-fitness-journey"
-                            class="block rounded-md border-2 border-white hover:bg-white hover:text-stone-950 transition-all duration-200 px-8 py-3">
-                            View on GitHub
-                        </a>
-                    </div>
-                    <div class="flex items-center gap-6 text-sm">
-                        <div class="flex items-center gap-2">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
-                            <span>100% Free Forever</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
-                            <span>Open Source</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
-                            <span>No Ads or Tracking</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative">
-                    <div class="bg-white rounded-2xl p-8 shadow-2xl">
-                        <div class="h-[500px] flex items-center justify-center z-50">
-                            <img class="z-50"
-                                src="{{url_for('static', filename='images/undraw_athletes-training_koqa.svg')}}" />
-                        </div>
-                    </div>
-                    <div class="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-4 text-green-500">
-                        <span class="font-bold">+15% Strength Gain</span>
-                    </div>
-                </div>
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span
+            class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium bg-white text-stone-600 mb-4">
+            🚀 Open Source & Free Forever
+          </span>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            Open Source
+            <span class="text-orange-600"> Fitness Tool </span>
+            Tracker
+          </h2>
+          <p class="text-xl mb-8 leading-relaxed">
+            A completely free and open source fitness tracking app. Document your fitness journey, visualize
+            progress, and achieve your goals without any cost or limitations.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 mb-8 text-lg font-medium text-white">
+            <a href=" {{ url_for('web.auth.login_page') }}"
+              class="block rounded-md bg-orange-600 hover:bg-orange-700 px-8 py-3 transition-all duration-200">
+              Join For Free
+            </a>
+            <a href="https://github.com/peek4bUh/my-fitness-journey"
+              class="block rounded-md border-2 border-white hover:bg-white hover:text-stone-950 transition-all duration-200 px-8 py-3">
+              View on GitHub
+            </a>
+          </div>
+          <div class="flex items-center gap-6 text-sm">
+            <div class="flex items-center gap-2">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
+              <span>100% Free Forever</span>
             </div>
+            <div class="flex items-center gap-2">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
+              <span>Open Source</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
+              <span>No Ads or Tracking</span>
+            </div>
+          </div>
         </div>
+
+        <div class="relative">
+          <div class="bg-white rounded-2xl p-8 shadow-2xl">
+            <div class="h-[500px] flex items-center justify-center z-50">
+              <img class="z-50" src="{{url_for('static', filename='images/undraw_athletes-training_koqa.svg')}}" />
+            </div>
+          </div>
+          <div class="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-4 text-green-500">
+            <span class="font-bold">+15% Strength Gain</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+    </div>
+  </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    Everything You Need to Dominate Your Workouts
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Powerful features designed for serious fitness enthusiasts who want to track, analyze, and improve
-                    their
-                    performance.
-                </p>
+  <!-- Features Section -->
+  <section id="features" class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Everything You Need to Dominate Your Workouts
+        </h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+          Powerful features designed for serious fitness enthusiasts who want to track, analyze, and improve
+          their
+          performance.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div
+          class="rounded-lg border-2 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
+          <div class="p-6">
+            <div
+              class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+              <img class="w-6" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/icons/dumbell.svg')}}" />
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div
-                    class="rounded-lg border-2 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
-                    <div class="p-6">
-                        <div
-                            class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
-                            <img class="w-6" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/icons/dumbell.svg')}}" />
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Tracking</h3>
-                        <p class="text-gray-600 leading-relaxed">Log every rep, set, and weight with our intuitive
-                            interface. Never lose track of your progress again.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 2 -->
-                <div
-                    class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
-                    <div class="p-6">
-                        <div
-                            class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
-                            <img class="w-6" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/icons/up-arrow.svg')}}" />
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Progress Analytics</h3>
-                        <p class="text-gray-600 leading-relaxed">Visualize your strength gains with detailed charts and
-                            progress tracking over time.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 3 -->
-                <div
-                    class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
-                    <div class="p-6">
-                        <div
-                            class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
-                            <img class="w-6" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/icons/circle.svg')}}" />
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Goal Setting</h3>
-                        <p class="text-gray-600 leading-relaxed">Set weekly and monthly fitness goals and track your
-                            consistency with smart reminders.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 4 -->
-                <div
-                    class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
-                    <div class="p-6">
-                        <div
-                            class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
-                            <img class="w-6" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/icons/timer.svg')}}" />
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Timer</h3>
-                        <p class="text-gray-600 leading-relaxed">Built-in rest timers and workout duration tracking to
-                            optimize your gym sessions.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 5 -->
-                <div
-                    class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
-                    <div class="p-6">
-                        <div
-                            class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
-                            <img class="w-6" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/icons/metrics.svg')}}" />
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Body Metrics</h3>
-                        <p class="text-gray-600 leading-relaxed">Track weight, body fat percentage, and muscle mass
-                            changes over time.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 6 -->
-                <div
-                    class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
-                    <div class="p-6">
-                        <div
-                            class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
-                            <img class="w-6" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/icons/phone.svg')}}" />
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Mobile First</h3>
-                        <p class="text-gray-600 leading-relaxed">Designed for mobile use in the gym with offline support
-                            and quick logging.</p>
-                    </div>
-                </div>
-            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Tracking</h3>
+            <p class="text-gray-600 leading-relaxed">Log every rep, set, and weight with our intuitive
+              interface. Never lose track of your progress again.</p>
+          </div>
         </div>
-    </section>
 
-    <!-- Reasons Section -->
-    <section id="reasons" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Why Choose MyFitnessJourney?</h2>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Join thousands of fitness enthusiasts who have transformed their workouts with our comprehensive
-                        tracking platform.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
-                            <span class="text-gray-700">Track unlimited workouts and exercises</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
-                                class="text-gray-700">Visual progress charts and analytics</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
-                                class="text-gray-700">Workout templates and routines</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
-                                class="text-gray-700">Rest timer and workout duration tracking</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
-                                class="text-gray-700">Body metrics and measurements</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
-                                class="text-gray-700">Goal setting and achievement tracking</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
-                                class="text-gray-700">Offline mode for gym use</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img class="w-4" alt="Circle Check Icon"
-                                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
-                                class="text-gray-700">Export data and progress reports</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img class="w-full md:w-4/5 z-50" src="{{url_for('static', filename='images/hero.png')}}" />
-                </div>
+        <!-- Feature 2 -->
+        <div
+          class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
+          <div class="p-6">
+            <div
+              class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+              <img class="w-6" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/icons/up-arrow.svg')}}" />
             </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Progress Analytics</h3>
+            <p class="text-gray-600 leading-relaxed">Visualize your strength gains with detailed charts and
+              progress tracking over time.</p>
+          </div>
         </div>
-    </section>
 
-    <!-- Open Source Section -->
-    <section id="opensource" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    Built by Fitness Enthusiasts, For Fitness Enthusiasts
-                </h2>
-                <p class="text-xl text-gray-600">MyFitnessJourney is completely open source and free to use</p>
+        <!-- Feature 3 -->
+        <div
+          class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
+          <div class="p-6">
+            <div
+              class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+              <img class="w-6" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/icons/circle.svg')}}" />
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Open Source Feature 1 -->
-                <div class="border-2 border-green-200 text-center rounded-lg bg-white">
-                    <div class="p-8">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" data-lucide="check-circle"
-                                class="lucide lucide-check-circle w-8 h-8 text-green-600">
-                                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
-                                <path d="m9 11 3 3L22 4"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">100% Free</h3>
-                        <p class="text-gray-600">
-                            No subscriptions, no hidden fees, no premium features. Everything is free forever.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Open Source Feature 2 -->
-                <div class="border-2 border-orange-200 text-center rounded-lg bg-white">
-                    <div class="p-8">
-                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" data-lucide="dumbbell"
-                                class="lucide lucide-dumbbell w-8 h-8 text-orange-600">
-                                <path
-                                    d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z">
-                                </path>
-                                <path d="m2.5 21.5 1.4-1.4"></path>
-                                <path d="m20.1 3.9 1.4-1.4"></path>
-                                <path
-                                    d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z">
-                                </path>
-                                <path d="m9.6 14.4 4.8-4.8"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Open Source</h3>
-                        <p class="text-gray-600">
-                            Full source code available on GitHub. Contribute, customize, or learn from the codebase.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Open Source Feature 3 -->
-                <div class="border-2 border-blue-200 text-center rounded-lg bg-white">
-                    <div class="p-8">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" data-lucide="target"
-                                class="lucide lucide-target w-8 h-8 text-blue-600">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <circle cx="12" cy="12" r="6"></circle>
-                                <circle cx="12" cy="12" r="2"></circle>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Privacy First</h3>
-                        <p class="text-gray-600">
-                            Your data stays on your device. No tracking, no ads, no data collection.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Goal Setting</h3>
+            <p class="text-gray-600 leading-relaxed">Set weekly and monthly fitness goals and track your
+              consistency with smart reminders.</p>
+          </div>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-gray-800">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Begin Your Fitness Journey?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">
-                Join the community of fitness enthusiasts documenting their journey with the best free and open source
-                tracker.
+        <!-- Feature 4 -->
+        <div
+          class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
+          <div class="p-6">
+            <div
+              class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+              <img class="w-6" alt="Circle Check Icon" src="{{url_for('static', filename='images/icons/timer.svg')}}" />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Timer</h3>
+            <p class="text-gray-600 leading-relaxed">Built-in rest timers and workout duration tracking to
+              optimize your gym sessions.</p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div
+          class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
+          <div class="p-6">
+            <div
+              class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+              <img class="w-6" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/icons/metrics.svg')}}" />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Body Metrics</h3>
+            <p class="text-gray-600 leading-relaxed">Track weight, body fat percentage, and muscle mass
+              changes over time.</p>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div
+          class="rounded-lg border-2 border-gray-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg group bg-white">
+          <div class="p-6">
+            <div
+              class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+              <img class="w-6" alt="Circle Check Icon" src="{{url_for('static', filename='images/icons/phone.svg')}}" />
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Mobile First</h3>
+            <p class="text-gray-600 leading-relaxed">Designed for mobile use in the gym with offline support
+              and quick logging.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reasons Section -->
+  <section id="reasons" class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Why Choose MyFitnessJourney?</h2>
+          <p class="text-lg text-gray-600 mb-8">
+            Join thousands of fitness enthusiasts who have transformed their workouts with our comprehensive
+            tracking platform.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" />
+              <span class="text-gray-700">Track unlimited workouts and exercises</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
+                class="text-gray-700">Visual progress charts and analytics</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
+                class="text-gray-700">Workout templates and routines</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
+                class="text-gray-700">Rest timer and workout duration tracking</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
+                class="text-gray-700">Body metrics and measurements</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
+                class="text-gray-700">Goal setting and achievement tracking</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
+                class="text-gray-700">Offline mode for gym use</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <img class="w-4" alt="Circle Check Icon"
+                src="{{url_for('static', filename='images/circle-check-regular.svg')}}" /> <span
+                class="text-gray-700">Export data and progress reports</span>
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <img class="w-full md:w-4/5 z-50" src="{{url_for('static', filename='images/hero.png')}}" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Source Section -->
+  <section id="opensource" class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Built by Fitness Enthusiasts, For Fitness Enthusiasts
+        </h2>
+        <p class="text-xl text-gray-600">MyFitnessJourney is completely open source and free to use</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Open Source Feature 1 -->
+        <div class="border-2 border-green-200 text-center rounded-lg bg-white">
+          <div class="p-8">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                data-lucide="check-circle" class="lucide lucide-check-circle w-8 h-8 text-green-600">
+                <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                <path d="m9 11 3 3L22 4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">100% Free</h3>
+            <p class="text-gray-600">
+              No subscriptions, no hidden fees, no premium features. Everything is free forever.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center text-lg font-medium">
-                <a href="https://github.com/peek4bUh/my-fitness-journey"
-                    class="block text-gray-800 rounded-md border-2 border-white hover:bg-gray-200 transition-all duration-200 px-8 py-3 bg-white">
-                    Start now
-                </a>
-                <a href=" https://github.com/peek4bUh/my-fitness-journey"
-                    class="block text-white rounded-md border-2 border-white hover:bg-white hover:text-gray-800 transition-all duration-200 px-8 py-3">
-                    Contribute on GitHub
-                </a>
-            </div>
-            <p class="mt-4 text-sm">100% Free • Open Source • No Ads or Tracking</p>
+          </div>
         </div>
-    </section>
 
-    <!--Footer-->
-    <footer class="bg-white py-8 text-stone-950">
-        <div class="container mx-auto px-8 flex flex-col sm:flex-row sm:justify-between gap-6 sm:gap-0">
-            <div class="order-2">
-                <div class="flex items-center mb-4">
-                    <ul class="flex items-center text-sm">
-                        <li class="relative after:content-['·'] after:mx-2">
-                            <a href="http://www.aandradeb.com" target="_blank"
-                                class="hover:text-sky-500 transition-colors duration-200">Portfolio</a>
-                        </li>
-                        <li class="relative after:content-['·'] after:mx-2">
-                            <a class="hover:text-sky-500 transition-colors duration-200" target="_blank"
-                                href="https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176/">Linkedin</a>
-                        </li>
-                        <li class="relative after:content-['·'] after:mx-2">
-                            <a href="https://github.com/peek4bUh/my-fitness-journey" target="_blank"
-                                class="hover:text-sky-500 transition-colors duration-200">GitHub</a>
-                        </li>
-                        <li class="relative after:mx-2">
-                            <a class="hover:text-sky-500 transition-colors duration-200" target="_blank"
-                                href="https://github.com/peek4bUh/my-fitness-journey/blob/main/LICENSE">License</a>
-                        </li>
-                    </ul>
-                </div>
-                <p class="text-gray-500 text-sm">© 2025 · MyFitnessJourney · All rights reserved</p>
+        <!-- Open Source Feature 2 -->
+        <div class="border-2 border-orange-200 text-center rounded-lg bg-white">
+          <div class="p-8">
+            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                data-lucide="dumbbell" class="lucide lucide-dumbbell w-8 h-8 text-orange-600">
+                <path
+                  d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z">
+                </path>
+                <path d="m2.5 21.5 1.4-1.4"></path>
+                <path d="m20.1 3.9 1.4-1.4"></path>
+                <path
+                  d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z">
+                </path>
+                <path d="m9.6 14.4 4.8-4.8"></path>
+              </svg>
             </div>
-            <div class="order-1 sm:order-3 sm:text-right">
-                <p class="text-sm text-gray-700 mb-3">Created by <a
-                        href="https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176/" target="_blank"
-                        rel="noopener noreferrer"
-                        class="underline font-bold hover:text-sky-500 transition-colors duration-200">Angel
-                        Andrade</a></p>
-                <p class="text-sm text-gray-700">Developed with <a href="https://flask.palletsprojects.com/en/stable/"
-                        target="_blank"
-                        class="underline font-bold hover:text-sky-500 transition-colors duration-200">Flask</a>
-                    + <a href="https://tailwindcss.com/" target="_blank"
-                        class="underline font-bold hover:text-sky-500 transition-colors duration-200">Tailwind
-                        CSS</a></p>
-            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Open Source</h3>
+            <p class="text-gray-600">
+              Full source code available on GitHub. Contribute, customize, or learn from the codebase.
+            </p>
+          </div>
         </div>
+
+        <!-- Open Source Feature 3 -->
+        <div class="border-2 border-blue-200 text-center rounded-lg bg-white">
+          <div class="p-8">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                data-lucide="target" class="lucide lucide-target w-8 h-8 text-blue-600">
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="6"></circle>
+                <circle cx="12" cy="12" r="2"></circle>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Privacy First</h3>
+            <p class="text-gray-600">
+              Your data stays on your device. No tracking, no ads, no data collection.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-gray-800">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Begin Your Fitness Journey?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Join the community of fitness enthusiasts documenting their journey with the best free and open source
+        tracker.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center text-lg font-medium">
+        <a href="https://github.com/peek4bUh/my-fitness-journey"
+          class="block text-gray-800 rounded-md border-2 border-white hover:bg-gray-200 transition-all duration-200 px-8 py-3 bg-white">
+          Start now
+        </a>
+        <a href=" https://github.com/peek4bUh/my-fitness-journey"
+          class="block text-white rounded-md border-2 border-white hover:bg-white hover:text-gray-800 transition-all duration-200 px-8 py-3">
+          Contribute on GitHub
+        </a>
+      </div>
+      <p class="mt-4 text-sm">100% Free • Open Source • No Ads or Tracking</p>
+    </div>
+  </section>
+
+  <!--Footer-->
+  <footer class="bg-white py-8 text-stone-950">
+    <div class="container mx-auto px-8 flex flex-col sm:flex-row sm:justify-between gap-6 sm:gap-0">
+      <div class="order-2">
+        <div class="flex items-center mb-4">
+          <ul class="flex items-center text-sm">
+            <li class="relative after:content-['·'] after:mx-2">
+              <a href="http://www.aandradeb.com" target="_blank"
+                class="hover:text-sky-500 transition-colors duration-200">Portfolio</a>
+            </li>
+            <li class="relative after:content-['·'] after:mx-2">
+              <a class="hover:text-sky-500 transition-colors duration-200" target="_blank"
+                href="https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176/">Linkedin</a>
+            </li>
+            <li class="relative after:content-['·'] after:mx-2">
+              <a href="https://github.com/peek4bUh/my-fitness-journey" target="_blank"
+                class="hover:text-sky-500 transition-colors duration-200">GitHub</a>
+            </li>
+            <li class="relative after:mx-2">
+              <a class="hover:text-sky-500 transition-colors duration-200" target="_blank"
+                href="https://github.com/peek4bUh/my-fitness-journey/blob/main/LICENSE">License</a>
+            </li>
+          </ul>
+        </div>
+        <p class="text-gray-500 text-sm">© 2025 · MyFitnessJourney · All rights reserved</p>
+      </div>
+      <div class="order-1 sm:order-3 sm:text-right">
+        <p class="text-sm text-gray-700 mb-3">Created by <a
+            href="https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176/" target="_blank"
+            rel="noopener noreferrer"
+            class="underline font-bold hover:text-sky-500 transition-colors duration-200">Angel
+            Andrade</a></p>
+        <p class="text-sm text-gray-700">Developed with <a href="https://flask.palletsprojects.com/en/stable/"
+            target="_blank" class="underline font-bold hover:text-sky-500 transition-colors duration-200">Flask</a>
+          + <a href="https://tailwindcss.com/" target="_blank"
+            class="underline font-bold hover:text-sky-500 transition-colors duration-200">Tailwind
+            CSS</a></p>
+      </div>
+    </div>
 </body>
 
 </html>
