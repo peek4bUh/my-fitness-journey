@@ -1,8 +1,9 @@
-from flask import jsonify, render_template, request
+from flask import jsonify, request
 from werkzeug.security import generate_password_hash
 
+from dto.user import UserOutput
 from .repository import UsersRepository
-from core.constants.globals import HTTP_200_OK, HTTP_409_CONFLICT
+from core.constants.globals import HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
 
 
 class UsersService:
@@ -27,3 +28,13 @@ class UsersService:
         self.users_repository.create_user(user_dto)
 
         return jsonify({"message": "User created successfully."}), HTTP_200_OK
+
+    def get_user_data(self, username: str):
+        user = self.users_repository.find_by_username(username)
+
+        if not user:
+            return jsonify({"message": "User not found."}), HTTP_404_NOT_FOUND
+
+        user_output = UserOutput(user.username, user.email).__dict__
+
+        return jsonify({"data": user_output}), HTTP_200_OK
