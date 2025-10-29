@@ -9,7 +9,8 @@ from globals import (
     PAGE_SIGNUP,
     MSG_ERROR_INVALID_CREDENTIALS,
     MSG_ERROR_USER_TAKEN,
-    HTTP_200_OK
+    HTTP_200_OK,
+    HTTP_401_UNAUTHORIZED
 )
 
 
@@ -22,12 +23,14 @@ class UsersService:
         data = request.get_json()
         request_username = data.get("username")
         request_password = data.get("password")
-        user = UserModel.query.filter_by(username=request_username).first()
+        user = self.users_repository.find_user_by_username(request_username)
 
         if user and check_password_hash(user.password, request_password):
-            return redirect(url_for(PAGE_DASHBOARD))
+            # return redirect(url_for(PAGE_DASHBOARD))
+            return jsonify({"message": "User logged successfully.", "user_id": user.id}), HTTP_200_OK
         else:
-            return render_template(PAGE_LOGIN, error=MSG_ERROR_INVALID_CREDENTIALS)
+            # return render_template(PAGE_LOGIN, error=MSG_ERROR_INVALID_CREDENTIALS)
+            return jsonify({"message": "User invalid credentials."}), HTTP_401_UNAUTHORIZED
 
     def register_user(self):
         data = request.get_json()

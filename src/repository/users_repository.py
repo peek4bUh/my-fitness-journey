@@ -1,5 +1,3 @@
-from flask import jsonify
-
 from dto.user import UserDto
 from models.user import UserModel
 

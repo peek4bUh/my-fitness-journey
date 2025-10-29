@@ -1,8 +1,7 @@
-from flask import render_template, request
+from flask import Blueprint
 
 from services.users_service import UsersService
-from globals import METHOD_GET, METHOD_POST, PAGE_LOGIN, PAGE_SIGNUP
-from flask import Blueprint
+from globals import METHOD_POST
 
 
 user_bp = Blueprint('user', __name__)

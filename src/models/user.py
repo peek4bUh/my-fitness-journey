@@ -1,12 +1,13 @@
+from sqlalchemy.orm import mapped_column
+
 from database import db
-from sqlalchemy.orm import Mapped, mapped_column
 
 
 class UserModel(db.Model):
 
     __tablename__ = 'user'
 
-    id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
-    username: Mapped[str] = mapped_column(db.String, unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(db.String, nullable=False)
-    email: Mapped[str] = mapped_column(db.String, unique=True, nullable=False)
+    id = mapped_column(db.Integer, primary_key=True)
+    username = mapped_column(db.String, unique=True, nullable=False)
+    password = mapped_column(db.String, nullable=False)
+    email = mapped_column(db.String, unique=True, nullable=False)
