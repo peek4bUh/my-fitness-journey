@@ -1,17 +1,10 @@
-from flask import jsonify, redirect, render_template, request, url_for
+from flask import jsonify, render_template, request
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from models.user import UserModel
-from repository.users_repository import UsersRepository
-from globals import (
-    PAGE_DASHBOARD,
-    PAGE_LOGIN,
-    PAGE_SIGNUP,
-    MSG_ERROR_INVALID_CREDENTIALS,
-    MSG_ERROR_USER_TAKEN,
-    HTTP_200_OK,
-    HTTP_401_UNAUTHORIZED
-)
+from .repository import UsersRepository
+from core.constants.globals import HTTP_200_OK, HTTP_401_UNAUTHORIZED
+from core.constants.pages import PAGE_SIGNUP
+from core.constants.messages import MSG_ERROR_USER_TAKEN
 
 
 class UsersService:

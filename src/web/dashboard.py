@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from globals import PAGE_DASHBOARD
+from core.constants.pages import PAGE_DASHBOARD
 
 
 dashboard_bp = Blueprint('dashboard', __name__)

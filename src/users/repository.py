@@ -1,5 +1,5 @@
 from dto.user import UserDto
-from models.user import UserModel
+from .model import UserModel
 
 
 class UsersRepository:
@@ -13,5 +13,8 @@ class UsersRepository:
         db.session.add(new_user)
         db.session.commit()
 
-    def find_user_by_username(self, username: str) -> UserModel:
+    def find_by_username(self, username: str) -> UserModel:
         return UserModel.query.filter_by(username=username).first()
+
+    def find_by_email(self, email: str) -> UserModel:
+        return UserModel.query.filter_by(email=email).first()

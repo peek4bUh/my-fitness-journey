@@ -1,6 +1,6 @@
 from flask import Flask
 
-from config import DevelopmentConfig
+from core.config import DevelopmentConfig
 
 
 def create_app():
@@ -9,8 +9,7 @@ def create_app():
                 static_folder='../static')
     app.config.from_object(DevelopmentConfig())
 
-    from routes.api import api_bp
-    from routes.web import web_bp
+    from core.blueprints import api_bp, web_bp
     app.register_blueprint(api_bp)
     app.register_blueprint(web_bp)
 
@@ -18,12 +17,8 @@ def create_app():
     db.init_app(app)
 
     # Ensure models are imported before creating tables
-    import models
+    import users.model
     with app.app_context():
         db.create_all()
 
     return app
-
-
-if __name__ == "__main__":
-    create_app()
