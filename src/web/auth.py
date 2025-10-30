@@ -2,7 +2,7 @@ from functools import wraps
 from flask import Blueprint, redirect, render_template, request, url_for, make_response, session
 
 from core.constants.globals import METHOD_GET, METHOD_POST, HTTP_409_CONFLICT
-from core.constants.pages import PAGE_DASHBOARD, PAGE_LOGIN, PAGE_SIGNUP
+from core.constants.templates import TEMPLATE_LOGIN, TEMPLATE_SIGNUP
 from core.ws import WebService
 
 
@@ -25,7 +25,7 @@ def is_user_logged(endpoint: str = "dashboard.navigate_to_dashboard"):
 @is_user_logged("web.dashboard.navigate_to_dashboard")
 def login_page():
     if request.method == METHOD_GET:
-        return render_template(PAGE_LOGIN)
+        return render_template(TEMPLATE_LOGIN)
 
     http_result = ws.post("/api/auth/login", json={
         "username": request.form['username'],
@@ -33,7 +33,7 @@ def login_page():
     })
 
     if http_result.status_code != 200:
-        return render_template(PAGE_LOGIN, error=(http_result.json or {}).get("message"))
+        return render_template(TEMPLATE_LOGIN, error=(http_result.json or {}).get("message"))
 
     body = http_result.json or {}
     session['user'] = {
@@ -48,7 +48,7 @@ def login_page():
 @web_auth_bp.route('/register', methods=[METHOD_GET, METHOD_POST])
 def signup_page():
     if request.method == METHOD_GET:
-        return render_template(PAGE_SIGNUP)
+        return render_template(TEMPLATE_SIGNUP)
 
     if request.method == METHOD_POST:
         resp = ws.post("/api/users", json={
@@ -58,6 +58,6 @@ def signup_page():
         })
 
         if resp.status_code == HTTP_409_CONFLICT:
-            return render_template(PAGE_SIGNUP, error="Username or email already exists.")
+            return render_template(TEMPLATE_SIGNUP, error="Username or email already exists.")
 
-        return redirect(url_for('web.auth.login_page'))
+        return redirect(url_for('web.auth.login_TEMPLATE'))
