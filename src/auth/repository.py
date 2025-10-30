@@ -1,17 +1,14 @@
-from dto.user import UserDto
-from .model import UserModel
+from flask import jsonify, session
+
+from users.model import UserModel
+from core.constants.globals import HTTP_200_OK
 
 
-class UsersRepository:
+class AuthRepository:
 
-    def create_user(self, user: UserDto) -> None:
-        new_user = UserModel(username=user.username,
-                             password=user.password,
-                             email=user.email)
+    def login_user(self, user_id: int):
+        session.clear()
+        session["user_id"] = user_id
 
-        from database import db
-        db.session.add(new_user)
-        db.session.commit()
-
-    def find_user_by_username(self, username: str) -> UserModel:
-        return UserModel.query.filter_by(username=username).first()
+    def logout_user(self):
+        session.clear()

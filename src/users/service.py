@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 
 from dto.user import UserOutput
 from .repository import UsersRepository
-from core.constants.globals import HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
+from core.constants.globals import HTTP_200_OK, HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
 
 
 class UsersService:
@@ -27,7 +27,7 @@ class UsersService:
 
         self.users_repository.create_user(user_dto)
 
-        return jsonify({"message": "User created successfully."}), HTTP_200_OK
+        return jsonify({"message": "User created successfully."}), HTTP_201_CREATED
 
     def get_user_data(self, username: str):
         user = self.users_repository.find_by_username(username)

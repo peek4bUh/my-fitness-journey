@@ -1,23 +1,18 @@
 from flask import Blueprint
 
-from users.service import UsersService
+from .service import AuthService
 from core.constants.globals import METHOD_POST
 
 
-user_bp = Blueprint('user', __name__)
-users_service = UsersService()
+api_auth_bp = Blueprint('auth', __name__)
+auth_service = AuthService()
 
 
-@user_bp.route("/login", methods=[METHOD_POST])
+@api_auth_bp.route("/login", methods=[METHOD_POST])
 def login():
-    return users_service.login_user()
+    return auth_service.login_user()
 
 
-@user_bp.route('/register', methods=[METHOD_POST])
-def register():
-    return users_service.register_user()
-
-
-@user_bp.route('/')
-def test():
-    return {"message": "Hello World!"}
+@api_auth_bp.route('/logout', methods=[METHOD_POST])
+def logout():
+    return auth_service.logout_user()
