@@ -1,5 +1,5 @@
 <aside
-  class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 duration-300 ease-linear lg:static lg:translate-x-0">
+  class="sidebar fixed left-0 top-0 z-9999 flex h-screen w-[290px] pb-6 flex-col overflow-y-hidden border-r border-gray-200 bg-white px-5 duration-300 ease-linear lg:static lg:translate-x-0">
 
   <!-- SIDEBAR HEADER -->
   <div class="sidebar-header flex items-center gap-2 pb-7 pt-8">
@@ -9,10 +9,10 @@
     <h1 class="text-xl font-bold text-gray-900 ">MyFitnessJourney</h1>
   </div>
 
-  <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+  <div class="no-scrollbar flex flex-col grow overflow-y-auto duration-300 ease-linear">
 
     <!-- Sidebar Menu -->
-    <nav x-data="{selected: $persist('Dashboard')}">
+    <nav>
       <div>
         <h3 class="mb-4 text-xs uppercase leading-[20px] text-gray-400">
           MENU
@@ -101,4 +101,13 @@
       </div>
     </nav>
   </div>
+
+  <a href="#" class="bg-gray-100 rounded-lg px-4 py-3">
+    <span class="text-sm block text-gray-700 font-bold">
+      {{ user.username }}
+    </span>
+    <span class="text-xs mt-0.5 block text-gray-500">
+      {{ user.email }}
+    </span>
+  </a>
 </aside>

@@ -1,3 +1,4 @@
+import secrets
 from flask import Flask
 
 from core.config import DevelopmentConfig
@@ -8,6 +9,7 @@ def create_app():
                 template_folder='../templates',
                 static_folder='../static')
     app.config.from_object(DevelopmentConfig())
+    app.config['SECRET_KEY'] = secrets.token_urlsafe(32)
 
     from core.blueprints import api_bp, web_bp
     app.register_blueprint(api_bp)

@@ -1,14 +1,10 @@
-from flask import jsonify, session
-
-from users.model import UserModel
-from core.constants.globals import HTTP_200_OK
+from flask import session
 
 
 class AuthRepository:
 
-    def login_user(self, user_id: int):
-        session.clear()
-        session["user_id"] = user_id
+    def login_user(self, user_id: int, username: str = None):
+        session['user'] = {"id": user_id, "username": username}
 
     def logout_user(self):
-        session.clear()
+        session.pop('user', None)
