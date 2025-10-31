@@ -19,8 +19,8 @@ class AuthService:
         if user and check_password_hash(user.password, data.get("password")):
             self.auth_repository.login_user(user.id)
             return jsonify({"message": f"User {user.username} logged in successfully."}), HTTP_200_OK
-        else:
-            return jsonify({"message": "User invalid credentials."}), HTTP_401_UNAUTHORIZED
+
+        return jsonify({"message": "User invalid credentials."}), HTTP_401_UNAUTHORIZED
 
     def logout_user(self):
         data = request.get_json()

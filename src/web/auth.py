@@ -1,49 +1,39 @@
-from functools import wraps
-from flask import Blueprint, redirect, render_template, request, url_for, make_response, session
+from flask import Blueprint, redirect, render_template, request, url_for, session
 
 from core.constants.globals import METHOD_GET, METHOD_POST, HTTP_409_CONFLICT
 from core.constants.pages import PAGE_DASHBOARD, PAGE_LOGIN
 from core.constants.templates import TEMPLATE_LOGIN, TEMPLATE_SIGNUP
 from core.ws import WebService
+from core.decorators.auth import is_user_logged, redirect_if_authenticated
 
 
 web_auth_bp = Blueprint('auth', __name__)
 ws = WebService()
 
 
-def is_user_logged():
-    def decorator(fn):
-        @wraps(fn)
-        def wrapper(*args, **kwargs):
-            if session.get("user"):
-                return redirect(url_for(PAGE_DASHBOARD))
-            return fn(*args, **kwargs)
-        return wrapper
-    return decorator
-
-
 @web_auth_bp.route('/login', methods=[METHOD_GET, METHOD_POST])
-@is_user_logged()
+@redirect_if_authenticated()
 def login_page():
     if request.method == METHOD_GET:
         return render_template(TEMPLATE_LOGIN)
 
-    http_result = ws.post("/api/auth/login", json={
-        "username": request.form['username'],
-        "password": request.form['password']
-    })
+    if request.method == METHOD_POST:
+        http_result = ws.post("/api/auth/login", json={
+            "username": request.form['username'],
+            "password": request.form['password']
+        })
 
-    if http_result.status_code != 200:
-        return render_template(TEMPLATE_LOGIN, error=(http_result.json or {}).get("message"))
+        if http_result.status_code != 200:
+            return render_template(TEMPLATE_LOGIN, error=(http_result.json or {}).get("message"))
 
-    body = http_result.json or {}
-    session['user'] = {
-        "id": body.get("id") or body.get("user_id"),
-        "username": body.get("username")
-    }
-    session.permanent = True
+        body = http_result.json or {}
+        session['user'] = {
+            "id": body.get("id") or body.get("user_id"),
+            "username": body.get("username")
+        }
+        session.permanent = True
 
-    return redirect(url_for(PAGE_DASHBOARD))
+        return redirect(url_for(PAGE_DASHBOARD))
 
 
 @web_auth_bp.route('/register', methods=[METHOD_GET, METHOD_POST])

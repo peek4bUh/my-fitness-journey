@@ -13,11 +13,13 @@ class UsersService:
 
     def create_user(self):
         data = request.get_json()
+        username = data.get("username")
+        password = data.get("password")
 
         from dto.user import UserDto
         user_dto = UserDto()
-        user_dto.set_username(data.get("username"))
-        hashed_password = generate_password_hash(data.get("password"))
+        user_dto.set_username(username)
+        hashed_password = generate_password_hash(password)
         user_dto.set_password(hashed_password)
         user_dto.set_email(data.get("email"))
 
