@@ -15,7 +15,7 @@ def create_app():
     app.register_blueprint(api_bp)
     app.register_blueprint(web_bp)
 
-    from database import db
+    from core.extensions import db
     db.init_app(app)
 
     # Ensure models are imported before creating tables

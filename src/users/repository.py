@@ -9,7 +9,7 @@ class UsersRepository:
                              password=user.password,
                              email=user.email)
 
-        from database import db
+        from core.extensions import db
         db.session.add(new_user)
         db.session.commit()
 
