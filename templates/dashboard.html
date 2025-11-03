@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> Dashboard | MyFitnessJourney</title>
   <link href="{{url_for('static', filename='css/main.css')}}" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
 <body>
@@ -15,14 +16,22 @@
     {% include './layouts/sidebar.html' %}
 
     <!-- Content Area Start -->
-    <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
-      <div>I'm a div in the content area</div>
+    <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto md:p-8 bg-gray-50">
+
+      <!-- Bento Grid -->
+      <div class="grid h-full w-full grid-cols-4 grid-rows-4 gap-4">
+        <div class="col-span-2 row-span-2 border border-gray-200 rounded-xl bg-white">A</div>
+        <div class="col-span-2 border border-gray-200 rounded-xl bg-white">B</div>
+        <div class="border border-gray-200 rounded-xl bg-white">C</div>
+        <div class="row-span-2 border border-gray-200 rounded-xl bg-white">D</div>
+        <div class="row-span-2 rounded-xl border border-gray-200 bg-white">E</div>
+        <div class="border border-gray-200 rounded-xl bg-white">F</div>
+        <div class="border border-gray-200 rounded-xl bg-white">G</div>
+        <div class="col-span-2 border border-gray-200 rounded-xl bg-white">H</div>
+        <div class="border border-gray-200 rounded-xl bg-white">I</div>
+      </div>
+
     </div>
-    <!-- Content Area End -->
-
-  </div>
-  <!-- Page Wrapper End -->
-
 </body>
 
 </html>

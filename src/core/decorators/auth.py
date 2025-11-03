@@ -8,7 +8,7 @@ def redirect_if_authenticated():
     def decorator(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
-            if session.get("user"):
+            if session.get("username"):
                 return redirect(url_for(PAGE_DASHBOARD))
             return f(*args, **kwargs)
         return wrapped
@@ -19,7 +19,7 @@ def is_user_logged():
     def decorator(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
-            if not session.get("user"):
+            if not session.get("username"):
                 return redirect(url_for(PAGE_LOGIN))
             return f(*args, **kwargs)
         return wrapped

@@ -1,10 +1,10 @@
-from flask import Blueprint, redirect, render_template, request, url_for, session
+from flask import Blueprint, current_app, redirect, render_template, request, url_for, session
 
-from core.constants.globals import METHOD_GET, METHOD_POST, HTTP_409_CONFLICT
+from core.constants.globals import METHOD_GET, METHOD_POST, HTTP_409_CONFLICT, HTTP_200_OK
 from core.constants.pages import PAGE_DASHBOARD, PAGE_LOGIN
 from core.constants.templates import TEMPLATE_LOGIN, TEMPLATE_SIGNUP
 from core.ws import WebService
-from core.decorators.auth import is_user_logged, redirect_if_authenticated
+from core.decorators.auth import redirect_if_authenticated
 
 
 web_auth_bp = Blueprint('auth', __name__)
@@ -23,17 +23,19 @@ def login_page():
             "password": request.form['password']
         })
 
-        if http_result.status_code != 200:
-            return render_template(TEMPLATE_LOGIN, error=(http_result.json or {}).get("message"))
+        if http_result.status_code != HTTP_200_OK:
+            return render_template(TEMPLATE_LOGIN, error=(http_result.json.get("message")))
 
-        body = http_result.json or {}
-        session['user'] = {
-            "id": body.get("id") or body.get("user_id"),
-            "username": body.get("username")
-        }
+        session['username'] = request.form['username']
         session.permanent = True
 
         return redirect(url_for(PAGE_DASHBOARD))
+
+
+@web_auth_bp.route('/logout')
+def logout_user():
+    session.pop('username', None)
+    return redirect(url_for(PAGE_LOGIN))
 
 
 @web_auth_bp.route('/register', methods=[METHOD_GET, METHOD_POST])
