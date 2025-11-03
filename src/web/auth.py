@@ -19,7 +19,7 @@ def login_page():
         return render_template(Templates.LOGIN.value)
 
     if request.method == METHOD_POST:
-        http_result = ws.post("/api/auth/login", json={
+        http_result = ws.post("/api/v1/auth/login", json={
             "username": request.form['username'],
             "password": request.form['password']
         })

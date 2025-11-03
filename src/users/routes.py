@@ -1,19 +1,25 @@
-from flask import Blueprint, request
+from flask import request
+from flask_restx import Resource
 
 from users.service import UsersService
-from core.constants.globals import METHOD_POST
+from core.extensions import api
 
 
-api_user_bp = Blueprint('user', __name__)
+ns = api.namespace("users", description="Users Operations")
 users_service = UsersService()
 
 
-@api_user_bp.route("", methods=[METHOD_POST])
-def user_crud():
-    if request.method == METHOD_POST:
+@ns.route('/users')
+class UserCRUD(Resource):
+
+    @api.doc(parser=api.parser())
+    def post(self):
         return users_service.create_user()
 
 
-@api_user_bp.route("/<username>")
-def user_data(username):
-    return users_service.get_user_data(username)
+@ns.route('/users/<username>')
+class UserData(Resource):
+
+    @api.doc(parser=api.parser())
+    def get(self, username):
+        return users_service.get_user_data(username)

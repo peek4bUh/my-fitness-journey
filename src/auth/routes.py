@@ -1,18 +1,26 @@
-from flask import Blueprint
+from flask_restx import Resource
 
 from .service import AuthService
-from core.constants.globals import METHOD_POST
+from core.extensions import api
 
 
-api_auth_bp = Blueprint('auth', __name__)
+ns = api.namespace("auth", description="Auth Operations")
 auth_service = AuthService()
 
 
-@api_auth_bp.route("/login", methods=[METHOD_POST])
-def login():
-    return auth_service.login_user()
+@ns.route('/login')
+class Login(Resource):
+
+    @api.doc(parser=api.parser())
+    def post(self):
+        """Login an user"""
+        return auth_service.login_user()
 
 
-@api_auth_bp.route('/logout', methods=[METHOD_POST])
-def logout():
-    return auth_service.logout_user()
+@ns.route('/logout')
+class Logout(Resource):
+
+    @api.doc(parser=api.parser())
+    def post(self):
+        """Logout an user"""
+        return self.auth_service.logout_user()
