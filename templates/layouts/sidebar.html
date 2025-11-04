@@ -108,7 +108,7 @@
             </a>
           </li>
           <li>
-            <a href="{{ url_for('web.auth.logout_user') }}"
+            <a href="{{ url_for('ui.auth.logout_user') }}"
               class="relative flex items-center gap-3 rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 text-sm font-bold">
               <img alt="Logout Icon" src="{{ url_for('static', filename='images/icons/logout.svg') }}" />
               <span x-show="sidebarOpen" x-transition>Logout</span>

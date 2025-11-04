@@ -1,9 +1,9 @@
 from flask import Blueprint
 
-from web import web_home_bp, web_auth_bp, web_dashboard_bp
+from ui import ui_home_bp, ui_auth_bp, ui_dashboard_bp
 
 
-web_bp = Blueprint('web', __name__)
-web_bp.register_blueprint(web_home_bp)
-web_bp.register_blueprint(web_auth_bp)
-web_bp.register_blueprint(web_dashboard_bp)
+ui_bp = Blueprint('ui', __name__)
+ui_bp.register_blueprint(ui_home_bp)
+ui_bp.register_blueprint(ui_auth_bp)
+ui_bp.register_blueprint(ui_dashboard_bp)

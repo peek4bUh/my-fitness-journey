@@ -4,10 +4,10 @@ from core.constants.pages import PAGE_LOGIN
 from core.templates import Templates
 from core.endpoints import Endpoints
 
-web_dashboard_bp = Blueprint('dashboard', __name__)
+ui_dashboard_bp = Blueprint('dashboard', __name__)
 
 
-@web_dashboard_bp.route(Endpoints.DASHBOARD.value)
+@ui_dashboard_bp.route(Endpoints.DASHBOARD.value)
 def navigate_to_dashboard():
     user = session.get('username')
     if user is None:

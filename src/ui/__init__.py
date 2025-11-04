@@ -1,3 +1,3 @@
-from .home import web_home_bp
-from .auth import web_auth_bp
-from .dashboard import web_dashboard_bp
+from .home import ui_home_bp
+from .auth import ui_auth_bp
+from .dashboard import ui_dashboard_bp

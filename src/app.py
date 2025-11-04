@@ -12,8 +12,8 @@ def create_app():
     app.config.from_object(DevelopmentConfig())
     app.config['SECRET_KEY'] = secrets.token_urlsafe(32)
 
-    from core.blueprints import web_bp
-    app.register_blueprint(web_bp)
+    from core.blueprints import ui_bp
+    app.register_blueprint(ui_bp)
 
     from auth.routes import ns as auth_ns
     from users.routes import ns as users_ns

@@ -1,3 +1,3 @@
 # Pages
-PAGE_DASHBOARD = "web.dashboard.navigate_to_dashboard"
-PAGE_LOGIN = "web.auth.login_page"
+PAGE_DASHBOARD = "ui.dashboard.navigate_to_dashboard"
+PAGE_LOGIN = "ui.auth.login_page"
