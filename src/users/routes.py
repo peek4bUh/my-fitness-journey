@@ -1,15 +1,14 @@
-from flask import request
-from flask_restx import Resource
+from flask_restx import Resource, fields
 
 from users.service import UsersService
 from core.extensions import api
 
 
-ns = api.namespace("users", description="Users Operations")
+ns = api.namespace(name="Users Operations", path="/users")
 users_service = UsersService()
 
 
-@ns.route('/users')
+@ns.route('')
 class UserCRUD(Resource):
 
     @api.doc(parser=api.parser())
@@ -17,7 +16,7 @@ class UserCRUD(Resource):
         return users_service.create_user()
 
 
-@ns.route('/users/<username>')
+@ns.route('/<username>')
 class UserData(Resource):
 
     @api.doc(parser=api.parser())

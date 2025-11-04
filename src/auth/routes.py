@@ -1,17 +1,22 @@
-from flask_restx import Resource
+from flask_restx import Resource, fields
 
 from .service import AuthService
 from core.extensions import api
 
 
-ns = api.namespace("auth", description="Auth Operations")
+ns = api.namespace(name="Authentication Operations", path="/auth")
 auth_service = AuthService()
+
+auth_login_model = ns.model('AuthLogin', {
+    'username': fields.String(required=True, description='The user name'),
+    'password': fields.String(required=True, description='The user password')
+})
 
 
 @ns.route('/login')
 class Login(Resource):
 
-    @api.doc(parser=api.parser())
+    @ns.expect(auth_login_model, validate=True)
     def post(self):
         """Login an user"""
         return auth_service.login_user()
@@ -20,7 +25,6 @@ class Login(Resource):
 @ns.route('/logout')
 class Logout(Resource):
 
-    @api.doc(parser=api.parser())
     def post(self):
         """Logout an user"""
         return self.auth_service.logout_user()

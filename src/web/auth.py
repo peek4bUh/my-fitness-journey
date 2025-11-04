@@ -19,13 +19,13 @@ def login_page():
         return render_template(Templates.LOGIN.value)
 
     if request.method == METHOD_POST:
-        http_result = ws.post("/api/v1/auth/login", json={
+        http_result = ws.post("/api/v0/auth/login", json={
             "username": request.form['username'],
             "password": request.form['password']
         })
 
         if http_result.status_code != HTTP_200_OK:
-            return render_template(Templates.LOGIN.value, error=(http_result.json.get("message")))
+            return render_template(Templates.LOGIN.value, error=("Invalid username or password."))
 
         session['username'] = request.form['username']
         session.permanent = True

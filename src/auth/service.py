@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import current_app, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from users.repository import UsersRepository
@@ -15,11 +15,11 @@ class AuthService:
         user = self.users_repository.find_by_username(data.get("username"))
 
         if user and check_password_hash(user.password, data.get("password")):
-            return jsonify({"message": f"User {user.username} logged in successfully."}), HTTP_200_OK
+            return {"message": f"User {user.username} logged in successfully."}
 
-        return jsonify({"message": "User invalid credentials."}), HTTP_401_UNAUTHORIZED
+        return {"message": "User invalid credentials."}
 
     def logout_user(self):
         data = request.get_json()
         user = self.users_repository.find_by_username(data.get("username"))
-        return jsonify({"message": f"User {user.username} logged out successfully."}), HTTP_200_OK
+        return {"message": f"User {user.username} logged out successfully."}
