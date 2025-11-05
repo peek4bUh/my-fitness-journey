@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import render_template, session, redirect, url_for
 
 from core.constants.pages import PAGE_LOGIN
 from core.templates import Templates
 from core.endpoints import Endpoints
-
-ui_dashboard_bp = Blueprint('dashboard', __name__)
+from core.blueprints import ui_dashboard_bp
 
 
 @ui_dashboard_bp.route(Endpoints.DASHBOARD.value)

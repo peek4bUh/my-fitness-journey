@@ -1,10 +1,8 @@
-from flask import Blueprint, render_template
+from flask import render_template
 
 from core.templates import Templates
 from core.endpoints import Endpoints
-
-
-ui_home_bp = Blueprint('home', __name__)
+from core.blueprints import ui_home_bp
 
 
 @ui_home_bp.route(Endpoints.INDEX.value)
