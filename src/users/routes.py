@@ -1,4 +1,4 @@
-from flask_restx import Resource, fields
+from flask_restx import Resource
 
 from users.service import UsersService
 from core.extensions import api

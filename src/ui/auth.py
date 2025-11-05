@@ -1,11 +1,10 @@
-from flask import current_app, redirect, render_template, request, url_for, session
+from flask import redirect, render_template, request, url_for
 from flask_login import login_remembered, login_required, login_user, logout_user
 
 from core.constants.globals import METHOD_GET, METHOD_POST, HTTP_409_CONFLICT, HTTP_200_OK
 from core.constants.pages import PAGE_DASHBOARD, PAGE_LOGIN
 from core.templates import Templates
 from core.ws import WebService
-from core.decorators.auth import redirect_if_authenticated
 from core.endpoints import Endpoints
 from core.blueprints import ui_auth_bp
 from dto.user import User

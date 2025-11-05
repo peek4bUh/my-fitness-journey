@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash
 
 from dto.user import UserOutput
 from .repository import UsersRepository
-from core.constants.globals import HTTP_200_OK, HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_409_CONFLICT
+from core.constants.globals import HTTP_201_CREATED, HTTP_409_CONFLICT
 
 
 class UsersService:

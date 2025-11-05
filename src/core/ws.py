@@ -1,7 +1,6 @@
 from typing import Any, Dict, Optional
 from dataclasses import dataclass
 import requests
-from flask import jsonify, make_response
 
 
 @dataclass

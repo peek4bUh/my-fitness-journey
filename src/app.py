@@ -1,4 +1,3 @@
-from users.model import UserModel
 import secrets
 from flask import Flask
 
