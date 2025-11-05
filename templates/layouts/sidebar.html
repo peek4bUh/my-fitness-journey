@@ -108,7 +108,7 @@
             </a>
           </li>
           <li>
-            <a href="{{ url_for('ui.auth.logout_user') }}"
+            <a href="{{ url_for('ui.auth.logout') }}"
               class="relative flex items-center gap-3 rounded-lg px-3 py-2 text-gray-700 hover:bg-gray-100 text-sm font-bold">
               <img alt="Logout Icon" src="{{ url_for('static', filename='images/icons/logout.svg') }}" />
               <span x-show="sidebarOpen" x-transition>Logout</span>
@@ -146,7 +146,7 @@
     :class="sidebarOpen ? 'justify-start' : 'justify-center'">
     <div class="flex-shrink-0 w-8 h-8 bg-gray-300 rounded-full"></div>
     <div x-show="sidebarOpen" x-transition>
-      <span class="text-sm block text-gray-700 font-bold">{{ user }}</span>
+      <span class="text-sm block text-gray-700 font-bold">{{ username }}</span>
     </div>
   </div>
 </aside>

@@ -1,4 +1,5 @@
-from flask import redirect, render_template, request, url_for, session
+from flask import current_app, redirect, render_template, request, url_for, session
+from flask_login import login_remembered, login_required, login_user, logout_user
 
 from core.constants.globals import METHOD_GET, METHOD_POST, HTTP_409_CONFLICT, HTTP_200_OK
 from core.constants.pages import PAGE_DASHBOARD, PAGE_LOGIN
@@ -7,15 +8,18 @@ from core.ws import WebService
 from core.decorators.auth import redirect_if_authenticated
 from core.endpoints import Endpoints
 from core.blueprints import ui_auth_bp
+from dto.user import User
 
 
 ws = WebService()
 
 
 @ui_auth_bp.route(Endpoints.LOGIN.value, methods=[METHOD_GET, METHOD_POST])
-@redirect_if_authenticated()
 def login_page():
     if request.method == METHOD_GET:
+        if login_remembered():
+            return redirect(url_for(PAGE_DASHBOARD))
+
         return render_template(Templates.LOGIN.value)
 
     if request.method == METHOD_POST:
@@ -27,15 +31,16 @@ def login_page():
         if http_result.status_code != HTTP_200_OK:
             return render_template(Templates.LOGIN.value, error=("Invalid username or password."))
 
-        session['username'] = request.form['username']
-        session.permanent = True
+        user = User(**http_result.json.get('user'))
+        login_user(user, remember=True)
 
         return redirect(url_for(PAGE_DASHBOARD))
 
 
 @ui_auth_bp.route(Endpoints.LOGOUT.value)
-def logout_user():
-    session.pop('username', None)
+@login_required
+def logout():
+    logout_user()
     return redirect(url_for(PAGE_LOGIN))
 
 

@@ -1,5 +1,6 @@
 from dto.user import UserDto
 from .model import UserModel
+from core.extensions import login_manager
 
 
 class UsersRepository:
@@ -18,3 +19,8 @@ class UsersRepository:
 
     def find_by_email(self, email: str) -> UserModel:
         return UserModel.query.filter_by(email=email).first()
+
+    # Load user for Flask-Login
+    @login_manager.user_loader
+    def load_user(user_id):
+        return UserModel.query.get(int(user_id))

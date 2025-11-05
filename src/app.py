@@ -1,3 +1,4 @@
+from users.model import UserModel
 import secrets
 from flask import Flask
 
@@ -14,6 +15,9 @@ def create_app():
 
     from core.blueprints import BlueprintManager
     BlueprintManager.register_all(app)
+
+    from core.extensions import login_manager
+    login_manager.init_app(app)
 
     from auth.routes import ns as auth_ns
     from users.routes import ns as users_ns

@@ -1,3 +1,6 @@
+from flask_login import UserMixin
+
+
 class UserDto:
     """Data Transfer Object for User data."""
 
@@ -42,4 +45,12 @@ class UserOutput:
         return self.email
 
     def set_email(self, email):
+        self.email = email
+
+
+class User(UserMixin):
+
+    def __init__(self, id, username, email):
+        self.id = id
+        self.username = username
         self.email = email
