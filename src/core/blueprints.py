@@ -17,7 +17,7 @@ class BlueprintManager:
     @classmethod
     def register_all(cls, app: Flask):
         """Register all blueprints to the Flask app."""
-        from ui import auth, dashboard, home
+        from ui import pages
 
         for parent_bp, child_bps in cls._blueprints.items():
             for child_bp in child_bps:

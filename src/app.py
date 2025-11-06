@@ -7,8 +7,8 @@ from core.extensions import api
 
 def create_app():
     app = Flask(__name__,
-                template_folder='../templates',
-                static_folder='../static')
+                template_folder='./ui/templates',
+                static_folder='./ui/static')
     app.config.from_object(DevelopmentConfig())
     app.config['SECRET_KEY'] = secrets.token_urlsafe(32)
 

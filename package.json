@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
-    "create-css": "npx @tailwindcss/cli -i ./static/src/input.css -o ./static/css/main.css --watch",
+    "create-css": "npx @tailwindcss/cli -i ./src/ui/static/src/input.css -o ./src/ui/static/css/main.css --watch",
     "commit": "commit"
   },
   "keywords": [],
