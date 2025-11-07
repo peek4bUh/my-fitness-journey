@@ -1,3 +1,5 @@
+from flask import g
+
 from dto.user import UserDto
 from .model import UserModel
 from core.extensions import login_manager
@@ -19,6 +21,9 @@ class UsersRepository:
 
     def find_by_email(self, email: str) -> UserModel:
         return UserModel.query.filter_by(email=email).first()
+
+    def find_user(self) -> UserModel:
+        return UserModel.query.filter_by(api_token=g.get('api_key')).first()
 
     # Load user for Flask-Login
     @login_manager.user_loader

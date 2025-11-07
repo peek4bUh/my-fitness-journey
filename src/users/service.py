@@ -31,10 +31,10 @@ class UsersService:
 
         return {"message": "User created successfully."}, HTTP_201_CREATED
 
-    def get_user_data(self, username: str):
-        user = self.users_repository.find_by_username(username)
+    def get_user_data(self):
+        user = self.users_repository.find_user()
 
         if not user:
             return None
 
-        return UserOutput(user.username, user.email).__dict__
+        return user.to_dict()
