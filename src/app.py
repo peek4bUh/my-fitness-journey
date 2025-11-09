@@ -1,5 +1,5 @@
 import secrets
-from flask import Flask
+from flask import Flask, abort, request
 
 from core.config import DevelopmentConfig
 from core.extensions import api
@@ -20,8 +20,10 @@ def create_app():
 
     from auth.routes import ns as auth_ns
     from users.routes import ns as users_ns
+    from programs.routes import ns as programs_ns
     api.add_namespace(auth_ns, path="/auth")
     api.add_namespace(users_ns, path="/users")
+    api.add_namespace(programs_ns, path="/programs")
     api.init_app(app)
 
     from core.extensions import db
