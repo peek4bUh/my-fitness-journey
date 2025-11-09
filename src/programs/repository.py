@@ -1,3 +1,4 @@
+from flask import g
 from dto.program import ProgramDto
 from programs.model import ProgramModel
 
@@ -10,3 +11,6 @@ class ProgramsRepository:
         from core.extensions import db
         db.session.add(new_program)
         db.session.commit()
+
+    def find_program_by_id(self, program_id) -> ProgramModel:
+        return ProgramModel.query.filter_by(user_id=g.get('user_id'), program_id=program_id).first()

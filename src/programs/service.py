@@ -40,3 +40,11 @@ class ProgramsService:
         self.programs_repository.add_program(program_dto)
 
         return {"message": "Program created successfully."}, HTTP_201_CREATED
+
+    def get_program(self, program_id: int):
+        program = self.programs_repository.find_program_by_id(program_id)
+
+        if not program:
+            return None
+
+        return program.to_dict()

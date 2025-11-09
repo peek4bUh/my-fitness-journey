@@ -10,7 +10,7 @@ class UserModel(UserMixin, db.Model):
 
     __tablename__ = 'user'
 
-    id = mapped_column(db.Integer, primary_key=True)
+    user_id = mapped_column(db.Integer, primary_key=True)
     username = mapped_column(db.String, unique=True, nullable=False)
     password = mapped_column(db.String, nullable=False)
     email = mapped_column(db.String, unique=True, nullable=False)
@@ -24,7 +24,6 @@ class UserModel(UserMixin, db.Model):
 
     def to_dict(self):
         return {
-            "id": self.id,
             "username": self.username,
             "email": self.email
         }

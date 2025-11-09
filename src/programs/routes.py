@@ -1,4 +1,7 @@
+from flask import current_app, g
 from flask_restx import Resource, fields
+
+from core.decorators import require_api_key
 
 from .service import ProgramsService
 from core.extensions import api
@@ -37,13 +40,15 @@ class Program(Resource):
 
     @ns.expect(program_model, validate=True)
     @ns.response(201, 'Program created successfully')
+    @require_api_key
     def post(self):
         return programs_service.create_program(ns.payload)
 
 
-@ns.route('/<string:programId>')
+@ns.route('/<int:programId>')
 class ProgramById(Resource):
 
     @api.doc(parser=api.parser())
-    def get(self, program_id):
-        pass
+    @require_api_key
+    def get(self, programId):
+        return programs_service.get_program(programId)

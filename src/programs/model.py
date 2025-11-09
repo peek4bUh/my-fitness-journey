@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import List
+from flask import g
 from sqlalchemy import Date, DateTime, ForeignKey, func
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
@@ -12,6 +13,8 @@ class ProgramModel(db.Model):
     __tablename__ = 'program'
 
     program_id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("user.user_id"), nullable=False)
     title: Mapped[str] = mapped_column(db.String, nullable=False)
     description: Mapped[str] = mapped_column(db.String, nullable=True)
     duration_weeks: Mapped[int] = mapped_column(db.Integer, nullable=False)
@@ -29,6 +32,7 @@ class ProgramModel(db.Model):
 
     def from_dto(dto: ProgramDto) -> ProgramModel:
         return ProgramModel(
+            user_id=g.get('user_id'),
             title=dto.title,
             description=dto.description,
             duration_weeks=dto.duration_weeks,
@@ -45,6 +49,15 @@ class ProgramModel(db.Model):
                 for s in dto.sections
             ]
         )
+
+    def to_dict(self):
+        return {
+            "program_id": self.program_id,
+            "title": self.title,
+            "description": self.description,
+            "duration_weeks": self.duration_weeks,
+            "sections": [section.to_dict() for section in self.sections]
+        }
 
 
 class ProgramSectionModel(db.Model):
@@ -68,6 +81,13 @@ class ProgramSectionModel(db.Model):
         cascade="all, delete-orphan"
     )
 
+    def to_dict(self):
+        return {
+            "id": self.program_section_id,
+            "name": self.name,
+            "exercises": [exercise.to_dict() for exercise in self.exercises],
+        }
+
 
 class ProgramExerciseModel(db.Model):
 
@@ -90,3 +110,13 @@ class ProgramExerciseModel(db.Model):
 
     section: Mapped['ProgramSectionModel'] = relationship(
         back_populates="exercises")
+
+    def to_dict(self):
+        return {
+            "id": self.program_exercise_id,
+            "name": self.name,
+            "sets": self.sets,
+            "reps": self.reps,
+            "rpe": self.rpe,
+            "rest_seconds": self.rest_seconds,
+        }

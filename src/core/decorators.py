@@ -16,6 +16,7 @@ def require_api_key(f):
         if not user.api_token:
             abort(401, 'Invalid API key')
 
+        g.user_id = user.user_id
         g.api_key = user.api_token
 
         return f(*args, **kwargs)
