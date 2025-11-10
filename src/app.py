@@ -18,12 +18,8 @@ def create_app():
     from api.core.extensions import login_manager
     login_manager.init_app(app)
 
-    from api.modules.auth.routes import ns as auth_ns
-    from api.modules.users.routes import ns as users_ns
-    from api.modules.programs.routes import ns as programs_ns
-    api_restx.add_namespace(auth_ns, path="/auth")
-    api_restx.add_namespace(users_ns, path="/users")
-    api_restx.add_namespace(programs_ns, path="/programs")
+    from api.core.namespaces import NamespaceManager
+    NamespaceManager.register_all(api_restx)
     api_restx.init_app(app)
 
     from api.core.extensions import db
