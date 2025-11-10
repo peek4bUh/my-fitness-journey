@@ -2,6 +2,7 @@ from flask import jsonify, request
 from werkzeug.security import generate_password_hash
 
 from .repository import UsersRepository
+from .io.user import UserDto
 from shared.enum.http import HTTP
 
 
@@ -12,15 +13,9 @@ class UsersService:
 
     def create_user(self):
         data = request.get_json()
-        username = data.get("username")
-        password = data.get("password")
-
-        from dto.user import UserDto
-        user_dto = UserDto()
-        user_dto.set_username(username)
-        hashed_password = generate_password_hash(password)
-        user_dto.set_password(hashed_password)
-        user_dto.set_email(data.get("email"))
+        hashed_password = generate_password_hash(data.get("password"))
+        user_dto = UserDto(data.get("username"),
+                           hashed_password, data.get("email"))
 
         if self.users_repository.find_by_username(user_dto.get_username()) or \
            self.users_repository.find_by_email(user_dto.get_email()):

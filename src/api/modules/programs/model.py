@@ -5,7 +5,7 @@ from sqlalchemy import Date, DateTime, ForeignKey, func
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from api.core.extensions import db
-from dto.program import ProgramDto
+from .io.program import ProgramDto
 
 
 class ProgramModel(db.Model):

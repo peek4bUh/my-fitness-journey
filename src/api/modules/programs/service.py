@@ -1,6 +1,6 @@
 from shared.enum.http import HTTP
-from dto.program import ProgramDto, ProgramSectionDto, ProgramExerciseDto
 from .repository import ProgramsRepository
+from .io import ProgramDto, ProgramSectionDto, ProgramExerciseDto
 
 
 class ProgramsService:

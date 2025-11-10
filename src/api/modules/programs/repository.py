@@ -1,7 +1,7 @@
 from flask import g
 
-from dto.program import ProgramDto
-from api.modules.programs.model import ProgramModel
+from .io.program import ProgramDto
+from .model import ProgramModel
 
 
 class ProgramsRepository:

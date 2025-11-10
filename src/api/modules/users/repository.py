@@ -1,6 +1,6 @@
 from flask import g
 
-from dto.user import UserDto
+from .io.user import UserDto
 from .model import UserModel
 from api.core.extensions import login_manager
 
