@@ -2,9 +2,7 @@ from flask import redirect, render_template, request, url_for
 from flask_login import login_remembered, login_required, login_user, logout_user
 
 from shared.enum.http import HTTP
-from ui.core.enum.views import View
-from ui.core.enum.endpoints import Endpoint
-from ui.core.enum.templates import Template
+from ui.core.enums import Endpoint, Template, View
 from ui.core.httpclient import HttpClient
 from ui.core.blueprints import ui_auth_bp
 from dto.user import User

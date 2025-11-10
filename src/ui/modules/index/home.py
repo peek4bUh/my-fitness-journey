@@ -1,7 +1,6 @@
 from flask import render_template
 
-from ui.core.enum.endpoints import Endpoint
-from ui.core.enum.templates import Template
+from ui.core.enums import Endpoint, Template
 from ui.core.blueprints import ui_home_bp
 
 
