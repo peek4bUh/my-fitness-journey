@@ -1,6 +1,7 @@
 from flask import request
 from werkzeug.security import check_password_hash
 
+from api.modules.users.mappers import UserMapper
 from api.modules.users.repository import UsersRepository
 
 
@@ -8,13 +9,17 @@ class AuthService:
 
     def __init__(self):
         self.users_repository = UsersRepository()
+        self.user_mapper = UserMapper()
 
     def login_user(self):
         data = request.get_json()
         user = self.users_repository.find_by_username(data.get("username"))
 
         if user and check_password_hash(user.password, data.get("password")):
-            return {"user": user.to_dict(), "message": f"User {user.username} logged in successfully."}
+            return {
+                "user": self.user_mapper.to_login_user_output(user),
+                "message": f"User {user.username} logged in successfully."
+            }, 200
 
         return {"message": "User invalid credentials."}, 401
 

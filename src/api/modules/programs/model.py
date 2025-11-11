@@ -5,7 +5,6 @@ from sqlalchemy import Date, DateTime, ForeignKey, func
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from api.core.extensions import db
-from .io.program import ProgramDto
 
 
 class ProgramModel(db.Model):
@@ -29,35 +28,6 @@ class ProgramModel(db.Model):
         back_populates="program",
         cascade="all, delete-orphan"
     )
-
-    def from_dto(dto: ProgramDto) -> ProgramModel:
-        return ProgramModel(
-            user_id=g.get('user_id'),
-            title=dto.title,
-            description=dto.description,
-            duration_weeks=dto.duration_weeks,
-            sections=[
-                ProgramSectionModel(
-                    name=s.name,
-                    exercises=[
-                        ProgramExerciseModel(
-                            name=e.name, sets=e.sets, reps=e.reps, rpe=e.rpe, rest_seconds=e.rest_seconds
-                        )
-                        for e in s.exercises
-                    ]
-                )
-                for s in dto.sections
-            ]
-        )
-
-    def to_dict(self):
-        return {
-            "program_id": self.program_id,
-            "title": self.title,
-            "description": self.description,
-            "duration_weeks": self.duration_weeks,
-            "sections": [section.to_dict() for section in self.sections]
-        }
 
 
 class ProgramSectionModel(db.Model):
