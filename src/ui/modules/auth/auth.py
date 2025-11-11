@@ -5,7 +5,7 @@ from shared.enum.http import HTTP
 from ui.core.enums import Endpoint, Template, View
 from ui.core.httpclient import HttpClient
 from ui.core.blueprints import ui_auth_bp
-from dto.user import User
+from ui.modules.auth.user import ApiUser
 
 
 http_client = HttpClient()
@@ -30,7 +30,7 @@ def login_page():
         if http_result.status_code != HTTP.Status.OK.value:
             return render_template(Template.LOGIN.value, error=("Invalid username or password."))
 
-        user = User(**http_result.json.get('user'))
+        user = ApiUser(**http_result.json.get('user'))
         login_user(user, remember=True)
 
         return redirect(url_for(View.DASHBOARD.value))
