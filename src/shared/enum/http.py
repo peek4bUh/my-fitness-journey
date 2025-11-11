@@ -1,9 +1,9 @@
 # HTTP request methods
-from enum import Enum, IntEnum
+from enum import IntEnum, StrEnum
 
 
 class HTTP:
-    class Method(str, Enum):
+    class Method(StrEnum):
         DELETE = "DELETE"
         GET = "GET"
         POST = "POST"
