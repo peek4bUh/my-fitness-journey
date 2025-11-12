@@ -1,3 +1,3 @@
-from .auth import routes
-from .programs import routes
-from .users import routes
+from .auth import controller
+from .programs import controller
+from .users import controller

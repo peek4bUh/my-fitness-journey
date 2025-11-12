@@ -1,7 +1,7 @@
 from flask_restx import Resource
 
-from .service import AuthService
-from .schemas import login_input_schema
+from ..service import AuthService
+from ..schemas import login_input_schema
 from api.core.namespaces import auth_ns
 
 
@@ -12,11 +12,3 @@ class Login(Resource):
     def post(self):
         """Login an user"""
         return AuthService().login_user()
-
-
-@auth_ns.route('/logout')
-class Logout(Resource):
-
-    def post(self):
-        """Logout an user"""
-        return AuthService().logout_user()
