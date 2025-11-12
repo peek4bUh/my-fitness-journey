@@ -1,6 +1,3 @@
-from api.core.io import BaseOutput
-
-
 class ProgramExerciseDto:
     """Data Transfer Object for Program Exercise data."""
 
@@ -54,7 +51,7 @@ class ProgramExerciseDto:
         )
 
 
-class ProgramExerciseOutput(BaseOutput):
+class ProgramExerciseOutput:
     """Data Transfer Object for Program Exercise data."""
 
     def __init__(

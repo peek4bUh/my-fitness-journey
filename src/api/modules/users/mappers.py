@@ -9,7 +9,7 @@ class UserMapper:
         user_output.set_username(model.username)
         user_output.set_email(model.email)
 
-        return user_output.to_dict()
+        return user_output.__dict__
 
     def to_login_user_output(self, model: UserModel) -> LoginUserOutput:
         login_user_output = LoginUserOutput()
@@ -17,4 +17,4 @@ class UserMapper:
         login_user_output.set_username(model.username)
         login_user_output.set_email(model.email)
 
-        return login_user_output.to_dict()
+        return login_user_output.__dict__

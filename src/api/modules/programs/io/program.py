@@ -1,7 +1,6 @@
 from typing import List
 
 from .program_section import ProgramSectionDto
-from api.core.io import BaseOutput
 
 
 class ProgramDto:
@@ -53,7 +52,7 @@ class ProgramDto:
         return f"ProgramDto(title={title}, description={desc}, duration_weeks={weeks}, sections={sections_info})"
 
 
-class ProgramOutput(BaseOutput):
+class ProgramOutput:
     """Output Object for Program data."""
 
     def __init__(

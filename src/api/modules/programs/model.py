@@ -51,13 +51,6 @@ class ProgramSectionModel(db.Model):
         cascade="all, delete-orphan"
     )
 
-    def to_dict(self):
-        return {
-            "id": self.program_section_id,
-            "name": self.name,
-            "exercises": [exercise.to_dict() for exercise in self.exercises],
-        }
-
 
 class ProgramExerciseModel(db.Model):
 
@@ -80,13 +73,3 @@ class ProgramExerciseModel(db.Model):
 
     section: Mapped['ProgramSectionModel'] = relationship(
         back_populates="exercises")
-
-    def to_dict(self):
-        return {
-            "id": self.program_exercise_id,
-            "name": self.name,
-            "sets": self.sets,
-            "reps": self.reps,
-            "rpe": self.rpe,
-            "rest_seconds": self.rest_seconds,
-        }

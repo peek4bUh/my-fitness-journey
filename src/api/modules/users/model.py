@@ -21,10 +21,3 @@ class UserModel(UserMixin, db.Model):
         server_default=func.now(),
         nullable=False
     )
-
-    def to_dict(self):
-        return {
-            "id": self.user_id,
-            "username": self.username,
-            "email": self.email
-        }

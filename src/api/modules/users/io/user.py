@@ -1,6 +1,3 @@
-from api.core.io import BaseOutput
-
-
 class UserDto:
     """Data Transfer Object for User data."""
 
@@ -28,7 +25,7 @@ class UserDto:
         self.email = email
 
 
-class UserOutput(BaseOutput):
+class UserOutput:
     """Output Object for User data."""
 
     def __init__(self, username: str = None, email: str = None):
@@ -48,7 +45,7 @@ class UserOutput(BaseOutput):
         self.email = email
 
 
-class LoginUserOutput(BaseOutput):
+class LoginUserOutput:
     """Output Object for Login User data."""
 
     def __init__(self, id: int = None, username: str = None, email: str = None):

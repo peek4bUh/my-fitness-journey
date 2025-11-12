@@ -1,6 +1,5 @@
 from typing import List
 
-from api.core.io import BaseOutput
 from .program_exercise import ProgramExerciseDto
 
 
@@ -32,7 +31,7 @@ class ProgramSectionDto:
         return f"ProgramSectionDto(name={name}, exercises={exercises_info})"
 
 
-class ProgramSectionOutput(BaseOutput):
+class ProgramSectionOutput:
     """Output Object for Program Section data."""
 
     def __init__(self, name: int = None, exercises: List[ProgramExerciseDto] = None):
