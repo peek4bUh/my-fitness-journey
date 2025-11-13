@@ -5,7 +5,7 @@ from api.config import api_restx
 from api.core.namespaces import programs_ns
 from ..service.usecase.create_program_usecase import CreateProgramUseCase
 from ..service.usecase.get_programs_usecase import GetProgramsUseCase
-from ..io.program.program_input import ProgramInput
+from ..io.program import ProgramInput
 
 
 @programs_ns.route('')

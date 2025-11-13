@@ -1,9 +1,6 @@
 from shared.enum.http import HTTP
-from ..mappers import ProgramMapper
 from ...domain.repository import ProgramsRepository
-from api.modules.programs.service.mappers import ProgramMapper
-from ..mappers import ProgramMapper
-from ...domain.repository import ProgramsRepository
+from ..mappers.program import ProgramMapper
 
 
 class GetProgramsUseCase:
@@ -18,6 +15,6 @@ class GetProgramsUseCase:
         if not programs:
             return None
 
-        output = [self.program_mapper.to_program_output(p) for p in programs]
+        output = [self.program_mapper.to_output(p) for p in programs]
 
         return output, HTTP.Status.OK.value

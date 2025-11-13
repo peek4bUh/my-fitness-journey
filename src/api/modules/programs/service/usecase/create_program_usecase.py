@@ -1,7 +1,6 @@
 from shared.enum.http import HTTP
-from api.modules.programs.service.mappers import ProgramMapper
-from ..mappers import ProgramMapper
 from ...domain.repository import ProgramsRepository
+from ..mappers.program import ProgramMapper
 
 
 class CreateProgramUseCase:
@@ -11,7 +10,7 @@ class CreateProgramUseCase:
         self.program_mapper = ProgramMapper()
 
     def execute(self, payload: dict) -> None:
-        program_dto = self.program_mapper.to_program_input(payload)
-        self.programs_repository.add_program(program_dto)
+        input = self.program_mapper.to_input(payload)
+        self.programs_repository.add_program(input)
 
         return {"message": "Program created successfully."}, HTTP.Status.CREATED.value

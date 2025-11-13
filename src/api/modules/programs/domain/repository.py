@@ -1,8 +1,7 @@
 from typing import List
 from flask import g
-from flask import current_app
 
-from ..io.program.program_input import ProgramInput
+from ..io.program import ProgramInput
 from .entity.program_entity import ProgramEntity
 from .entity.program_section_entity import ProgramSectionEntity
 from .entity.program_exercise_entity import ProgramExerciseEntity
