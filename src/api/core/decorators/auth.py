@@ -6,13 +6,13 @@ def require_api_key(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         from api.core.extensions import db
-        from api.modules.users.model import UserModel
+        from api.modules.users.domain.entity.user_entity import UserEntity
 
         api_key = request.headers.get('X-API-KEY')
         if not api_key:
             abort(401, 'Missing API key')
 
-        user = UserModel.query.filter_by(api_token=api_key).first()
+        user = UserEntity.query.filter_by(api_token=api_key).first()
         if not user.api_token:
             abort(401, 'Invalid API key')
 

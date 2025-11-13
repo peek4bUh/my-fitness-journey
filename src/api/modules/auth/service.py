@@ -1,8 +1,8 @@
 from flask import request
 from werkzeug.security import check_password_hash
 
-from api.modules.users.mappers import UserMapper
-from api.modules.users.repository import UsersRepository
+from api.modules.users.service.mappers import UserMapper
+from api.modules.users.domain.repository import UsersRepository
 
 
 class AuthService:

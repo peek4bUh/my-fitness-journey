@@ -1,4 +1,3 @@
-from flask_login import UserMixin
 from sqlalchemy import DateTime, func
 from sqlalchemy.orm import mapped_column
 import secrets
@@ -6,7 +5,7 @@ import secrets
 from api.core.extensions import db
 
 
-class UserModel(UserMixin, db.Model):
+class UserEntity(db.Model):
 
     __tablename__ = 'user'
 

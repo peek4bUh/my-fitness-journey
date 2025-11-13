@@ -26,7 +26,7 @@ def create_app():
     db.init_app(app)
 
     # Ensure models are imported before creating tables
-    import api.modules.users.model
+    import api.modules.users.domain.entity.user_entity
     with app.app_context():
         db.create_all()
 
