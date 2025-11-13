@@ -1,8 +1,6 @@
 from typing import List
-from flask_restx import fields
 
-from ...domain.dto.program_section_dto import ProgramSectionDto
-from api.core.namespaces import programs_ns
+from ...domain.entity.program_section_entity import ProgramSectionEntity
 
 
 class ProgramOutput:
@@ -14,7 +12,7 @@ class ProgramOutput:
             title: str = None,
             description: str = None,
             duration_weeks: int = None,
-            sections: List[ProgramSectionDto] = None):
+            sections: List[ProgramSectionEntity] = None):
         self.id = id
         self.title = title
         self.description = description

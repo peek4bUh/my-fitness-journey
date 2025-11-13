@@ -1,8 +1,8 @@
 from typing import Any, Dict
 
-from ..domain.dto.program_dto import ProgramDto
-from ..domain.dto.program_section_dto import ProgramSectionDto
-from ..domain.dto.program_exercise_dto import ProgramExerciseDto
+from ..io.program.program_input import ProgramInput
+from ..io.program_section.program_section_input import ProgramSectionInput
+from ..io.program_exercise.program_exercise_input import ProgramExerciseInput
 from ..io.program.program_output import ProgramOutput
 from ..io.program_section.program_section_output import ProgramSectionOutput
 from ..io.program_exercise.program_exercise_output import ProgramExerciseOutput
@@ -37,16 +37,16 @@ class ProgramMapper:
 
         return program_output
 
-    def to_program_dto(self, payload: Dict[str, Any]) -> ProgramDto:
-        program_dto = ProgramDto(
+    def to_program_input(self, payload: Dict[str, Any]) -> ProgramInput:
+        program_input = ProgramInput(
             title=payload.get("title"),
             description=payload.get("description"),
             duration_weeks=payload.get("duration_weeks"),
             sections=[
-                ProgramSectionDto(
+                ProgramSectionInput(
                     name=section.get("name"),
                     exercises=[
-                        ProgramExerciseDto(
+                        ProgramExerciseInput(
                             name=exercise.get("name"),
                             sets=exercise.get("sets"),
                             reps=exercise.get("reps"),
@@ -60,4 +60,4 @@ class ProgramMapper:
             ]
         )
 
-        return program_dto
+        return program_input

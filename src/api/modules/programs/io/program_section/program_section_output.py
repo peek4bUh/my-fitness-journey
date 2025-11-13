@@ -1,12 +1,12 @@
 from typing import List
 
-from ...domain.dto.program_exercise_dto import ProgramExerciseDto
+from ...domain.entity.program_exercise_entity import ProgramExerciseEntity
 
 
 class ProgramSectionOutput:
     """Output Object for Program Section data."""
 
-    def __init__(self, name: int = None, exercises: List[ProgramExerciseDto] = None):
+    def __init__(self, name: int = None, exercises: List[ProgramExerciseEntity] = None):
         self.name = name
         self.exercises = exercises
 

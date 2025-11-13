@@ -11,6 +11,7 @@ class CreateProgramUseCase:
         self.program_mapper = ProgramMapper()
 
     def execute(self, payload: dict) -> None:
-        program_dto = self.program_mapper.to_program_dto(payload)
+        program_dto = self.program_mapper.to_program_input(payload)
         self.programs_repository.add_program(program_dto)
+
         return {"message": "Program created successfully."}, HTTP.Status.CREATED.value

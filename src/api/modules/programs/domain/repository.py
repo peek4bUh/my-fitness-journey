@@ -1,6 +1,6 @@
 from flask import g
 
-from .dto.program_dto import ProgramDto
+from ..io.program.program_input import ProgramInput
 from .entity.program_entity import ProgramEntity
 from .entity.program_section_entity import ProgramSectionEntity
 from .entity.program_exercise_entity import ProgramExerciseEntity
@@ -8,12 +8,12 @@ from .entity.program_exercise_entity import ProgramExerciseEntity
 
 class ProgramsRepository:
 
-    def add_program(self, dto: ProgramDto) -> None:
+    def add_program(self, input: ProgramInput) -> None:
         new_program = ProgramEntity(
             user_id=g.get("user_id"),
-            title=dto.get_title(),
-            description=dto.get_description(),
-            duration_weeks=dto.get_duration_weeks(),
+            title=input.get_title(),
+            description=input.get_description(),
+            duration_weeks=input.get_duration_weeks(),
             sections=[
                 ProgramSectionEntity(
                     name=section.get_name(),
@@ -28,7 +28,7 @@ class ProgramsRepository:
                         for exercise in section.get_exercises()
                     ]
                 )
-                for section in dto.get_sections()
+                for section in input.get_sections()
             ]
         )
 
