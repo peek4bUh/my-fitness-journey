@@ -1,22 +1,24 @@
 from flask import g
 
-from .io.program import ProgramDto
-from .model import ProgramExerciseModel, ProgramModel, ProgramSectionModel
+from .dto.program_dto import ProgramDto
+from .entity.program_entity import ProgramEntity
+from .entity.program_section_entity import ProgramSectionEntity
+from .entity.program_exercise_entity import ProgramExerciseEntity
 
 
 class ProgramsRepository:
 
     def add_program(self, dto: ProgramDto) -> None:
-        new_program = ProgramModel(
+        new_program = ProgramEntity(
             user_id=g.get("user_id"),
             title=dto.get_title(),
             description=dto.get_description(),
             duration_weeks=dto.get_duration_weeks(),
             sections=[
-                ProgramSectionModel(
+                ProgramSectionEntity(
                     name=section.get_name(),
                     exercises=[
-                        ProgramExerciseModel(
+                        ProgramExerciseEntity(
                             name=exercise.get_name(),
                             sets=exercise.get_sets(),
                             reps=exercise.get_reps(),
@@ -34,8 +36,8 @@ class ProgramsRepository:
         db.session.add(new_program)
         db.session.commit()
 
-    def find_by_id(self, program_id) -> ProgramModel:
-        return ProgramModel.query.filter_by(user_id=g.get('user_id'), program_id=program_id).first()
+    def find_by_id(self, program_id) -> ProgramEntity:
+        return ProgramEntity.query.filter_by(user_id=g.get('user_id'), program_id=program_id).first()
 
-    def find_all(self) -> ProgramModel:
-        return ProgramModel.query.filter_by(user_id=g.get('user_id'))
+    def find_all(self) -> ProgramEntity:
+        return ProgramEntity.query.filter_by(user_id=g.get('user_id'))

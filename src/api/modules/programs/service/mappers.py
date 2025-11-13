@@ -1,14 +1,17 @@
 from typing import Any, Dict
 
-from api.modules.programs.io.program import ProgramDto, ProgramOutput
-from api.modules.programs.io.program_exercise import ProgramExerciseDto, ProgramExerciseOutput
-from api.modules.programs.io.program_section import ProgramSectionDto, ProgramSectionOutput
-from api.modules.programs.model import ProgramModel
+from ..domain.dto.program_dto import ProgramDto
+from ..domain.dto.program_section_dto import ProgramSectionDto
+from ..domain.dto.program_exercise_dto import ProgramExerciseDto
+from ..io.program.program_output import ProgramOutput
+from ..io.program_section.program_section_output import ProgramSectionOutput
+from ..io.program_exercise.program_exercise_output import ProgramExerciseOutput
+from ..domain.entity.program_entity import ProgramEntity
 
 
 class ProgramMapper:
 
-    def to_program_output(self, model: ProgramModel) -> ProgramOutput:
+    def to_program_output(self, model: ProgramEntity) -> ProgramOutput:
         program_output = ProgramOutput(
             id=model.program_id,
             title=model.title,
