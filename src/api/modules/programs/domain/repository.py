@@ -1,4 +1,6 @@
+from typing import List
 from flask import g
+from flask import current_app
 
 from ..io.program.program_input import ProgramInput
 from .entity.program_entity import ProgramEntity
@@ -39,5 +41,5 @@ class ProgramsRepository:
     def find_by_id(self, program_id) -> ProgramEntity:
         return ProgramEntity.query.filter_by(user_id=g.get('user_id'), program_id=program_id).first()
 
-    def find_all(self) -> ProgramEntity:
-        return ProgramEntity.query.filter_by(user_id=g.get('user_id'))
+    def find_all(self) -> List[ProgramEntity]:
+        return ProgramEntity.query.filter_by(user_id=g.get('user_id')).all()
