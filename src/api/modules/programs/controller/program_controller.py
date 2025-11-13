@@ -3,7 +3,7 @@ from flask_restx import Resource
 from api.core.decorators.auth import require_api_key
 from api.config import api_restx
 from api.core.namespaces import programs_ns
-from ..service.usecases.get_program_usecase import GetProgramUseCase
+from ..service.usecase.get_program_usecase import GetProgramUseCase
 
 
 @programs_ns.route('/<int:programId>')

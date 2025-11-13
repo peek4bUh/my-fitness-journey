@@ -3,7 +3,7 @@ from flask_restx import Resource
 from api.core.decorators.auth import require_api_key
 from api.config import api_restx
 from api.core.namespaces import programs_ns
-from ..service.usecases.create_program_usecase import CreateProgramUseCase
+from ..service.usecase.create_program_usecase import CreateProgramUseCase
 from ..io.program.program_input import ProgramInput
 
 
