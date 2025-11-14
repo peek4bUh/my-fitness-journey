@@ -12,24 +12,24 @@ class ProgramsRepository:
     def add_program(self, input: ProgramInput) -> None:
         new_program = ProgramEntity(
             user_id=g.get("user_id"),
-            title=input.get_title(),
-            description=input.get_description(),
-            duration_weeks=input.get_duration_weeks(),
+            title=input.title,
+            description=input.description,
+            duration_weeks=input.duration_weeks,
             sections=[
                 ProgramSectionEntity(
-                    name=section.get_name(),
+                    name=section.name,
                     exercises=[
                         ProgramExerciseEntity(
-                            name=exercise.get_name(),
-                            sets=exercise.get_sets(),
-                            reps=exercise.get_reps(),
-                            rpe=exercise.get_rpe(),
-                            rest_seconds=exercise.get_rest_seconds()
+                            name=exercise.name,
+                            sets=exercise.sets,
+                            reps=exercise.reps,
+                            rpe=exercise.rpe,
+                            rest_seconds=exercise.rest_seconds
                         )
-                        for exercise in section.get_exercises()
+                        for exercise in section.exercises
                     ]
                 )
-                for section in input.get_sections()
+                for section in input.sections
             ]
         )
 
