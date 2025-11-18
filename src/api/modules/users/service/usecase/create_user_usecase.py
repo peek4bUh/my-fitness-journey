@@ -1,7 +1,4 @@
-from flask import request
-from werkzeug.security import generate_password_hash
-
-from shared.enum.http import HTTP
+from shared.enum.http import Status
 from ...domain.repository import UsersRepository
 from ..mappers import UserMapper
 
@@ -17,8 +14,8 @@ class CreateUserUseCase:
 
         if self.users_repository.find_by_username(user_input.get_username()) or \
            self.users_repository.find_by_email(user_input.get_email()):
-            return {"message": "User or email already exists."}, HTTP.Status.CONFLICT.value
+            return {"message": "User or email already exists."}, Status.CONFLICT.value
 
         self.users_repository.add_user(user_input)
 
-        return {"message": "User created successfully."}, HTTP.Status.CREATED.value
+        return {"message": "User created successfully."}, Status.CREATED.value

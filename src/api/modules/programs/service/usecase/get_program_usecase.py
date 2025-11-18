@@ -1,4 +1,4 @@
-from shared.enum.http import HTTP
+from shared.enum.http import Status
 from ...domain.repository import ProgramsRepository
 from ..mappers.program import ProgramMapper
 
@@ -15,4 +15,4 @@ class GetProgramUseCase:
         if not program:
             return None
 
-        return self.program_mapper.to_output(program), HTTP.Status.OK.value
+        return self.program_mapper.to_output(program), Status.OK.value

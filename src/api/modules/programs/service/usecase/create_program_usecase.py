@@ -1,4 +1,4 @@
-from shared.enum.http import HTTP
+from shared.enum.http import Status
 from ...domain.repository import ProgramsRepository
 from ..mappers.program import ProgramMapper
 
@@ -13,4 +13,4 @@ class CreateProgramUseCase:
         input = self.program_mapper.to_input(payload)
         self.programs_repository.add_program(input)
 
-        return {"message": "Program created successfully."}, HTTP.Status.CREATED.value
+        return {"message": "Program created successfully."}, Status.CREATED.value

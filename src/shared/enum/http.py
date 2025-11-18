@@ -2,18 +2,18 @@
 from enum import IntEnum, StrEnum
 
 
-class HTTP:
-    class Method(StrEnum):
-        DELETE = "DELETE"
-        GET = "GET"
-        POST = "POST"
-        PUT = "PUT"
+class Method(StrEnum):
+    DELETE = "DELETE"
+    GET = "GET"
+    POST = "POST"
+    PUT = "PUT"
 
-    class Status(IntEnum):
-        OK = 200
-        CREATED = 201
-        BAD_REQUEST = 400
-        UNAUTHORIZED = 401
-        FORBIDDEN = 403
-        NOT_FOUND = 404
-        CONFLICT = 409
+
+class Status(IntEnum):
+    OK = 200
+    CREATED = 201
+    BAD_REQUEST = 400
+    UNAUTHORIZED = 401
+    FORBIDDEN = 403
+    NOT_FOUND = 404
+    CONFLICT = 409

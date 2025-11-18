@@ -1,4 +1,4 @@
-from shared.enum.http import HTTP
+from shared.enum.http import Status
 from ...domain.repository import UsersRepository
 from ..mappers import UserMapper
 
@@ -15,4 +15,4 @@ class GetUserUseCase:
         if not user:
             return None
 
-        return self.user_mapper.to_user_output(user), HTTP.Status.OK.value
+        return self.user_mapper.to_user_output(user), Status.OK.value
