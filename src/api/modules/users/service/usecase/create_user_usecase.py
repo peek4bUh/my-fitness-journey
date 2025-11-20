@@ -1,6 +1,6 @@
 from shared.enum.http import Status
 from ...domain.repository import UsersRepository
-from ..mappers import UserMapper
+from ..mappers.user import UserMapper
 
 
 class CreateUserUseCase:
@@ -10,7 +10,7 @@ class CreateUserUseCase:
         self.user_mapper = UserMapper()
 
     def execute(self, payload: dict) -> None:
-        user_input = self.user_mapper.to_user_input(payload)
+        user_input = self.user_mapper.to_input(payload)
 
         if self.users_repository.find_by_username(user_input.get_username()) or \
            self.users_repository.find_by_email(user_input.get_email()):
