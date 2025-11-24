@@ -14,12 +14,39 @@
   <!-- SIDEBAR MENU -->
   <nav class="flex-1 overflow-y-auto py-6">
     <ul class="flex flex-col gap-1">
+      {% from 'icons/overview.html' import OverviewIcon %}
+      {% from 'icons/workouts.html' import WorkoutsIcon %}
+      {% from 'icons/programs.html' import ProgramsIcon %}
+      {% from 'icons/body-weights.html' import BodyWeightsIcon %}
+
+      {% set sidebar_items = [
+      {
+      "title": "Overview",
+      "href": "/dashboard",
+      "icon": OverviewIcon()
+      },
+      {
+      "title": "Workouts",
+      "href": "#",
+      "icon": WorkoutsIcon()
+      },
+      {
+      "title": "Programs",
+      "href": "/programs",
+      "icon": ProgramsIcon()
+      },
+      {
+      "title": "Body Weights",
+      "href": "#",
+      "icon": BodyWeightsIcon()
+      } ] %}
+
       {% for item in sidebar_items %}
       <li>
         <a href="{{ item.href }}"
           class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors"
           :class="sidebarCollapsed ? 'justify-center' : ''">
-          <img class="w-5 h-5" alt="{{ item.icon }}" src="{{ url_for('static', filename=item.image) }}" />
+          {{ item.icon }}
           <span x-show="!sidebarCollapsed" class="lg:block">{{ item.title }}</span>
         </a>
       </li>
