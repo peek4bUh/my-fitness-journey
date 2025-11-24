@@ -30,10 +30,4 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    from ui.config.sidebar import sidebar_items
-
-    @app.context_processor
-    def inject_sidebar():
-        return {"sidebar_items": sidebar_items}
-
     return app

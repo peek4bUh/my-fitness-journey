@@ -4,9 +4,9 @@ from enum import StrEnum
 class Template(StrEnum):
     LOGIN = "modules/auth/login.html"
     SIGNUP = "modules/auth/signup.html"
-    INDEX = "modules/index.html"
-    DASHBOARD = "modules/dashboard.html"
-    PROGRAMS = "modules/programs.html"
+    INDEX = "modules/home/index.html"
+    DASHBOARD = "modules/dashboard/dashboard.html"
+    PROGRAMS = "modules/dashboard/programs.html"
 
 
 class View(StrEnum):
