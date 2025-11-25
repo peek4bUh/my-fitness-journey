@@ -1,20 +1,19 @@
-<header class="sticky top-0 z-30 flex min-h-14 items-center gap-4 border-b border-gray-200 bg-white p-1 lg:px-6">
+<header
+    class="sticky top-0 z-30 flex min-h-14 items-center justify-between gap-4 border-b border-gray-200 bg-white p-1 lg:px-6">
 
-    <!-- Left: Sidebar Toggle -->
+    <!-- Hamburger -->
     <button @click="sidebarOpen = !sidebarOpen"
-        class="flex items-center justify-center w-10 h-10  rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+        class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
         <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
     </button>
 
-    <!-- Center: App Title (Mobile Only) -->
-    <div class="flex-1 lg:hidden flex items-center justify-center">
-        <h1 class="text-lg font-semibold text-gray-900">MyFitnessJourney</h1>
-    </div>
+    {% from 'components/site_logo.html' import siteLogo %}
+    {{ siteLogo() }}
 
-    <!-- Right: User Menu -->
-    <div class="relative mr-2.5" x-data="{ userMenuOpen: false }" @click.away="userMenuOpen = false">
+    <!-- User Menu -->
+    <div class="hidden relative mr-2.5" x-data="{ userMenuOpen: false }" @click.away="userMenuOpen = false">
         <button @click="userMenuOpen = !userMenuOpen"
             class="flex items-center gap-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
             <div class="flex-shrink-0 w-9 h-9 bg-gray-200 rounded-full flex items-center justify-center">

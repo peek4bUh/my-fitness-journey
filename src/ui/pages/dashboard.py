@@ -5,7 +5,7 @@ from ui.core.enums import Template
 from ui.core.blueprints import ui_dashboard_bp
 
 
-@ui_dashboard_bp.route('/dashboard')
+@ui_dashboard_bp.route('/dashboard/overview')
 @login_required
-def navigate_to_dashboard():
-    return render_template(Template.DASHBOARD.value, username=current_user.username)
+def dashboard_overview_page():
+    return render_template(Template.OVERVIEW.value, username=current_user.username)

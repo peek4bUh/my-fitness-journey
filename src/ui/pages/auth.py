@@ -29,7 +29,7 @@ def login_page():
         user = ApiUser(**http_result.json.get('user'))
         login_user(user, remember=True)
 
-        return redirect(url_for(View.DASHBOARD.value))
+        return redirect(url_for(View.DASHBOARD_OVERVIEW.value))
 
 
 @ui_auth_bp.route('/logout')
@@ -56,4 +56,4 @@ def signup_page():
         if resp.status_code == Status.CONFLICT.value:
             return render_template(Template.SIGNUP.value, error="Username or email already exists.")
 
-        return redirect(url_for(View.DASHBOARD.value))
+        return redirect(url_for(View.DASHBOARD_OVERVIEW.value))
