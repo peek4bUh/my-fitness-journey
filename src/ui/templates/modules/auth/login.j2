@@ -1,0 +1,58 @@
+{% extends "layouts/auth.j2" %}
+{% block title %}
+  Login
+{% endblock title %}
+
+{% block content %}
+  <div class="text-center mt-0 mb-8">
+    <h2 class="text-3xl lg:text-4xl font-bold text-black mb-2">Welcome Back</h2>
+    <p class="lg:text-lg text-gray-600">Sign in to continue your fitness journey</p>
+  </div>
+
+  <form method="post" class="flex flex-col gap-6">
+    <div>
+      <label for="username" class="block text-sm lg:text-base font-semibold text-gray-600 mb-1">
+        Username
+      </label>
+      <input type="text"
+             id="username"
+             name="username"
+             required
+             class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors" />
+    </div>
+
+    <div>
+      <label for="password" class="block text-sm lg:text-base font-semibold text-gray-600 mb-1">
+        Password
+      </label>
+      <input type="password"
+             id="password"
+             name="password"
+             required
+             class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors" />
+    </div>
+
+    <div class="flex items-center justify-between text-sm">
+      <label class="flex items-center gap-2 cursor-pointer">
+        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-black focus:ring-black" />
+        <span class="text-gray-700">Remember me</span>
+      </label>
+
+      <a href="/forgot-password" class="text-gray-600 hover:text-black transition-colors">
+        Forgot password?
+      </a>
+    </div>
+
+    <button type="submit"
+            class="w-full py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition duration-200 cursor-pointer">
+      Login
+    </button>
+  </form>
+
+  <div class="mt-8 text-center">
+    <p class="text-gray-600">
+      Don't have an account?
+      <a href="/register" class="text-black font-semibold hover:underline">Create Account</a>
+    </p>
+  </div>
+{% endblock content %}

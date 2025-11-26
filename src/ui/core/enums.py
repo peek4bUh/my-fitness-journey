@@ -2,11 +2,11 @@ from enum import StrEnum
 
 
 class Template(StrEnum):
-    LOGIN = "modules/auth/login.html"
-    SIGNUP = "modules/auth/signup.html"
-    INDEX = "modules/home/index.html"
-    OVERVIEW = "modules/dashboard/overview.html"
-    PROGRAMS = "modules/dashboard/programs.html"
+    LOGIN = "modules/auth/login.j2"
+    SIGNUP = "modules/auth/signup.j2"
+    INDEX = "modules/home/index.j2"
+    OVERVIEW = "modules/dashboard/overview.j2"
+    PROGRAMS = "modules/dashboard/programs.j2"
 
 
 class View(StrEnum):

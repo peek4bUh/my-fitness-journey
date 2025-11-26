@@ -1,0 +1,31 @@
+{%- macro Link(href='#', underline=None, name='Link', class_name='', target=None, rel=None, attrs=None) -%}
+  {%- set attrs = attrs or {} -%}
+  {%- set is_external = href.startswith('http') and (request is not none and not
+    href.startswith(request.url_root|default(''))) -%}
+  {%- if underline is none -%}
+    {%- set underline = "hover" -%}
+  {%- endif -%}
+
+  {%- if underline == 'none' -%}
+    {%- set underline_cls = "" -%}
+  {%- elif underline == 'hover' -%}
+    {%- set underline_cls = "hover:underline" -%}
+  {%- elif underline == 'always' -%}
+    {%- set underline_cls = "underline" -%}
+  {%- endif -%}
+
+  {%- set base_cls = "text-sm font-medium text-gray-600 hover:text-black transition-colors" -%}
+
+  {%- if is_external and not target -%}
+    {%- set target = "_blank" -%}
+  {%- endif -%}
+  {%- if target == '_blank' and not rel -%}
+    {%- set rel = "noopener noreferrer" -%}
+  {%- endif -%}
+
+  <a href="{{ href }}" class="{{ base_cls }} {{ underline_cls }} {{ class_name }}" {%- if target %} target="{{ target }}"
+  {% endif -%} {%- if rel %} rel="{{ rel }}" {% endif -%} {%- for k, v in attrs.items() %} {{ k }}="{{ v }}" {% endfor
+  -%}>
+  {{ name }}
+</a>
+{%- endmacro -%}

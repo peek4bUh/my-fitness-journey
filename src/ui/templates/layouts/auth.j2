@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+      {% endblock title %}
+    | MyFitnesJourney</title>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="flex h-screen">
+      <!-- Left Column -->
+      <div class="hidden lg:block relative basis-2/4">
+        <img class="absolute z-0 h-full object-cover"
+             src="{{ url_for('static', filename='images/bb-romanian-deadlift.jpg') }}"
+             alt="Barbell Romanian Deadlift" />
+        <div class="absolute z-10 flex flex-col justify-center items-start h-full w-full pl-10 inset-0 bg-black/50">
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">Push Your Limits.</h2>
+          <p class="text-lg text-gray-200 max-w-md">
+            Every small step adds up. Stay consistent, show up, and watch your journey transform.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="flex flex-col justify-between grow basis-1/2 p-6">
+        {% from "components/site_logo.j2" import siteLogo %}
+        {{ siteLogo() }}
+
+        <div class="flex items-center justify-center flex-1">
+          <div class="w-full max-w-md">
+            {% block content %}
+            {% endblock content %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,36 @@
+<footer id="footer" class="py-10 text-gray-200 bg-gray-900">
+  <div class="container mx-auto px-8 flex flex-col sm:flex-row sm:justify-between gap-6 sm:gap-0">
+    <div class="order-2">
+      <div class="flex items-center mb-4">
+        <ul class="flex items-center text-sm">
+          {% from 'components/link_item.j2' import link_item %}
+          {{ link_item('Portfolio', 'http://www.aandradeb.com') }}
+          {{ link_item('LinkedIn', 'https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176') }}
+          {{ link_item('GitHub', 'https://github.com/peek4bUh/my-fitness-journey') }}
+          {{ link_item('License', 'https://github.com/peek4bUh/my-fitness-journey/blob/main/LICENSE',
+                    separator=False) 
+          }}
+        </ul>
+      </div>
+      <p class="text-gray-400 text-sm">© 2025 · MyFitnessJourney · All rights reserved</p>
+    </div>
+    <div class="order-1 sm:order-3 sm:text-right">
+      <p class="text-sm text-gray-400 mb-3">
+        Created by <a href="https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="underline font-bold text-gray-200 hover:text-sky-500 transition-colors duration-200">Angel
+      Andrade</a>
+    </p>
+    <p class="text-sm text-gray-400">
+      Developed with <a href="https://flask.palletsprojects.com/en/stable/"
+    target="_blank"
+    class="underline font-bold text-gray-200 hover:text-sky-500 transition-colors duration-200">Flask</a>
+      + <a href="https://tailwindcss.com/"
+    target="_blank"
+    class="underline font-bold text-gray-200 hover:text-sky-500 transition-colors duration-200">Tailwind
+    CSS</a>
+  </p>
+</div>
+</div>
+</footer>
