@@ -12,3 +12,4 @@ class Template(StrEnum):
 class View(StrEnum):
     DASHBOARD_OVERVIEW = "ui.dashboard.dashboard_overview_page"
     LOGIN = "ui.auth.login_page"
+    REGISTER = "ui.auth.signup_page"

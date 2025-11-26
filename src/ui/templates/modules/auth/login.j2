@@ -52,7 +52,7 @@
   <div class="mt-8 text-center">
     <p class="text-gray-600">
       Don't have an account?
-      <a href="/register" class="text-black font-semibold hover:underline">Create Account</a>
+      <a href="{{ url_for('ui.auth.signup_page') }}" class="text-black font-semibold hover:underline">Create Account</a>
     </p>
   </div>
 {% endblock content %}
