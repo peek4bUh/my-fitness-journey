@@ -13,7 +13,7 @@ from flask import redirect, render_template, request, url_for
 def login_page():
     if request.method == Method.GET.value:
         if login_remembered():
-            return redirect(url_for(View.DASHBOARD.value))
+            return redirect(url_for(View.DASHBOARD_OVERVIEW.value))
 
         return render_template(Template.LOGIN.value)
 

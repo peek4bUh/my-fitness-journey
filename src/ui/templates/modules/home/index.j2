@@ -1,15 +1,4 @@
-{% from 'components/badge.j2' import Badge %}
-{% from 'components/button.j2' import Button %}
-{% from 'components/link.j2' import Link %}
-{% from 'components/site_logo.j2' import siteLogo %}
-{% from 'components/reason.j2' import reason %}
-{% from 'icons/dumbell.j2' import DumbellIcon %}
-{% from 'icons/up-arrow.j2' import UpArrowIcon %}
-{% from 'icons/circle.j2' import CircleIcon %}
-{% from 'icons/timer.j2' import TimerIcon %}
-{% from 'icons/metrics.j2' import MetricsIcon %}
-{% from 'icons/phone.j2' import PhoneIcon %}
-{% from 'icons/circle-check.j2' import CircleCheckIcon %}
+{% from 'data/index.j2' import features, highlights, reasons %}
 
 {% extends "layouts/base.j2" %}
 {% block title %}
@@ -23,17 +12,30 @@
        @scroll.window="scrolled = window.scrollY > 0"
        :class="scrolled ? 'bg-white border-b border-gray-100' : ''">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-      {{ siteLogo() }}
+      <a href="/" class="flex items-center gap-2 lg:gap-3 w-fit">
+        <span class="w-7 h-7 lg:w-9 lg:h-9 bg-black rounded-lg flex items-center justify-center">
+          <img class="w-4 h-4 lg:w-5 lg:h-5"
+               alt="MyFitnessJourney Logo"
+               src="{{ url_for('static', filename='images/logo.svg') }}" />
+        </span>
+        <p class="lg:text-xl font-semibold">MyFitnessJourney</p>
+      </a>
 
       <!-- Navigation -->
       <nav class="hidden md:flex items-center gap-6">
-        {{ Link(href='#features', name='Features') }}
+        <a href="#features" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">features</a>
         <a href="#reasons" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">Reasons</a>
         <a href="#opensource" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">Open Source</a>
 
         <div class="flex items-center gap-2 font-semibold">
-          {{ Button(variant='outline', href='ui.auth.login_page', name='Login', size='medium') }}
-          {{ Button(variant='contained', href='ui.auth.signup_page', name='Register', size='medium') }}
+          <a href="{{ url_for('ui.auth.login_page') }}"
+             class="px-6 py-2.5 text-sm border border-gray-800 hover:bg-gray-200 rounded-md text-gray-700 hover:text-black transition-colors">
+            Log In
+          </a>
+          <a href="{{ url_for('ui.auth.signup_page') }}"
+             class="px-6 py-2.5 text-sm border border-black bg-black text-white rounded-md hover:bg-gray-800 transition-all duration-200">
+            Register
+          </a>
         </div>
       </nav>
 
@@ -103,15 +105,22 @@
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-        {{ Button(variant='contained', href='ui.auth.login_page', name='Join For Free', size='large') }}
-        {{ Button(variant='outline', href='https://github.com/peek4bUh/my-fitness-journey', name='View on GitHub',
-                size='large') }}
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <a href="{{ url_for('ui.auth.login_page') }}"
+             class="inline-block px-10 py-4 border-2 border-black bg-black text-white text-lg font-medium rounded-md hover:bg-gray-800 transition-all duration-200">
+            Join For Free
+          </a>
+          <a href="https://github.com/peek4bUh/my-fitness-journey"
+             class="inline-block px-10 py-4 border-2 border-black text-black text-lg font-medium rounded-md hover:bg-gray-200 transition-all duration-200">
+            View on GitHub
+          </a>
+        </div>
       </div>
 
       <div class="flex flex-wrap gap-3 justify-center text-sm text-gray-500">
-        {{ Badge(name='100% Free') }}
-        {{ Badge(name='Open Source') }}
-        {{ Badge(name='No Limitations') }}
+        <span class="px-4 py-2 border border-gray-300 rounded-full">100% Free</span>
+        <span class="px-4 py-2 border border-gray-300 rounded-full">Open Source</span>
+        <span class="px-4 py-2 border border-gray-300 rounded-full">No Limitations</span>
       </div>
     </div>
   </section>
@@ -129,30 +138,15 @@
         </p>
       </div>
 
-      {%- set features = [
-            {'icon': DumbellIcon(),'title':'Workout Tracking','desc':'Log
-            every rep, set, and weight with our intuitive interface. Never lose track of your progress again.'},
-            {'icon': UpArrowIcon(),'title':'Progress Analytics','desc':'Visualize your strength gains with detailed charts and
-            progress tracking over time.'},
-            {'icon': CircleIcon(),'title':'Goal Setting','desc':'Set weekly and monthly fitness goals and track your
-            consistency with smart reminders.'},
-            {'icon': TimerIcon(),'title':'Workout Timer','desc':'Built-in rest timers and workout duration tracking to
-            optimize your gym sessions.'},
-            {'icon': MetricsIcon(),'title':'Body Metrics','desc':'Track weight, body fat percentage, and muscle mass changes
-            over time.'},
-            {'icon': PhoneIcon(),'title':'Mobile First','desc':'Designed for mobile use in the gym with offline support and
-            quick logging.'}
-            ] -%}
-
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for f in features %}
+        {% for feature in features %}
           <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
             <div class="p-6">
               <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                {{ f.icon }}
+                {{ feature.icon }}
               </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ f.title }}</h3>
-              <p class="text-gray-600 leading-relaxed">{{ f.desc }}</p>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ feature.title }}</h3>
+              <p class="text-gray-600 leading-relaxed">{{ feature.desc }}</p>
             </div>
           </div>
         {% endfor %}
@@ -171,14 +165,20 @@
             tracking platform.
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {{ reason("Track unlimited workouts and exercises") }}
-            {{ reason("Visual progress charts and analytics") }}
-            {{ reason("Workout templates and routines") }}
-            {{ reason("Rest timer and workout duration tracking") }}
-            {{ reason("Body metrics and measurements") }}
-            {{ reason("Goal setting and achievement tracking") }}
-            {{ reason("Offline mode for gym use") }}
-            {{ reason("Export data and progress reports") }}
+            <div class="flex items-center gap-3">
+              <img class="w-4"
+                   alt="Circle Check Icon"
+                   src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+              <span class="text-gray-700">{{ label }}</span>
+            </div>
+            {% for reason in reasons %}
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">{{ reason.title }}</span>
+              </div>
+            {% endfor %}
           </div>
         </div>
         <div class="relative">
@@ -188,8 +188,8 @@
     </div>
   </section>
 
-  <!-- Open Source Section -->
-  <section id="opensource" class="py-20">
+  <!-- Highlights Section -->
+  <section id="highlights" class="py-20">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -199,23 +199,14 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {%- set features_open_source = [
-                {'icon': CircleCheckIcon(classes='w-8 h-8 text-gray-800'), 'title': '100% Free', 'desc': 'No subscriptions, no
-                hidden fees, no premium features. Everything is free forever.'},
-                {'icon': DumbellIcon(classes='w-8 h-8 text-gray-800'), 'title': 'Open Source', 'desc': 'Full source code available
-                on GitHub. Contribute, customize, or learn from the codebase.'},
-                {'icon': CircleIcon(classes='w-8 h-8 text-gray-800'), 'title': 'Privacy First', 'desc': 'Your data stays on your
-                device. No tracking, no ads, no data collection.'}
-                ] -%}
-
-        {% for f in features_open_source %}
+        {% for highlight in highlights %}
           <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
             <div class="p-8">
               <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                {{ f.icon }}
+                {{ highlight.icon }}
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-4">{{ f.title }}</h3>
-              <p class="text-gray-600">{{ f.desc }}</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-4">{{ highlight.title }}</h3>
+              <p class="text-gray-600">{{ highlight.desc }}</p>
             </div>
           </div>
         {% endfor %}

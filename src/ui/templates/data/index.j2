@@ -1,0 +1,49 @@
+{% from 'icons/dumbell.j2' import DumbellIcon %}
+{% from 'icons/up-arrow.j2' import UpArrowIcon %}
+{% from 'icons/circle.j2' import CircleIcon %}
+{% from 'icons/timer.j2' import TimerIcon %}
+{% from 'icons/metrics.j2' import MetricsIcon %}
+{% from 'icons/phone.j2' import PhoneIcon %}
+{% from 'icons/circle-check.j2' import CircleCheckIcon %}
+
+{% set features = [
+  {'icon': DumbellIcon(), 'title':'Workout Tracking','desc':'Log every rep, set, and weight with our intuitive interface. Never lose track of your progress again.'},
+  {'icon': UpArrowIcon(), 'title':'Progress Analytics','desc':'Visualize your strength gains with detailed charts and progress tracking over time.'},
+  {'icon': CircleIcon(), 'title':'Goal Setting','desc':'Set weekly and monthly fitness goals and track your consistency with smart reminders.'},
+  {'icon': TimerIcon(), 'title':'Workout Timer','desc':'Built-in rest timers and workout duration tracking to optimize your gym sessions.'},
+  {'icon': MetricsIcon(), 'title':'Body Metrics','desc':'Track weight, body fat percentage, and muscle mass changes over time.'},
+  {'icon': PhoneIcon(), 'title':'Mobile First','desc':'Designed for mobile use in the gym with offline support and quick logging.'}
+] %}
+
+{% set highlights = [
+  {'icon': CircleCheckIcon(classes='w-8 h-8 text-gray-800'), 'title': '100% Free', 'desc': 'No subscriptions, no hidden fees, no premium features. Everything is free forever.'},
+  {'icon': DumbellIcon(classes='w-8 h-8 text-gray-800'), 'title': 'Open Source', 'desc': 'Full source code available on GitHub. Contribute, customize, or learn from the codebase.'},
+  {'icon': CircleIcon(classes='w-8 h-8 text-gray-800'), 'title': 'Privacy First', 'desc': 'Your data stays on your device. No tracking, no ads, no data collection.'}
+] %}
+
+{% set reasons = [
+  {
+    "title": "Track unlimited workouts and exercises"
+  },
+  {
+    "title": "Visual progress charts and analytics"
+  },
+  {
+    "title": "Workout templates and routines"
+  },
+  {
+    "title": "Rest timer and workout duration tracking"
+  },
+  {
+    "title": "Body metrics and measurements"
+  },
+  {
+    "title": "Goal setting and achievement tracking"
+  },
+  {
+    "title": "Offline mode for gym use"
+  },
+  {
+    "title": "Export data and progress reports"
+  }
+] %}

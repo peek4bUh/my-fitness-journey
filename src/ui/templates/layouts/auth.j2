@@ -28,8 +28,14 @@
 
       <!-- Right Column -->
       <div class="flex flex-col justify-between grow basis-1/2 p-6">
-        {% from "components/site_logo.j2" import siteLogo %}
-        {{ siteLogo() }}
+        <a href="/" class="flex items-center gap-2 lg:gap-3 w-fit">
+          <span class="w-7 h-7 lg:w-9 lg:h-9 bg-black rounded-lg flex items-center justify-center">
+            <img class="w-4 h-4 lg:w-5 lg:h-5"
+                 alt="MyFitnessJourney Logo"
+                 src="{{ url_for('static', filename='images/logo.svg') }}" />
+          </span>
+          <p class="lg:text-xl font-semibold">MyFitnessJourney</p>
+        </a>
 
         <div class="flex items-center justify-center flex-1">
           <div class="w-full max-w-md">

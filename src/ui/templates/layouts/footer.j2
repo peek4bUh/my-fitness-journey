@@ -3,13 +3,26 @@
     <div class="order-2">
       <div class="flex items-center mb-4">
         <ul class="flex items-center text-sm">
-          {% from 'components/link_item.j2' import link_item %}
-          {{ link_item('Portfolio', 'http://www.aandradeb.com') }}
-          {{ link_item('LinkedIn', 'https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176') }}
-          {{ link_item('GitHub', 'https://github.com/peek4bUh/my-fitness-journey') }}
-          {{ link_item('License', 'https://github.com/peek4bUh/my-fitness-journey/blob/main/LICENSE',
-                    separator=False) 
-          }}
+          <li class="relative after:content-['·'] after:mx-2">
+            <a href="http://www.aandradeb.com"
+               target="_blank"
+               class="hover:text-sky-500 transition-colors duration-200">Portfolio</a>
+          </li>
+          <li class="relative after:content-['·'] after:mx-2">
+            <a href="https://www.linkedin.com/in/angel-andrade-berganti%C3%B1os-3791a7176"
+               target="_blank"
+               class="hover:text-sky-500 transition-colors duration-200">LinkedIn</a>
+          </li>
+          <li class="relative after:content-['·'] after:mx-2">
+            <a href="https://github.com/peek4bUh/my-fitness-journey"
+               target="_blank"
+               class="hover:text-sky-500 transition-colors duration-200">GitHub</a>
+          </li>
+          <li class="relative">
+            <a href="https://github.com/peek4bUh/my-fitness-journey/blob/main/LICENSE"
+               target="_blank"
+               class="hover:text-sky-500 transition-colors duration-200">License</a>
+          </li>
         </ul>
       </div>
       <p class="text-gray-400 text-sm">© 2025 · MyFitnessJourney · All rights reserved</p>

@@ -1,6 +1,0 @@
-{% macro link_item(label, href='#', target='_blank', li_classes='relative', a_classes='hover:text-sky-500
-  transition-colors duration-200', separator=True) -%}
-  <li class="{{ li_classes }}{% if separator %} after:content-['·'] after:mx-2{% endif %}">
-    <a href="{{ href }}" target="{{ target }}" class="{{ a_classes }}">{{ label }}</a>
-  </li>
-{%- endmacro %}
