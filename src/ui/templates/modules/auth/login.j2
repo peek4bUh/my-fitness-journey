@@ -1,9 +1,10 @@
 {% extends "layouts/auth.j2" %}
+
 {% block title %}
-  Login
+  Login {{ super() }}
 {% endblock title %}
 
-{% block content %}
+{% block content_auth %}
   <div class="text-center mt-0 mb-8">
     <h2 class="text-3xl lg:text-4xl font-bold text-black mb-2">Welcome Back</h2>
     <p class="lg:text-lg text-gray-600">Sign in to continue your fitness journey</p>
@@ -15,7 +16,6 @@
         Username
       </label>
       <input type="text"
-             id="username"
              name="username"
              required
              class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors" />
@@ -26,7 +26,6 @@
         Password
       </label>
       <input type="password"
-             id="password"
              name="password"
              required
              class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors" />
@@ -55,4 +54,4 @@
       <a href="{{ url_for('ui.auth.signup_page') }}" class="text-black font-semibold hover:underline">Create Account</a>
     </p>
   </div>
-{% endblock content %}
+{% endblock content_auth %}
