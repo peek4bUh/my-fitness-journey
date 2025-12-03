@@ -1,6 +1,22 @@
-<aside class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform bg-white border-r border-gray-200"
-       :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'">
-  <div class="h-full px-3 py-4 overflow-y-auto">
+<aside id="sidebar"
+       class="hidden fixed top-0 left-0 z-99 w-72 h-screen rounded-xl transition-transform bg-white border-r border-gray-200">
+  <div class="flex px-4 py-3.5 items-center justify-between">
+    <a href="/dashboard/overview" class="flex items-center gap-3 w-fit">
+      <span class="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+        <img class="w-5 h-5"
+             alt="MyFitnessJourney Logo"
+             src="{{ url_for('static', filename='images/logo.svg') }}" />
+      </span>
+      <p class="lg:text-xl text-sm font-semibold">MyFitnessJourney</p>
+    </a>
+    <button id="hamburger">
+      <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17 L17 7 M7 7 L17 17" />
+      </svg>
+    </button>
+  </div>
+
+  <nav class="h-full px-4 py-4 overflow-y-auto">
     <ul class="space-y-2">
       <li>
         <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
@@ -52,5 +68,5 @@
         </a>
       </li>
     </ul>
-  </div>
+  </nav>
 </aside>

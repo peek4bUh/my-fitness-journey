@@ -25,5 +25,9 @@
 
     {% block footer %}
     {% endblock footer %}
+
+    {% block extra_js %}
+      <script src="{{ url_for('static', filename='js/hamburger.js') }}"></script>
+    {% endblock extra_js %}
   </body>
 </html>

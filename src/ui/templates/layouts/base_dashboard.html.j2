@@ -5,13 +5,13 @@
 {% endblock title %}
 
 {% block header %}
-  {% include "layouts/navigation.html.j2" %}
+  {% include "layouts/header.html.j2" %}
 {% endblock header %}
 
 {% block content %}
-  <main class="bg-gray-50" x-data="{ sidebarOpen: false, userMenuOpen: false }">
+  <main class="bg-gray-50 md:pl-75 pt-[61px]">
     {% include "layouts/sidebar.html.j2" %}
-    <div class="p-4 md:ml-64 mt-[61px]">
+    <div id="content" class="p-4">
       {% block content_dashboard %}
       {% endblock content_dashboard %}
     </div>
