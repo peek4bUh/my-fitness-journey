@@ -6,7 +6,7 @@ from ui.core.blueprints import ui_programs_bp
 from ui.core.httpclient import HttpClient
 
 
-@ui_programs_bp.route('/programs')
+@ui_programs_bp.route('/dashboard/programs')
 @login_required
 def navigate_to_programs():
     # programs = HttpClient().post("/api/v0/programs", json={

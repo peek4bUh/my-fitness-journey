@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% block head %}
-      <meta name="keywords"
-            content="fitness tracker, open source, workout tracker, fitness journal, exercise log, training planner, workout analytics" />
-      <meta name="description"
-            content="A free, open‑source fitness tracker to document workouts, visualize progress, and achieve goals — no cost, no limits." />
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>
-        {% block title %}
-          | MyFitnessJourney
-        {% endblock title %}
-      </title>
-      <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
-      <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    {% endblock head %}
+    <meta name="keywords"
+          content="fitness tracker, open source, workout tracker, fitness journal, exercise log, training planner, workout analytics" />
+    <meta name="description"
+          content="A free, open‑source fitness tracker to document workouts, visualize progress, and achieve goals — no cost, no limits." />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        | MyFitnessJourney
+      {% endblock title %}
+    </title>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   </head>
 
   <body class="bg-gray-50">

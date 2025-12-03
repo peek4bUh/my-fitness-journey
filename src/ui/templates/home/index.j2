@@ -1,4 +1,11 @@
-{% from 'data/index.j2' import features, highlights, reasons %}
+{% from 'icons/dumbell.j2' import DumbellIcon %}
+{% from 'icons/up-arrow.j2' import UpArrowIcon %}
+{% from 'icons/circle.j2' import CircleIcon %}
+{% from 'icons/timer.j2' import TimerIcon %}
+{% from 'icons/metrics.j2' import MetricsIcon %}
+{% from 'icons/phone.j2' import PhoneIcon %}
+{% from 'icons/circle-check.j2' import CircleCheckIcon %}
+
 {% extends "layouts/base.j2" %}
 
 {% block title %}
@@ -141,17 +148,77 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {% for feature in features %}
-            <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
-              <div class="p-6">
-                <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                  {{ feature.icon }}
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ feature.title }}</h3>
-                <p class="text-gray-600 leading-relaxed">{{ feature.desc }}</p>
+          <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
+                {{ DumbellIcon() }}
               </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Tracking</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Log every rep, set, and weight with our intuitive interface. Never lose track of your progress again.
+              </p>
             </div>
-          {% endfor %}
+          </div>
+
+          <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
+                {{ UpArrowIcon() }}
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Progress Analytics</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Visualize your strength gains with detailed charts and progress tracking over time.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
+                {{ CircleIcon() }}
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Goal Setting</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Set weekly and monthly fitness goals and track your consistency with smart reminders.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
+                {{ TimerIcon() }}
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Timer</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Built-in rest timers and workout duration tracking to optimize your gym sessions.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
+                {{ MetricsIcon() }}
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Body Metrics</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Track weight, body fat percentage, and muscle mass changes over time.
+              </p>
+            </div>
+          </div>
+
+          <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
+            <div class="p-6">
+              <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
+                {{ PhoneIcon() }}
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Mobile First</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Designed for mobile use in the gym with offline support and quick logging.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -171,16 +238,50 @@
                 <img class="w-4"
                      alt="Circle Check Icon"
                      src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
-                <span class="text-gray-700">{{ label }}</span>
+                <span class="text-gray-700">Track unlimited workouts and exercises</span>
               </div>
-              {% for reason in reasons %}
-                <div class="flex items-center gap-3">
-                  <img class="w-4"
-                       alt="Circle Check Icon"
-                       src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
-                  <span class="text-gray-700">{{ reason.title }}</span>
-                </div>
-              {% endfor %}
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">Visual progress charts and analytics</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">Workout templates and routines</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">Rest timer and workout duration tracking</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">Body metrics and measurements</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">Goal setting and achievement tracking</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">Offline mode for gym use</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img class="w-4"
+                     alt="Circle Check Icon"
+                     src="{{ url_for('static', filename='images/circle-check-regular.svg') }}" />
+                <span class="text-gray-700">Export data and progress reports</span>
+              </div>
             </div>
           </div>
           <div class="relative">
@@ -201,17 +302,41 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {% for highlight in highlights %}
-            <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
-              <div class="p-8">
-                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  {{ highlight.icon }}
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-4">{{ highlight.title }}</h3>
-                <p class="text-gray-600">{{ highlight.desc }}</p>
+          <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
+            <div class="p-8">
+              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                {{ CircleCheckIcon(classes='w-8 h-8 text-gray-800') }}
               </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-4">100% Free</h3>
+              <p class="text-gray-600">
+                No subscriptions, no hidden fees, no premium features. Everything is free forever.
+              </p>
             </div>
-          {% endfor %}
+          </div>
+
+          <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
+            <div class="p-8">
+              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                {{ DumbellIcon(classes='w-8 h-8 text-gray-800') }}
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-4">Open Source</h3>
+              <p class="text-gray-600">
+                Full source code available on GitHub. Contribute, customize, or learn from the codebase.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
+            <div class="p-8">
+              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                {{ CircleIcon(classes='w-8 h-8 text-gray-800') }}
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-4">Privacy First</h3>
+              <p class="text-gray-600">
+                Your data stays on your device. No tracking, no ads, no data collection.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

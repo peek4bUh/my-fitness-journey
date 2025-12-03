@@ -1,0 +1,19 @@
+{% extends "layouts/base.j2" %}
+
+{% block title %}
+  Dashboard {{ super() }}
+{% endblock title %}
+
+{% block header %}
+  {% include "layouts/navigation.html.j2" %}
+{% endblock header %}
+
+{% block content %}
+  <main class="bg-gray-50" x-data="{ sidebarOpen: false, userMenuOpen: false }">
+    {% include "layouts/sidebar.html.j2" %}
+    <div class="p-4 md:ml-64 mt-[61px]">
+      {% block content_dashboard %}
+      {% endblock content_dashboard %}
+    </div>
+  </main>
+{% endblock content %}

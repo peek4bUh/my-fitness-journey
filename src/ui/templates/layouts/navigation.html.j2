@@ -1,0 +1,39 @@
+<header>
+  <nav class="bg-white border-b border-gray-200 px-4 py-2 fixed left-0 right-0 top-0 z-50">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <button @click="sidebarOpen = !sidebarOpen"
+                class="p-2 mr-2 text-gray-900 rounded-lg cursor-pointer md:hidden hover:bg-gray-100 focus:ring-2 focus:ring-gray-200">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd">
+            </path>
+          </svg>
+        </button>
+        <a href="/" class="flex items-center md:gap-3 w-fit">
+          <span class="hidden md:flex w-7 h-7 lg:w-9 lg:h-9 bg-black rounded-lg flex items-center justify-center">
+            <img class="w-4 h-4 lg:w-5 lg:h-5"
+                 alt="MyFitnessJourney Logo"
+                 src="{{ url_for('static', filename='images/logo.svg') }}" />
+          </span>
+          <p class="lg:text-xl font-semibold">MyFitnessJourney</p>
+        </a>
+      </div>
+
+      <div class="relative" x-data="{ open: false }">
+        <button @click="open = !open" class="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-100">
+          <div class="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
+            <span class="text-white text-sm font-medium">JD</span>
+          </div>
+        </button>
+        <div x-show="open"
+             @click.away="open = false"
+             class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1">
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+          <hr class="my-1 border-gray-200" />
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

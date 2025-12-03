@@ -1,4 +1,4 @@
-{% extends "layouts/auth.j2" %}
+{% extends "layouts/base_auth.j2" %}
 
 {% block title %}
   Login {{ super() }}
@@ -33,7 +33,10 @@
 
     <div class="flex items-center justify-between text-sm">
       <label class="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-black focus:ring-black" />
+        <input type="checkbox"
+               name="remember"
+               value="1"
+               class="w-4 h-4 rounded border-gray-300 text-black focus:ring-black" />
         <span class="text-gray-700">Remember me</span>
       </label>
 
