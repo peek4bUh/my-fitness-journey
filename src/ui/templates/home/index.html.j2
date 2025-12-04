@@ -1,11 +1,3 @@
-{% from 'icons/dumbell.html.j2' import DumbellIcon %}
-{% from 'icons/up-arrow.html.j2' import UpArrowIcon %}
-{% from 'icons/circle.html.j2' import CircleIcon %}
-{% from 'icons/timer.html.j2' import TimerIcon %}
-{% from 'icons/metrics.html.j2' import MetricsIcon %}
-{% from 'icons/phone.html.j2' import PhoneIcon %}
-{% from 'icons/circle-check.html.j2' import CircleCheckIcon %}
-
 {% extends "layouts/base.html.j2" %}
 
 {% block title %}
@@ -151,7 +143,9 @@
           <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
             <div class="p-6">
               <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                {{ DumbellIcon() }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#dumbell" />
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Tracking</h3>
               <p class="text-gray-600 leading-relaxed">
@@ -163,7 +157,9 @@
           <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
             <div class="p-6">
               <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                {{ UpArrowIcon() }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use xlink:href="{{ url_for('static', filename='icons.svg') }}#up-arrow" />
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Progress Analytics</h3>
               <p class="text-gray-600 leading-relaxed">
@@ -175,7 +171,9 @@
           <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
             <div class="p-6">
               <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                {{ CircleIcon() }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#circle" />
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Goal Setting</h3>
               <p class="text-gray-600 leading-relaxed">
@@ -187,7 +185,9 @@
           <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
             <div class="p-6">
               <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                {{ TimerIcon() }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#timer" />
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Workout Timer</h3>
               <p class="text-gray-600 leading-relaxed">
@@ -199,7 +199,9 @@
           <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
             <div class="p-6">
               <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                {{ MetricsIcon() }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#metrics" />
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Body Metrics</h3>
               <p class="text-gray-600 leading-relaxed">
@@ -211,7 +213,9 @@
           <div class="rounded-lg border-2 border-gray-100 hover:border-gray-300 transition-all duration-300 hover:shadow-lg group bg-white">
             <div class="p-6">
               <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-300 transition-colors">
-                {{ PhoneIcon() }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#phone" />
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-gray-900 mb-3">Mobile First</h3>
               <p class="text-gray-600 leading-relaxed">
@@ -305,7 +309,9 @@
           <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
             <div class="p-8">
               <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                {{ CircleCheckIcon(classes='w-8 h-8 text-gray-800') }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#circle-check" />
+                </svg>
               </div>
               <h3 class="text-xl font-bold text-gray-900 mb-4">100% Free</h3>
               <p class="text-gray-600">
@@ -317,7 +323,9 @@
           <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
             <div class="p-8">
               <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                {{ DumbellIcon(classes='w-8 h-8 text-gray-800') }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#dumbell" />
+                </svg>
               </div>
               <h3 class="text-xl font-bold text-gray-900 mb-4">Open Source</h3>
               <p class="text-gray-600">
@@ -329,7 +337,9 @@
           <div class="border-2 border-gray-200 text-center rounded-lg bg-white">
             <div class="p-8">
               <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                {{ CircleIcon(classes='w-8 h-8 text-gray-800') }}
+                <svg class="w-6 h-6 text-gray-800">
+                  <use href="{{ url_for('static', filename='icons.svg') }}#circle" />
+                </svg>
               </div>
               <h3 class="text-xl font-bold text-gray-900 mb-4">Privacy First</h3>
               <p class="text-gray-600">
