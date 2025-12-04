@@ -13,10 +13,14 @@
       {% endblock title %}
     </title>
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+          rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   </head>
 
-  <body class="bg-gray-50">
+  <body class="bg-gray-50 font-[Inter]">
     {% block header %}
     {% endblock header %}
 
@@ -27,7 +31,6 @@
     {% endblock footer %}
 
     {% block extra_js %}
-      <script src="{{ url_for('static', filename='js/hamburger.js') }}"></script>
     {% endblock extra_js %}
   </body>
 </html>

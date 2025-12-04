@@ -9,7 +9,7 @@
 {% endblock header %}
 
 {% block content %}
-  <main class="bg-gray-50 md:pl-75 pt-[65px]">
+  <main class="bg-gray-50 md:pl-72 pt-[65px]">
     {% include "layouts/sidebar.html.j2" %}
     <div id="content" class="p-4 md:p-6 lg:p-8">
       {% block content_dashboard %}
@@ -17,3 +17,8 @@
     </div>
   </main>
 {% endblock content %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/hamburger.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/user-profile.js') }}"></script>
+{% endblock extra_js %}

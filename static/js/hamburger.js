@@ -1,5 +1,5 @@
 var hamburger = document.getElementById('hamburger');
-var hamburgerSidebar = document.getElementById('hamburgerSidebar');
+var hamburgerSidebar = document.getElementById('hamburger-sidebar');
 var content = document.getElementById('content');
 var sidebar = document.getElementById('sidebar');
 
