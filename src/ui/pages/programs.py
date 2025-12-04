@@ -2,13 +2,13 @@ from flask import render_template, request
 from flask_login import login_required
 
 from ui.core.enums import Template
-from ui.core.blueprints import ui_programs_bp
+from ui.core.blueprints import ui_dashboard_bp
 from ui.core.httpclient import HttpClient
 
 
-@ui_programs_bp.route('/dashboard/programs')
+@ui_dashboard_bp.route('/dashboard/programs')
 @login_required
-def navigate_to_programs():
+def dashboard_programs_page():
     # programs = HttpClient().post("/api/v0/programs", json={
     #     "username": request.form['username'],
     #     "email": request.form['email'],

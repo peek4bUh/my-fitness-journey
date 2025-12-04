@@ -9,9 +9,9 @@
 {% endblock header %}
 
 {% block content %}
-  <main class="bg-gray-50 md:pl-75 pt-[61px]">
+  <main class="bg-gray-50 md:pl-75 pt-[65px]">
     {% include "layouts/sidebar.html.j2" %}
-    <div id="content" class="p-4">
+    <div id="content" class="p-4 md:p-6 lg:p-8">
       {% block content_dashboard %}
       {% endblock content_dashboard %}
     </div>
