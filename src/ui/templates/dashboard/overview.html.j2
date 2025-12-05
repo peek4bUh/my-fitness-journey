@@ -1,6 +1,28 @@
 {% extends "layouts/base-dashboard.html.j2" %}
 
 {% block content_dashboard %}
+  <nav class="flex mb-6" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-2">
+      <li class="inline-flex items-center">
+        <a href="#" class="inline-flex items-center text-sm font-medium text-gray-500">Home</a>
+      </li>
+      <li>
+        <div class="flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5 rtl:rotate-180 text-body"
+               aria-hidden="true"
+               xmlns="http://www.w3.org/2000/svg"
+               width="24"
+               height="24"
+               fill="none"
+               viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+          </svg>
+          <span class="inline-flex items-center text-sm font-medium text-gray-900">Overview</span>
+        </div>
+      </li>
+    </ol>
+  </nav>
+
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
     <div class="border border-gray-200 rounded-lg bg-white p-4">
       <div class="flex items-center justify-between mb-4">
