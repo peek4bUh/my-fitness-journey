@@ -5,7 +5,10 @@
     {% for program in programs %}
       <div class="flex items-center p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors group">
         <div class="flex-grow min-w-0">
-          <h3 class="text-base font-medium text-gray-900">{{ program.title }}</h3>
+          <a href="{{ url_for("ui.dashboard.dashboard_programs_page") }}/{{ program.id }}"
+             class="text-base font-medium text-gray-900 hover:underline cursor-pointer">
+            {{ program.title }}
+          </a>
           <p class="text-xs text-gray-500 mt-0.5 mb-1">{{ program.duration_weeks }} weeks</p>
           <p class="text-sm text-gray-600 line-clamp-1">{{ program.description }}</p>
         </div>

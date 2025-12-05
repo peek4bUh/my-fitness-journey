@@ -6,6 +6,7 @@ class Template(StrEnum):
     SIGNUP = "auth/signup.html.j2"
     INDEX = "home/index.html.j2"
     OVERVIEW = "dashboard/overview.html.j2"
+    PROGRAM = "dashboard/program.html.j2"
     PROGRAMS = "dashboard/programs.html.j2"
 
 

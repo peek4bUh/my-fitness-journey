@@ -1,0 +1,82 @@
+{% extends "layouts/base-dashboard.html.j2" %}
+
+{% block content_dashboard %}
+  {% if not program %}
+    <div class="p-6 bg-white rounded-lg border border-gray-200">
+      <p class="text-sm text-gray-600">Program not found.</p>
+    </div>
+  {% else %}
+    <div class="space-y-6">
+      <!-- Header -->
+      <div class="bg-white p-6 rounded-lg border border-gray-200">
+        <h1 class="mt-2 text-2xl font-bold text-gray-900">{{ program.title }}</h1>
+        <p class="mt-1 text-sm text-gray-600">{{ program.description }}</p>
+        <p class="mt-2 text-xs text-gray-500">
+          Duration: {{ program.duration_weeks }} week{{ 's' if program.duration_weeks|int != 1 }}
+        </p>
+      </div>
+
+      <!-- Sections -->
+      {% for section in program.sections or [] %}
+        <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <div class="p-6 flex items-center justify-between gap-8">
+            <div>
+              <h2 class="block text-lg font-semibold text-gray-900">{{ section.name }}</h2>
+              <p class="block mt-1 text-xs text-gray-500">
+                {{ section.exercises|length }} exercise{{ 's' if section.exercises|length != 1 }}
+              </p>
+            </div>
+            <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
+              <button class="cursor-pointer rounded-lg border border-gray-900 py-2 px-4 text-center align-middle text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 active:opacity-[0.85]">
+                Delete section
+              </button>
+              <button class="cursor-pointer flex items-center gap-3 rounded-lg bg-gray-900 py-2 px-4 text-center align-middle text-xs font-bold uppercase text-white">
+                Add exercise
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="bg-gray-50">
+                <tr class="border-y border-gray-400">
+                  <th class="px-6 py-2.5 text-left text-gray-900 opacity-70">Exercise</th>
+                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">Sets</th>
+                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">Reps</th>
+                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">RPE</th>
+                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">Rest (s)</th>
+                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70"></th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                {% for ex in section.exercises %}
+                  <tr>
+                    <td class="px-6 py-2.5 text-left font-normal text-gray-700">{{ ex.name }}</td>
+                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.sets }}</td>
+                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.reps }}</td>
+                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.rpe }}</td>
+                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.rest_seconds }}</td>
+                    <td class="p-2.5">
+                      <button class="cursor-pointer relative w-8 h-8 select-none rounded-lg text-center align-middle text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                        <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                               viewBox="0 0 24 24"
+                               fill="currentColor"
+                               aria-hidden="true"
+                               class="w-4 h-4">
+                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z">
+                            </path>
+                          </svg>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock content_dashboard %}
