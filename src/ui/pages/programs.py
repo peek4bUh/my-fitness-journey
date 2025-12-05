@@ -1,18 +1,15 @@
-from flask import render_template, request
+from flask import render_template, session
 from flask_login import login_required
+import requests
 
 from ui.core.enums import Template
 from ui.core.blueprints import ui_dashboard_bp
-from ui.core.httpclient import HttpClient
 
 
 @ui_dashboard_bp.route('/dashboard/programs')
 @login_required
 def dashboard_programs_page():
-    # programs = HttpClient().post("/api/v0/programs", json={
-    #     "username": request.form['username'],
-    #     "email": request.form['email'],
-    #     "password": request.form['password']
-    # })
+    response = requests.get("http://localhost:7777/api/v0/programs",
+                            headers={"X-API-KEY": session['api_key']})
 
-    return render_template(Template.PROGRAMS.value)
+    return render_template(Template.PROGRAMS.value, programs=response.json())

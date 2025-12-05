@@ -1,70 +1,21 @@
 {% extends "layouts/base-dashboard.html.j2" %}
 
 {% block content_dashboard %}
-  <div class="flex h-screen overflow-hidden">
-    {% include "./layouts/sidebar.html.j2" %}
-
-    <div>
-      <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <!-- Program Item 1 -->
-        <div class="flex items-center p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors group">
-          <!-- Restructured to show title, duration, then description -->
-          <div class="flex-grow min-w-0">
-            <h3 class="text-base font-medium text-gray-900">Beginner Strength Builder</h3>
-            <p class="text-xs text-gray-500 mt-0.5 mb-1">4 weeks</p>
-            <p class="text-sm text-gray-600 line-clamp-1">
-              Perfect for those starting their fitness journey. Build
-              foundational strength with progressive overload techniques.
-            </p>
-          </div>
-
-          <!-- Replaced button with trash icon on the right -->
-          <button class="opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-red-50 rounded flex-shrink-0 ml-4"
-                  title="Delete program">
-            <img class="w-5 h-5"
-                 alt="Trash Icon"
-                 src="{{ url_for('static', filename='/images/icons/trashcan.svg') }}" />
-          </button>
+  <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+    {% for program in programs %}
+      <div class="flex items-center p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors group">
+        <div class="flex-grow min-w-0">
+          <h3 class="text-base font-medium text-gray-900">{{ program.title }}</h3>
+          <p class="text-xs text-gray-500 mt-0.5 mb-1">{{ program.duration_weeks }} weeks</p>
+          <p class="text-sm text-gray-600 line-clamp-1">{{ program.description }}</p>
         </div>
 
-        <!-- Program Item 2 -->
-        <div class="flex items-center p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors group">
-          <div class="flex-grow min-w-0">
-            <h3 class="text-base font-medium text-gray-900">Advanced Hypertrophy</h3>
-            <p class="text-xs text-gray-500 mt-0.5 mb-1">8 weeks</p>
-            <p class="text-sm text-gray-600 line-clamp-1">
-              Designed for experienced lifters looking to maximize muscle
-              growth. High-volume training with strategic deloads.
-            </p>
-          </div>
-
-          <button class="opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-red-50 rounded flex-shrink-0 ml-4"
-                  title="Delete program">
-            <img class="w-5 h-5"
-                 alt="Trash Icon"
-                 src="{{ url_for('static', filename='/images/icons/trashcan.svg') }}" />
-          </button>
-        </div>
-
-        <!-- Program Item 3 -->
-        <div class="flex items-center p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors group">
-          <div class="flex-grow min-w-0">
-            <h3 class="text-base font-medium text-gray-900">Powerlifting Prep</h3>
-            <p class="text-xs text-gray-500 mt-0.5 mb-1">12 weeks</p>
-            <p class="text-sm text-gray-600 line-clamp-1">
-              Competition-focused program to peak your squat, bench press,
-              and deadlift. Includes meet day preparation.
-            </p>
-          </div>
-
-          <button class="opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-red-50 rounded flex-shrink-0 ml-4"
-                  title="Delete program">
-            <img class="w-5 h-5"
-                 alt="Trash Icon"
-                 src="{{ url_for('static', filename='/images/icons/trashcan.svg') }}" />
-          </button>
-        </div>
+        <button class="p-2 hover:bg-gray-100 rounded-sm cursor-pointer">
+          <svg class="w-5 h-5 text-gray-600">
+            <use href="{{ url_for('static', filename='icons.svg') }}#trashcan" />
+          </svg>
+        </button>
       </div>
-    </div>
+    {% endfor %}
   </div>
 {% endblock content_dashboard %}

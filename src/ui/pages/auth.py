@@ -4,7 +4,7 @@ from ui.core.httpclient import HttpClient
 from ui.core.enums import Template, View
 from shared.enum.http import Method, Status
 from flask_login import login_remembered, login_required, login_user, logout_user
-from flask import redirect, render_template, request, url_for
+from flask import current_app, redirect, render_template, request, session, url_for
 
 
 @ui_auth_bp.route(
@@ -28,6 +28,7 @@ def login_page():
 
         user = ApiUser(**http_result.json.get('user'))
         login_user(user, remember=True)
+        session['api_key'] = user.api_token
 
         return redirect(url_for(View.DASHBOARD_OVERVIEW.value))
 

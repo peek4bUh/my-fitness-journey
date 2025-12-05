@@ -8,7 +8,8 @@ class LoginUserMapper:
         login_user_output = LoginUserOutput(
             id=model.user_id,
             username=model.username,
-            email=model.email
+            email=model.email,
+            api_token=model.api_token
         ).__dict__
 
         return login_user_output

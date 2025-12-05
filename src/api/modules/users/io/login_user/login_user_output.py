@@ -11,10 +11,11 @@ class LoginUserOutput:
         'password': fields.String(required=True, description='The user password')
     })
 
-    def __init__(self, id: int = None, username: str = None, email: str = None):
+    def __init__(self, id: int = None, username: str = None, email: str = None, api_token: str = None):
         self.id = id
         self.username = username
         self.email = email
+        self.api_token = api_token
 
     def get_id(self):
         return self.username
@@ -33,3 +34,9 @@ class LoginUserOutput:
 
     def set_email(self, email):
         self.email = email
+
+    def get_api_token(self):
+        return self.api_token
+
+    def set_api_token(self, api_token):
+        self.api_token = api_token
