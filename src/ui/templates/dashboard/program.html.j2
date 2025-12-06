@@ -1,73 +1,87 @@
 {% extends "layouts/base-dashboard.html.j2" %}
 
 {% block content_dashboard %}
-  {% if not program %}
-    <div class="p-6 bg-white rounded-lg border border-gray-200">
-      <p class="text-sm text-gray-600">Program not found.</p>
-    </div>
-  {% else %}
-    <div class="space-y-6">
-      <!-- Header -->
-      <div class="bg-white p-6 rounded-lg border border-gray-200">
-        <h1 class="mt-2 text-2xl font-bold text-gray-900">{{ program.title }}</h1>
-        <p class="mt-1 text-sm text-gray-600">{{ program.description }}</p>
-        <p class="mt-2 text-xs text-gray-500">
+  <div class="space-y-6">
+    <!-- Header -->
+    <div class="p-6 bg-white border border-gray-200 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="mb-2 text-2xl font-bold text-gray-900">{{ program.title }}</h1>
+        <p class="mb-2 text-sm text-gray-600">{{ program.description }}</p>
+        <p class="text-xs text-gray-500">
           Duration: {{ program.duration_weeks }} week{{ 's' if program.duration_weeks|int != 1 }}
         </p>
       </div>
+      <button class="self-start inline-flex items-center justify-center bg-gray-900 text-white gap-2 rounded-md text-sm font-medium shadow cursor-pointer h-9 px-3 py-2 w-full sm:w-auto">
+        <svg class="w-6 h-6 text-white">
+          <use href="{{ url_for('static', filename='icons.svg') }}#plus" />
+        </svg>
+        Add Section
+      </button>
+    </div>
 
-      <!-- Sections -->
-      {% for section in program.sections or [] %}
-        <section class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-          <div class="p-6 flex items-center justify-between gap-8">
-            <div>
-              <h2 class="block text-lg font-semibold text-gray-900">{{ section.name }}</h2>
-              <p class="block mt-1 text-xs text-gray-500">
-                {{ section.exercises|length }} exercise{{ 's' if section.exercises|length != 1 }}
-              </p>
-            </div>
-            <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
-              <button class="cursor-pointer rounded-lg border border-gray-900 py-2 px-4 text-center align-middle text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 active:opacity-[0.85]">
-                Delete section
-              </button>
-              <button class="cursor-pointer flex items-center gap-3 rounded-lg bg-gray-900 py-2 px-4 text-center align-middle text-xs font-bold uppercase text-white">
-                Add exercise
-              </button>
-            </div>
+    <!-- Sections -->
+    {% for section in program.sections or [] %}
+      <section class="bg-white border border-gray-200 rounded-lg">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4.5">
+          <div>
+            <h2 class="text-lg font-medium text-gray-900 mb-2">{{ section.name }}</h2>
+            <p class="text-sm text-gray-600">Day {{ loop.index }}</p>
           </div>
-
+          <div>
+            <button class="self-start inline-flex items-center justify-center bg-red-600 text-white gap-2 rounded-md text-sm font-medium shadow cursor-pointer h-9 px-3 py-2 w-full sm:w-auto">
+              <svg class="w-6 h-6 text-white">
+                <use href="{{ url_for('static', filename='icons.svg') }}#trashcan" />
+              </svg>
+              Delete Section
+            </button>
+          </div>
+        </div>
+        <div>
           <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead class="bg-gray-50">
-                <tr class="border-y border-gray-400">
-                  <th class="px-6 py-2.5 text-left text-gray-900 opacity-70">Exercise</th>
-                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">Sets</th>
-                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">Reps</th>
-                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">RPE</th>
-                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70">Rest (s)</th>
-                  <th class="px-6 py-2.5 text-center text-gray-900 opacity-70"></th>
+            <table class="w-full xl:table-fixed">
+              <thead>
+                <tr class="border-y border-gray-200 bg-gray-100">
+                  <th class="text-left py-3 px-6 text-sm font-semibold text-gray-700">Exercise</th>
+                  <th class="text-center py-3 px-6 text-sm font-semibold text-gray-700">Sets</th>
+                  <th class="text-center py-3 px-6 text-sm font-semibold text-gray-700">Reps</th>
+                  <th class="text-center py-3 px-6 text-sm font-semibold text-gray-700">RPE</th>
+                  <th class="text-center py-3 px-6 text-sm font-semibold text-gray-700">Rest (s)</th>
+                  <th class="text-center py-3 px-6 text-sm font-semibold text-gray-700">Actions</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-gray-100">
+              <tbody>
                 {% for ex in section.exercises %}
-                  <tr>
-                    <td class="px-6 py-2.5 text-left font-normal text-gray-700">{{ ex.name }}</td>
-                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.sets }}</td>
-                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.reps }}</td>
-                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.rpe }}</td>
-                    <td class="px-6 py-2.5 text-center font-normal text-gray-700">{{ ex.rest_seconds }}</td>
-                    <td class="p-2.5">
-                      <button class="cursor-pointer relative w-8 h-8 select-none rounded-lg text-center align-middle text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                        <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                          <svg xmlns="http://www.w3.org/2000/svg"
-                               viewBox="0 0 24 24"
-                               fill="currentColor"
-                               aria-hidden="true"
-                               class="w-4 h-4">
-                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z">
-                            </path>
-                          </svg>
-                        </span>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 px-6 text-sm text-gray-600 font-medium">{{ ex.name }}</td>
+                    <td class="py-3 px-6 text-sm text-gray-600 text-center font-medium">{{ ex.sets }}</td>
+                    <td class="py-3 px-6 text-sm text-gray-600 text-center font-medium">{{ ex.reps }}</td>
+                    <td class="py-3 px-6 text-sm text-gray-600 text-center font-medium">{{ ex.rpe }}</td>
+                    <td class="py-3 px-6 text-sm text-gray-600 text-center font-medium">{{ ex.rest_seconds }}</td>
+                    <td class="py-3 px-6 flex items-center justify-center">
+                      <button class="p-1 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
+                        <svg class="w-6 h-6 text-gray-900">
+                          <use href="{{ url_for('static', filename='icons.svg') }}#plus" />
+                        </svg>
+                      </button>
+                      <button class="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
+                        <svg class="w-4 h-4 text-gray-900">
+                          <use href="{{ url_for('static', filename='icons.svg') }}#pencil" />
+                        </svg>
+                      </button>
+                      <button class="p-1.5 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
+                        <svg class="w-5 h-5 text-gray-900">
+                          <use href="{{ url_for('static', filename='icons.svg') }}#trashcan" />
+                        </svg>
+                      </button>
+                      <button class="p-1 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
+                        <svg class="w-6 h-6 text-gray-900">
+                          <use href="{{ url_for('static', filename='icons.svg') }}#chevron-up" />
+                        </svg>
+                      </button>
+                      <button class="p-1 hover:bg-gray-100 rounded-full transition-colors cursor-pointer">
+                        <svg class="w-6 h-6 text-gray-900">
+                          <use href="{{ url_for('static', filename='icons.svg') }}#chevron-down" />
+                        </svg>
                       </button>
                     </td>
                   </tr>
@@ -75,8 +89,11 @@
               </tbody>
             </table>
           </div>
-        </section>
-      {% endfor %}
-    </div>
-  {% endif %}
+          <div class="py-4 px-6 flex items-center justify-between text-sm text-gray-600">
+            <span>{{ section.exercises|length }} exercise{{ 's' if section.exercises|length != 1 }}</span>
+          </div>
+        </div>
+      </section>
+    {% endfor %}
+  </div>
 {% endblock content_dashboard %}
