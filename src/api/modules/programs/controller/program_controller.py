@@ -4,6 +4,7 @@ from api.core.decorators.auth import require_api_key
 from api.config import api_restx
 from api.core.namespaces import programs_ns
 from ..service.usecase.get_program_usecase import GetProgramUseCase
+from ..service.usecase.delete_program_usecase import DeleteProgramUseCase
 
 
 @programs_ns.route('/<int:programId>')
@@ -13,3 +14,8 @@ class ProgramByIdController(Resource):
     @require_api_key
     def get(self, programId):
         return GetProgramUseCase().execute(programId)
+
+    @api_restx.doc(parser=api_restx.parser())
+    @require_api_key
+    def delete(self, programId):
+        return DeleteProgramUseCase().execute(programId)

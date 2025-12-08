@@ -1,5 +1,5 @@
 from typing import List
-from flask import g
+from flask import current_app, g
 
 from ..io.program import ProgramInput
 from .entity.program_entity import ProgramEntity
@@ -42,3 +42,12 @@ class ProgramsRepository:
 
     def find_all(self) -> List[ProgramEntity]:
         return ProgramEntity.query.filter_by(user_id=g.get('user_id')).all()
+
+    def remove(self, program_id: int) -> None:
+        """Delete a program owned by the current user."""
+        program = ProgramEntity.query.filter_by(
+            user_id=g.get('user_id'), program_id=program_id).first()
+
+        from api.core.extensions import db
+        db.session.delete(program)
+        db.session.commit()

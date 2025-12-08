@@ -13,11 +13,13 @@
           <p class="text-sm text-gray-600 line-clamp-1">{{ program.description }}</p>
         </div>
 
-        <button class="p-2 hover:bg-gray-100 rounded-sm cursor-pointer">
-          <svg class="w-5 h-5 text-gray-600">
-            <use href="{{ url_for('static', filename='icons.svg') }}#trashcan" />
-          </svg>
-        </button>
+        <form method="post" action="{{ url_for('ui.dashboard.delete_program', program_id=program.id) }}">
+          <button type="submit" class="p-2 bg-red-500 hover:bg-red-600/90 rounded-sm cursor-pointer">
+            <svg class="w-5 h-5 text-white">
+              <use href="{{ url_for('static', filename='icons.svg') }}#trashcan" />
+            </svg>
+          </button>
+        </form>
       </div>
     {% endfor %}
   </div>

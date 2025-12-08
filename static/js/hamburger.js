@@ -1,7 +1,7 @@
-var hamburger = document.getElementById('hamburger');
-var hamburgerSidebar = document.getElementById('hamburger-sidebar');
-var content = document.getElementById('content');
-var sidebar = document.getElementById('sidebar');
+let hamburger = document.getElementById('hamburger');
+let hamburgerSidebar = document.getElementById('hamburger-sidebar');
+let content = document.getElementById('content');
+let sidebar = document.getElementById('sidebar');
 
 hamburger.addEventListener('click', () => {
   sidebar.classList.toggle('hidden');
