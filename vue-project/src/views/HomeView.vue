@@ -1,5 +1,6 @@
 <script setup>
 import Badge from '../components/Badge.vue'
+import ReasonItem from '../components/ReasonItem.vue'
 
 import DumbellIcon from '../components/icons/IconDumbell.vue'
 </script>
@@ -34,18 +35,16 @@ import DumbellIcon from '../components/icons/IconDumbell.vue'
           >
 
           <div class="flex items-center gap-2 font-semibold">
-            <a
-              href="#"
+            <RouterLink
+              to="/login"
               class="px-6 py-2.5 text-sm border border-gray-800 hover:bg-gray-200 rounded-md text-gray-700 hover:text-black transition-colors"
+              >Log In</RouterLink
             >
-              Log In
-            </a>
-            <a
-              href="#"
+            <RouterLink
+              to="/register"
               class="px-6 py-2.5 text-sm border border-black bg-black text-white rounded-md hover:bg-gray-800 transition-all duration-200"
+              >Sign Up</RouterLink
             >
-              Register
-            </a>
           </div>
         </nav>
 
@@ -124,12 +123,12 @@ import DumbellIcon from '../components/icons/IconDumbell.vue'
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <a
-            href="#"
+          <RouterLink
+            to="/login"
             class="inline-block px-10 py-4 border-2 border-black bg-black text-white text-lg font-medium rounded-md hover:bg-gray-800 transition-all duration-200"
           >
             Join For Free
-          </a>
+          </RouterLink>
           <a
             href="https://github.com/peek4bUh/my-fitness-journey"
             class="inline-block px-10 py-4 border-2 border-black text-black text-lg font-medium rounded-md hover:bg-gray-200 transition-all duration-200"
@@ -262,33 +261,23 @@ import DumbellIcon from '../components/icons/IconDumbell.vue'
               comprehensive tracking platform.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Track unlimited workouts and exercises</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Visual progress charts and analytics</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Workout templates and routines</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Rest timer and workout duration tracking</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Body metrics and measurements</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Goal setting and achievement tracking</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Offline mode for gym use</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gray-700">Export data and progress reports</span>
-              </div>
+              <ReasonItem msg="Track unlimited workouts and exercises" />
+              <ReasonItem msg="Visual progress charts and analytics" />
+              <ReasonItem msg="Workout templates and routines" />
+              <ReasonItem msg="Rest timer and workout duration tracking" />
+              <ReasonItem msg="Body metrics and measurements" />
+              <ReasonItem msg="Goal setting and achievement tracking" />
+              <ReasonItem msg="Offline mode for gym use" />
+              <ReasonItem msg="Export data and progress reports" />
             </div>
           </div>
-          <div class="relative"></div>
+          <div class="relative">
+            <img
+              class="w-full md:w-4/5 z-50"
+              src="../assets/images/reasons.png"
+              alt="Reasons Image"
+            />
+          </div>
         </div>
       </div>
     </section>
