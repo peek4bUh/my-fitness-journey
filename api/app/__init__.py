@@ -1,5 +1,6 @@
 import secrets
 from flask import Flask
+from flask_cors import CORS
 
 from app.core.config_profile import DevelopmentConfig
 from app.core.config import api_restx
@@ -9,6 +10,8 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(DevelopmentConfig())
     app.config['SECRET_KEY'] = secrets.token_urlsafe(32)
+
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # from app.core.extensions import login_manager
     # login_manager.init_app(app)

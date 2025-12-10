@@ -31,7 +31,7 @@ class ProgramsRepository:
             ]
         )
 
-        from api.core.extensions import db
+        from app.core.extensions import db
         db.session.add(new_program)
         db.session.commit()
 
@@ -46,6 +46,6 @@ class ProgramsRepository:
         program = ProgramEntity.query.filter_by(
             user_id=g.get('user_id'), program_id=program_id).first()
 
-        from api.core.extensions import db
+        from app.core.extensions import db
         db.session.delete(program)
         db.session.commit()

@@ -1,5 +1,5 @@
 <script setup>
-import DumbellIcon from '../components/icons/IconDumbell.vue'
+import SiteLogo from '../components/SiteLogo.vue'
 </script>
 
 <template>
@@ -25,12 +25,7 @@ import DumbellIcon from '../components/icons/IconDumbell.vue'
 
     <!-- Right Column -->
     <div class="flex flex-col justify-between grow basis-1/2 p-6">
-      <a href="/" class="flex items-center gap-2 lg:gap-3 w-fit">
-        <span class="w-7 h-7 lg:w-9 lg:h-9 bg-black rounded-lg flex items-center justify-center">
-          <DumbellIcon class="w-4 h-4 lg:w-5 lg:h-5 text-white" />
-        </span>
-        <p class="lg:text-xl font-semibold">MyFitnessJourney</p>
-      </a>
+      <SiteLogo />
 
       <div class="flex items-center justify-center flex-1">
         <div class="w-full max-w-md">
@@ -39,7 +34,7 @@ import DumbellIcon from '../components/icons/IconDumbell.vue'
             <p class="lg:text-lg text-gray-600">Sign in to continue your fitness journey</p>
           </div>
 
-          <form method="post" class="flex flex-col gap-6">
+          <form method="post" sub class="flex flex-col gap-6">
             <div>
               <label
                 for="username"

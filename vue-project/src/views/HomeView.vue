@@ -1,20 +1,14 @@
 <script setup>
 import Badge from '../components/Badge.vue'
 import ReasonItem from '../components/ReasonItem.vue'
-
-import DumbellIcon from '../components/icons/IconDumbell.vue'
+import SiteLogo from '../components/SiteLogo.vue'
 </script>
 
 <template>
   <header id="header">
     <div class="w-full fixed top-0 z-50 transition-[background-color] duration-300 ease-in-out">
       <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 lg:gap-3 w-fit">
-          <span class="w-7 h-7 lg:w-9 lg:h-9 bg-black rounded-lg flex items-center justify-center">
-            <DumbellIcon class="w-4 h-4 lg:w-5 lg:h-5 text-white" />
-          </span>
-          <p class="lg:text-xl font-semibold">MyFitnessJourney</p>
-        </a>
+        <SiteLogo />
 
         <!-- Navigation -->
         <nav class="hidden md:flex items-center gap-6">
