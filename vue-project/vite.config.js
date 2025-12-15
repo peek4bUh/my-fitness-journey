@@ -14,6 +14,6 @@ export default defineConfig({
     },
   },
   devServer: {
-    proxy: 'http://localhost:7777/',
+    proxy: 'http://localhost:7777',
   },
 })

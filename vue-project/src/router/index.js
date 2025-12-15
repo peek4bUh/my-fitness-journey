@@ -1,23 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/LoginView.vue'
-import SignupView from '../views/SignupView.vue'
+import LoginView from '@/views/LoginView.vue'
+import SignupView from '@/views/SignupView.vue'
 import OverviewView from '@/views/dashboard/OverviewView.vue'
-import PorgramsView from '@/views/dashboard/PorgramsView.vue'
+import ProgramsView from '@/views/dashboard/ProgramsView.vue'
+import ProgramDetailView from '@/views/dashboard/ProgramDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      redirect: 'login',
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      components: {
+        default: () => LoginView,
+      },
     },
     {
       path: '/register',
@@ -25,14 +26,28 @@ const router = createRouter({
       component: SignupView,
     },
     {
-      path: '/dashboard/overview',
-      name: 'overview',
-      component: OverviewView,
-    },
-    {
-      path: '/dashboard/programs',
-      name: 'programs',
-      component: PorgramsView,
+      path: '/dashboard',
+      redirect: '/dashboard/overview',
+      children: [
+        {
+          path: 'overview',
+          name: 'overview',
+          component: OverviewView,
+        },
+        {
+          path: 'programs',
+          name: 'programs',
+          component: ProgramsView,
+          children: [
+            {
+              path: ':id',
+              name: 'program-detail',
+              component: ProgramDetailView,
+              props: true,
+            },
+          ],
+        },
+      ],
     },
   ],
 })
