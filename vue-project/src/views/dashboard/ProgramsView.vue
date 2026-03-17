@@ -1,8 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import Header from '@/components/Header.vue'
-import Sidebar from '@/components/Sidebar.vue'
+import AdminLayout from '@/components/layout/AdminLayout.vue'
 
 import Button from 'primevue/button'
 import DataView from 'primevue/dataview'
@@ -13,9 +12,7 @@ const error = ref(null)
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:7777/api/v0/programs', {
-      headers: { 'x-api-key': 'a4067f9f41bbd3c8ada4114fa9cae8e3210c41e3f41d4fd010474132767dbfa9' },
-    })
+    const response = await axios.get('http://127.0.0.1:8000/programs/')
     programs.value = response.data
     console.log(response.data)
   } catch (err) {
@@ -28,49 +25,61 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Header />
-
-  <main class="bg-gray-50 md:pl-72 pt-[65px]">
-    <Sidebar />
-
-    <div id="content" class="p-4 md:p-6 lg:p-8">
+  <AdminLayout>
+    <div class="bg-gray-50 p-4 md:p-6 lg:p-8">
       <div v-if="loading" class="text-center text-gray-500">Loading...</div>
       <div v-else-if="error" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
         {{ error }}
       </div>
 
-      <div v-else class="bg-white rounded-lg p-6 border border-gray-200">
-        <DataView :value="programs">
-          <template #list="slotProps">
-            <div class="flex flex-col">
-              <div
-                v-for="(program, index) in slotProps.items"
-                :key="program.id"
-                class="flex flex-col sm:flex-row p-4 sm:items-center"
-                :class="{ 'border-t border-surface-200': index !== 0 }"
+      <!-- Programs Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          v-for="program in programs"
+          :key="program.id"
+          class="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all duration-200"
+        >
+          <!-- Card Header -->
+          <div class="p-5 pb-3">
+            <div class="flex items-start justify-between gap-3 mb-2">
+              <RouterLink
+                :to="`/dashboard/programs/${program.id}`"
+                class="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors line-clamp-2"
               >
-                <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
-                  <div>
-                    <RouterLink
-                      :to="`/dashboard/programs/${program.id}`"
-                      class="block text-lg font-semibold mb-1 hover:underline cursor-pointer"
-                    >
-                      {{ program.title }}
-                    </RouterLink>
-                    <span class="inline-block font-medium text-surface-500 text-sm mb-2">
-                      {{ program.duration_weeks }} Weeks
-                    </span>
-                    <p>{{ program.description }}</p>
-                  </div>
-                  <div class="flex flex-col md:items-end gap-2">
-                    <Button icon="pi pi-trash" severity="danger" />
-                  </div>
-                </div>
-              </div>
+                {{ program.title }}
+              </RouterLink>
+              <span class="shrink-0 px-2.5 py-1 text-xs font-medium bg-blue-50 text-blue-700 rounded-full">
+                {{ program.duration_weeks }} Weeks
+              </span>
             </div>
-          </template>
-        </DataView>
+            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+              {{ program.description }}
+            </p>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="px-5 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+              <span v-if="program.days_per_week" class="flex items-center gap-1">
+                <i class="pi pi-calendar text-gray-400"></i>
+                {{ program.days_per_week }}x/week
+              </span>
+              <span v-if="program.exercises_count" class="flex items-center gap-1">
+                <i class="pi pi-list text-gray-400"></i>
+                {{ program.exercises_count }} exercises
+              </span>
+            </div>
+            <Button
+              icon="pi pi-trash"
+              severity="danger"
+              text
+              rounded
+              size="small"
+              class="opacity-0 group-hover:opacity-100 transition-opacity"
+            />
+          </div>
+        </div>
       </div>
     </div>
-  </main>
+  </AdminLayout>
 </template>

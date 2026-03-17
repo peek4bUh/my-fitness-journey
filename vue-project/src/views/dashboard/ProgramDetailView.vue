@@ -2,8 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
-import Header from '@/components/Header.vue'
-import Sidebar from '@/components/Sidebar.vue'
+import AdminLayout from '@/components/layout/AdminLayout.vue'
 
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
@@ -32,11 +31,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Header />
-  <main class="bg-gray-50 md:pl-72 pt-[65px]">
-    <Sidebar />
-
-    <div id="content" class="p-4 md:p-6 lg:p-8">
+  <AdminLayout>
+    <div class="bg-gray-50 p-4 md:p-6 lg:p-8">
       <div v-if="loading" class="text-center text-gray-500">Loading...</div>
       <div v-else-if="error" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
         {{ error }}
@@ -80,5 +76,5 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-  </main>
+  </AdminLayout>
 </template>

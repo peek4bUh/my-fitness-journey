@@ -1,15 +1,10 @@
 <script setup>
-import Header from '@/components/Header.vue'
-import Sidebar from '@/components/Sidebar.vue'
+import AdminLayout from '@/components/layout/AdminLayout.vue'
 </script>
 
 <template>
-  <Header />
-
-  <main class="bg-gray-50 md:pl-72 pt-[65px]">
-    <Sidebar />
-
-    <div id="content" class="p-4 md:p-6 lg:p-8">
+  <AdminLayout>
+    <div class="bg-gray-50 p-4 md:p-6 lg:p-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <div class="border border-gray-200 rounded-lg bg-white p-4">
           <div class="flex items-center justify-between mb-4">
@@ -124,5 +119,5 @@ import Sidebar from '@/components/Sidebar.vue'
         </div>
       </div>
     </div>
-  </main>
+  </AdminLayout>
 </template>
