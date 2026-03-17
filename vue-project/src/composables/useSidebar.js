@@ -6,7 +6,6 @@ export function useSidebarProvider() {
   const isExpanded = ref(true)
   const isMobileOpen = ref(false)
   const isMobile = ref(false)
-  const isHovered = ref(false)
   const activeItem = ref(null)
   const openSubmenu = ref(null)
 
@@ -39,10 +38,6 @@ export function useSidebarProvider() {
     isMobileOpen.value = !isMobileOpen.value
   }
 
-  const setIsHovered = (value) => {
-    isHovered.value = value
-  }
-
   const setActiveItem = (item) => {
     activeItem.value = item
   }
@@ -54,12 +49,10 @@ export function useSidebarProvider() {
   const context = {
     isExpanded: computed(() => (isMobile.value ? false : isExpanded.value)),
     isMobileOpen,
-    isHovered,
     activeItem,
     openSubmenu,
     toggleSidebar,
     toggleMobileSidebar,
-    setIsHovered,
     setActiveItem,
     toggleSubmenu,
   }

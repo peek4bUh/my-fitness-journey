@@ -3,32 +3,31 @@
     :class="[
       'fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white text-gray-900 h-screen transition-all duration-300 ease-in-out z-99999 border-r border-gray-200',
       {
-        'lg:w-[290px]': isExpanded || isMobileOpen || isHovered,
-        'lg:w-[90px]': !isExpanded && !isHovered,
+        'lg:w-[290px]': isExpanded || isMobileOpen,
+        'lg:w-[90px]': !isExpanded,
         'translate-x-0 w-[290px]': isMobileOpen,
         '-translate-x-full': !isMobileOpen,
         'lg:translate-x-0': true,
       },
     ]"
-    @mouseenter="!isExpanded && (isHovered = true)"
-    @mouseleave="isHovered = false"
+    @mouseenter="!isExpanded"
   >
     <div
       :class="[
         'py-8 flex',
-        !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start',
+        !isExpanded ? 'lg:justify-center' : 'justify-start',
       ]"
     >
       <router-link to="/">
         <img
-          v-if="isExpanded || isHovered || isMobileOpen"
+          v-if="isExpanded || isMobileOpen"
           src="/images/logo/logo.svg"
           alt="Logo"
           width="150"
           height="40"
         />
         <img
-          v-if="isExpanded || isHovered || isMobileOpen"
+          v-if="isExpanded || isMobileOpen"
           class="hidden"
           src="/images/logo/logo-dark.svg"
           alt="Logo"
@@ -53,12 +52,12 @@
             <h2
               :class="[
                 'mb-4 text-xs uppercase flex leading-[20px] text-gray-400',
-                !isExpanded && !isHovered
+                !isExpanded
                   ? 'lg:justify-center'
                   : 'justify-start',
               ]"
             >
-              <template v-if="isExpanded || isHovered || isMobileOpen">
+              <template v-if="isExpanded || isMobileOpen">
                 {{ menuGroup.title }}
               </template>
               <HorizontalDots v-else />
@@ -77,7 +76,7 @@
                   <span class="flex items-center">
                     <component :is="item.icon" />
                   </span>
-                  <span v-if="isExpanded || isHovered || isMobileOpen">{{ item.name }}</span>
+                  <span v-if="isExpanded || isMobileOpen">{{ item.name }}</span>
                 </router-link>
               </li>
             </ul>
@@ -111,7 +110,7 @@ import { useSidebar } from '@/composables/useSidebar'
 import UserMenu from './header/UserMenu.vue'
 
 const route = useRoute()
-const { isExpanded, isMobileOpen, isHovered } = useSidebar()
+const { isExpanded, isMobileOpen } = useSidebar()
 const menuGroups = [
   {
     title: 'Menu',
