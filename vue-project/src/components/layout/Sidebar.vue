@@ -19,28 +19,11 @@
       ]"
     >
       <router-link to="/">
-        <img
-          v-if="isExpanded || isMobileOpen"
-          src="/images/logo/logo.svg"
-          alt="Logo"
-          width="150"
-          height="40"
-        />
-        <img
-          v-if="isExpanded || isMobileOpen"
-          class="hidden"
-          src="/images/logo/logo-dark.svg"
-          alt="Logo"
-          width="150"
-          height="40"
-        />
-        <img
-          v-else
-          src="/images/logo/logo-icon.svg"
-          alt="Logo"
-          width="32"
-          height="32"
-        />
+        <div v-if="isExpanded || isMobileOpen" class="flex items-center gap-2 lg:gap-3 w-fit">
+          <SiteLogo/>
+          <p class="lg:text-xl font-semibold">MyFitnessJourney</p>
+        </div>
+        <SiteLogo v-else/>
       </router-link>
     </div>
     <div
@@ -108,6 +91,7 @@ import {
 } from '../../icons'
 import { useSidebar } from '@/composables/useSidebar'
 import UserMenu from './header/UserMenu.vue'
+import SiteLogo from '../SiteLogo.vue'
 
 const route = useRoute()
 const { isExpanded, isMobileOpen } = useSidebar()
