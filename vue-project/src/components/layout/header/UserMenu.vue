@@ -1,10 +1,9 @@
 <template>
   <div class="relative" ref="dropdownRef">
-    <button
-      class="cursor-pointer flex items-center text-gray-700"
-      @click.prevent="toggleDropdown"
-    >
-      <div class="flex items-center justify-center rounded-full h-9 w-9 lg:h-10 lg:w-10 bg-gray-200 text-gray-800 font-semibold text-sm lg:mr-3">
+    <button class="flex cursor-pointer items-center text-gray-700" @click.prevent="toggleDropdown">
+      <div
+        class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800 lg:mr-3 lg:h-10 lg:w-10"
+      >
         AA
       </div>
 
@@ -16,25 +15,20 @@
       v-if="dropdownOpen"
       class="absolute right-0 mt-2 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3"
     >
+      <!-- Esto es para en la sidebar salga hacia arriba
+       class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3" -->
       <div class="mb-3">
-        <p class="font-medium text-gray-700">
-          Musharof Chowdhury
-        </p>
-        <p class="mt-0.5 text-gray-500">
-          aandradeb99@gmail.com
-        </p>
+        <p class="font-medium text-gray-700">Musharof Chowdhury</p>
+        <p class="mt-0.5 text-gray-500">aandradeb99@gmail.com</p>
       </div>
 
-      <ul class="flex flex-col gap-1 pt-3 pb-3 border-y border-gray-200">
+      <ul class="flex flex-col gap-1 border-y border-gray-200 pt-3 pb-3">
         <li v-for="item in menuItems" :key="item.href">
           <router-link
             :to="item.href"
-            class="flex items-center gap-3 px-3 py-2 font-medium text-gray-700 rounded-lg group hover:bg-gray-100 hover:text-gray-700"
+            class="group flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
           >
-            <component
-              :is="item.icon"
-              class="text-gray-500 group-hover:text-gray-700"
-            />
+            <component :is="item.icon" class="text-gray-500 group-hover:text-gray-700" />
             {{ item.text }}
           </router-link>
         </li>
@@ -42,11 +36,9 @@
       <router-link
         to="/signin"
         @click="signOut"
-        class="flex items-center gap-3 px-3 py-2 mt-3 font-medium text-gray-700 rounded-lg group hover:bg-gray-100 hover:text-gray-700"
+        class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
       >
-        <LogoutIcon
-          class="text-gray-500 group-hover:text-gray-700"
-        />
+        <LogoutIcon class="text-gray-500 group-hover:text-gray-700" />
         Sign out
       </router-link>
     </div>
