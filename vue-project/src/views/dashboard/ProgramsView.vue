@@ -4,8 +4,6 @@ import axios from 'axios'
 import AdminLayout from '@/components/layout/DashboardLayout.vue'
 
 import Button from 'primevue/button'
-import DataView from 'primevue/dataview'
-import BadgeItem from '@/components/Badge.vue'
 
 const programs = ref([])
 const loading = ref(true)

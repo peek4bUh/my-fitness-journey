@@ -7,7 +7,6 @@ export function useSidebarProvider() {
   const isMobileOpen = ref(false)
   const isMobile = ref(false)
   const activeItem = ref(null)
-  const openSubmenu = ref(null)
 
   const handleResize = () => {
     const mobile = window.innerWidth < 768
@@ -42,19 +41,13 @@ export function useSidebarProvider() {
     activeItem.value = item
   }
 
-  const toggleSubmenu = (item) => {
-    openSubmenu.value = openSubmenu.value === item ? null : item
-  }
-
   const context = {
     isExpanded: computed(() => (isMobile.value ? false : isExpanded.value)),
     isMobileOpen,
     activeItem,
-    openSubmenu,
     toggleSidebar,
     toggleMobileSidebar,
     setActiveItem,
-    toggleSubmenu,
   }
 
   provide(SidebarSymbol, context)

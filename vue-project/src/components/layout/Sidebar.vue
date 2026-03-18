@@ -1,9 +1,9 @@
 <template>
   <aside
-    class="fixed flex flex-col top-0 px-3.5 lg:px-5 left-0 bg-white text-gray-900 h-screen transition-all duration-300 ease-in-out z-100 lg:border-r lg:border-gray-200"
+    class="fixed flex flex-col top-0 px-3.5 lg:px-5 left-0 bg-white text-gray-900 w-screen h-screen transition-all duration-300 ease-in-out z-100 lg:border-r lg:border-gray-200"
     :class="[
       {
-        'lg:w-screen': isExpanded || isMobileOpen,
+        'lg:w-[320px]': isExpanded,
         'lg:w-[90px]': !isExpanded,
         'translate-x-0 w-screen': isMobileOpen,
         '-translate-x-full': !isMobileOpen,
@@ -111,7 +111,6 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { ref } from 'vue'
 
 import {
   GridIcon,
@@ -119,7 +118,6 @@ import {
   PageIcon,
   TableIcon,
   ListIcon,
-  UserCircleIcon
 } from '../../icons'
 import { useSidebar } from '@/composables/useSidebar'
 import UserMenu from './header/UserMenu.vue'
