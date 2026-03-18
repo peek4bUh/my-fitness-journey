@@ -1,31 +1,31 @@
 <template>
   <div class="relative" ref="dropdownRef">
     <button
-      class="flex items-center text-gray-700"
+      class="cursor-pointer flex items-center text-gray-700"
       @click.prevent="toggleDropdown"
     >
-      <span class="mr-3 flex items-center justify-center rounded-full h-10 w-10 bg-gray-200 text-gray-800 font-semibold text-sm">
+      <div class="flex items-center justify-center rounded-full h-9 w-9 lg:h-10 lg:w-10 bg-gray-200 text-gray-800 font-semibold text-sm lg:mr-3">
         AA
-      </span>
+      </div>
 
-      <p class="text-sm">Angel Andrade</p>
+      <p class="hidden text-sm">Angel Andrade</p>
     </button>
 
     <!-- Dropdown Start -->
     <div
       v-if="dropdownOpen"
-      class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3"
+      class="absolute right-0 mt-2 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3"
     >
-      <div>
-        <span class="block font-medium text-gray-700">
+      <div class="mb-3">
+        <p class="font-medium text-gray-700">
           Musharof Chowdhury
-        </span>
-        <span class="mt-0.5 block text-gray-500">
+        </p>
+        <p class="mt-0.5 text-gray-500">
           aandradeb99@gmail.com
-        </span>
+        </p>
       </div>
 
-      <ul class="flex flex-col gap-1 pt-4 pb-3 border-b border-gray-200">
+      <ul class="flex flex-col gap-1 pt-3 pb-3 border-y border-gray-200">
         <li v-for="item in menuItems" :key="item.href">
           <router-link
             :to="item.href"
