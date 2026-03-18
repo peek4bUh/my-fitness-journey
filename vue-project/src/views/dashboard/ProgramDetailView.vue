@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
-import AdminLayout from '@/components/layout/AdminLayout.vue'
+import AdminLayout from '@/components/layout/DashboardLayout.vue'
 
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
