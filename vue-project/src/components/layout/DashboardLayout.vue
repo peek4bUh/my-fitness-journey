@@ -18,7 +18,6 @@
 import Sidebar from './Sidebar.vue'
 import Header from './Header.vue'
 import { useSidebar } from '@/composables/useSidebar'
-import Backdrop from './Backdrop.vue'
 
 const { isExpanded } = useSidebar()
 </script>
