@@ -27,7 +27,7 @@
       </router-link>
     </div>
     <div
-      class="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar"
+      class="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar g-1"
     >
       <nav class="mb-6">
         <div class="flex flex-col gap-4">
@@ -67,7 +67,7 @@
         </div>
       </nav>
     </div>
-    <div class="fixed left-0 bottom-0 w-full border-t border-gray-200 p-2">
+    <div class="fixed left-0 bottom-0 w-full border-t border-gray-200 px-3 py-2">
         <div
             class="border-top border-gray-200 w-full px-3 pt-2 pb-1.5 rounded-lg cursor-pointer hover:bg-gray-100"
         >
@@ -83,7 +83,6 @@ import { useRoute } from 'vue-router'
 import {
   GridIcon,
   CalenderIcon,
-  UserCircleIcon,
   HorizontalDots,
   PageIcon,
   TableIcon,
@@ -102,38 +101,22 @@ const menuGroups = [
       {
         icon: GridIcon,
         name: 'Overview',
-        subItems: [{ name: 'Ecommerce', path: '/', pro: false }],
+        path: '/dashboard/overview',
       },
       {
-        icon: CalenderIcon,
-        name: 'Calendar',
-        path: '/calendar',
-      },
-      {
-        icon: UserCircleIcon,
-        name: 'User Profile',
-        path: '/profile',
-      },
-
-      {
-        name: 'Forms',
-        icon: ListIcon,
-        subItems: [
-          { name: 'Form Elements', path: '/form-elements', pro: false },
-        ],
-      },
-      {
-        name: 'Tables',
-        icon: TableIcon,
-        subItems: [{ name: 'Basic Tables', path: '/basic-tables', pro: false }],
-      },
-      {
-        name: 'Pages',
         icon: PageIcon,
-        subItems: [
-          { name: 'Black Page', path: '/blank', pro: false },
-          { name: '404 Page', path: '/error-404', pro: false },
-        ],
+        name: 'Programs',
+        path: '/dashboard/programs',
+      },
+      {
+        icon: ListIcon,
+        name: 'Workouts',
+        path: '/dashboard/workouts',
+      },
+      {
+        icon: TableIcon,
+        name: 'Body Weights',
+        path: '/dashboard/body-weights',
       },
     ],
   },
