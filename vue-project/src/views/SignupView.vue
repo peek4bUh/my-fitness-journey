@@ -5,40 +5,40 @@ import SiteLogo from '../components/SiteLogo.vue'
 <template>
   <div class="flex h-screen">
     <!-- Left Column -->
-    <div class="hidden lg:block relative basis-2/4">
+    <div class="relative hidden basis-2/4 lg:block">
       <img
         class="absolute z-0 h-full object-cover"
         src="../assets/images/bb-romanian-deadlift.jpg"
         alt="Barbell Romanian Deadlift"
       />
       <div
-        class="absolute z-10 flex flex-col justify-center items-start h-full w-full pl-10 inset-0 bg-black/50"
+        class="absolute inset-0 z-10 flex h-full w-full flex-col items-start justify-center bg-black/50 pl-10"
       >
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+        <h2 class="mb-4 text-4xl font-bold text-white drop-shadow-lg md:text-5xl">
           Push Your Limits.
         </h2>
-        <p class="text-lg text-gray-200 max-w-md">
+        <p class="max-w-md text-lg text-gray-200">
           Every small step adds up. Stay consistent, show up, and watch your journey transform.
         </p>
       </div>
     </div>
 
     <!-- Right Column -->
-    <div class="flex flex-col justify-between grow basis-1/2 p-6">
+    <div class="flex grow basis-1/2 flex-col justify-between p-6">
       <SiteLogo />
 
-      <div class="flex items-center justify-center flex-1">
+      <div class="flex flex-1 items-center justify-center">
         <div class="w-full max-w-md">
-          <div class="text-center mt-0 mb-8">
-            <h2 class="text-3xl lg:text-4xl font-bold text-black mb-2">Create Account</h2>
-            <p class="lg:text-lg text-gray-600">Start your fitness journey today</p>
+          <div class="mt-0 mb-8 text-center">
+            <h2 class="mb-2 text-3xl font-bold text-black lg:text-4xl">Create Account</h2>
+            <p class="text-gray-600 lg:text-lg">Start your fitness journey today</p>
           </div>
 
           <form method="post" class="flex flex-col gap-6">
             <div>
               <label
                 for="username"
-                class="block text-sm lg:text-base font-semibold text-gray-600 mb-1"
+                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
               >
                 Username
               </label>
@@ -46,14 +46,14 @@ import SiteLogo from '../components/SiteLogo.vue'
                 type="text"
                 name="username"
                 required
-                class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors"
+                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
             </div>
 
             <div>
               <label
                 for="email"
-                class="block text-sm lg:text-base font-semibold text-gray-600 mb-1"
+                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
               >
                 Email
               </label>
@@ -61,14 +61,14 @@ import SiteLogo from '../components/SiteLogo.vue'
                 type="text"
                 name="email"
                 required
-                class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors"
+                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
             </div>
 
             <div>
               <label
                 for="password"
-                class="block text-sm lg:text-base font-semibold text-gray-600 mb-1"
+                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
               >
                 Password
               </label>
@@ -76,14 +76,14 @@ import SiteLogo from '../components/SiteLogo.vue'
                 type="password"
                 name="password"
                 required
-                class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors"
+                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
             </div>
 
             <div>
               <label
                 for="confirm-password"
-                class="block text-sm lg:text-base font-semibold text-gray-600 mb-1"
+                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
               >
                 Confirm Password
               </label>
@@ -91,13 +91,13 @@ import SiteLogo from '../components/SiteLogo.vue'
                 type="password"
                 name="confirm-password"
                 required
-                class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors"
+                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
             </div>
 
             <button
               type="submit"
-              class="w-full py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition duration-200"
+              class="w-full rounded-lg bg-black py-3 font-semibold text-white transition duration-200 hover:bg-gray-800"
             >
               Create Account
             </button>
@@ -106,7 +106,7 @@ import SiteLogo from '../components/SiteLogo.vue'
           <div class="mt-8 text-center">
             <p class="text-gray-600">
               Already registered?
-              <a href="/login" class="text-black font-semibold hover:underline">Login</a>
+              <a href="/login" class="font-semibold text-black hover:underline">Login</a>
             </p>
           </div>
         </div>

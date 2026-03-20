@@ -27,37 +27,41 @@ onMounted(async () => {
   <AdminLayout>
     <div class="bg-gray-50 p-4 md:p-6 lg:p-8">
       <div v-if="loading" class="text-center text-gray-500">Loading...</div>
-      <div v-else-if="error" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
+      <div v-else-if="error" class="rounded-lg border border-red-200 bg-red-50 p-4 text-red-600">
         {{ error }}
       </div>
 
       <!-- Programs Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div
           v-for="program in programs"
           :key="program.id"
-          class="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg hover:border-gray-300 transition-all duration-200"
+          class="group overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-200 hover:border-gray-300 hover:shadow-lg"
         >
           <!-- Card Header -->
           <div class="p-5 pb-3">
-            <div class="flex items-start justify-between gap-3 mb-2">
+            <div class="mb-2 flex items-start justify-between gap-3">
               <RouterLink
                 :to="`/dashboard/programs/${program.id}`"
-                class="text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors line-clamp-2"
+                class="line-clamp-2 text-lg font-semibold text-gray-900 transition-colors hover:text-blue-600"
               >
                 {{ program.title }}
               </RouterLink>
-              <span class="shrink-0 px-2.5 py-1 text-xs font-medium bg-blue-50 text-blue-700 rounded-full">
+              <span
+                class="shrink-0 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700"
+              >
                 {{ program.duration_weeks }} Weeks
               </span>
             </div>
-            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+            <p class="line-clamp-2 text-sm leading-relaxed text-gray-600">
               {{ program.description }}
             </p>
           </div>
 
           <!-- Card Footer -->
-          <div class="px-5 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+          <div
+            class="flex items-center justify-between border-t border-gray-100 bg-gray-50 px-5 py-3"
+          >
             <div class="flex items-center gap-4 text-xs text-gray-500">
               <span v-if="program.days_per_week" class="flex items-center gap-1">
                 <i class="pi pi-calendar text-gray-400"></i>
@@ -74,7 +78,7 @@ onMounted(async () => {
               text
               rounded
               size="small"
-              class="opacity-0 group-hover:opacity-100 transition-opacity"
+              class="opacity-0 transition-opacity group-hover:opacity-100"
             />
           </div>
         </div>

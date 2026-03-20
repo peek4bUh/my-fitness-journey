@@ -5,40 +5,40 @@ import SiteLogo from '../components/SiteLogo.vue'
 <template>
   <div class="flex h-screen">
     <!-- Left Column -->
-    <div class="hidden lg:block relative basis-2/4">
+    <div class="relative hidden basis-2/4 lg:block">
       <img
         class="absolute z-0 h-full object-cover"
         src="../assets/images/bb-romanian-deadlift.jpg"
         alt="Barbell Romanian Deadlift"
       />
       <div
-        class="absolute z-10 flex flex-col justify-center items-start h-full w-full pl-10 inset-0 bg-black/50"
+        class="absolute inset-0 z-10 flex h-full w-full flex-col items-start justify-center bg-black/50 pl-10"
       >
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+        <h2 class="mb-4 text-4xl font-bold text-white drop-shadow-lg md:text-5xl">
           Push Your Limits.
         </h2>
-        <p class="text-lg text-gray-200 max-w-md">
+        <p class="max-w-md text-lg text-gray-200">
           Every small step adds up. Stay consistent, show up, and watch your journey transform.
         </p>
       </div>
     </div>
 
     <!-- Right Column -->
-    <div class="flex flex-col justify-between grow basis-1/2 p-6">
+    <div class="flex grow basis-1/2 flex-col justify-between p-6">
       <SiteLogo />
 
-      <div class="flex items-center justify-center flex-1">
+      <div class="flex flex-1 items-center justify-center">
         <div class="w-full max-w-md">
-          <div class="text-center mt-0 mb-8">
-            <h2 class="text-3xl lg:text-4xl font-bold text-black mb-2">Welcome Back</h2>
-            <p class="lg:text-lg text-gray-600">Sign in to continue your fitness journey</p>
+          <div class="mt-0 mb-8 text-center">
+            <h2 class="mb-2 text-3xl font-bold text-black lg:text-4xl">Welcome Back</h2>
+            <p class="text-gray-600 lg:text-lg">Sign in to continue your fitness journey</p>
           </div>
 
           <form method="post" sub class="flex flex-col gap-6">
             <div>
               <label
                 for="username"
-                class="block text-sm lg:text-base font-semibold text-gray-600 mb-1"
+                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
               >
                 Username
               </label>
@@ -46,14 +46,14 @@ import SiteLogo from '../components/SiteLogo.vue'
                 type="text"
                 name="username"
                 required
-                class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors"
+                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
             </div>
 
             <div>
               <label
                 for="password"
-                class="block text-sm lg:text-base font-semibold text-gray-600 mb-1"
+                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
               >
                 Password
               </label>
@@ -61,24 +61,24 @@ import SiteLogo from '../components/SiteLogo.vue'
                 type="password"
                 name="password"
                 required
-                class="text-sm lg:text-base w-full py-1 border-b bg-transparent border-gray-400 focus:outline-none focus:border-black transition-colors"
+                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
             </div>
 
             <div class="flex items-center justify-between text-sm">
-              <label class="flex items-center gap-2 cursor-pointer">
+              <label class="flex cursor-pointer items-center gap-2">
                 <input
                   type="checkbox"
                   name="remember"
                   value="1"
-                  class="w-4 h-4 rounded border-gray-300 text-black focus:ring-black"
+                  class="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
                 />
                 <span class="text-gray-700">Remember me</span>
               </label>
 
               <RouterLink
                 to="/forgot-password"
-                class="text-gray-600 hover:text-black transition-colors"
+                class="text-gray-600 transition-colors hover:text-black"
               >
                 Forgot password?
               </RouterLink>
@@ -86,7 +86,7 @@ import SiteLogo from '../components/SiteLogo.vue'
 
             <button
               type="submit"
-              class="w-full py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition duration-200 cursor-pointer"
+              class="w-full cursor-pointer rounded-lg bg-black py-3 font-semibold text-white transition duration-200 hover:bg-gray-800"
             >
               Login
             </button>
@@ -95,7 +95,7 @@ import SiteLogo from '../components/SiteLogo.vue'
           <div class="mt-8 text-center">
             <p class="text-gray-600">
               Don't have an account?
-              <RouterLink to="/register" class="text-black font-semibold hover:underline"
+              <RouterLink to="/register" class="font-semibold text-black hover:underline"
                 >Create Account</RouterLink
               >
             </p>

@@ -34,14 +34,14 @@ onMounted(async () => {
   <AdminLayout>
     <div class="bg-gray-50 p-4 md:p-6 lg:p-8">
       <div v-if="loading" class="text-center text-gray-500">Loading...</div>
-      <div v-else-if="error" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-600">
+      <div v-else-if="error" class="rounded-lg border border-red-200 bg-red-50 p-4 text-red-600">
         {{ error }}
       </div>
 
       <div v-else-if="program" class="space-y-6">
         <!-- Header -->
         <div
-          class="p-6 bg-white border border-gray-200 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+          class="flex flex-col justify-between gap-4 rounded-lg border border-gray-200 bg-white p-6 sm:flex-row sm:items-center"
         >
           <div>
             <h1 class="mb-2 text-2xl font-bold text-gray-900">{{ program.title }}</h1>
@@ -60,10 +60,10 @@ onMounted(async () => {
           <div
             v-for="(section, sIndex) in program.sections || []"
             :key="sIndex"
-            class="bg-white rounded-lg p-6 border border-gray-200"
+            class="rounded-lg border border-gray-200 bg-white p-6"
           >
             <div class="flex flex-col gap-2">
-              <h2 class="font-semibold text-base mb-4">{{ section.name }}</h2>
+              <h2 class="mb-4 text-base font-semibold">{{ section.name }}</h2>
               <DataTable :value="section.exercises || []">
                 <Column field="name" header="Exercise" />
                 <Column field="sets" header="Sets" />
