@@ -1,45 +1,8 @@
-<template>
-  <header class="sticky top-0 z-90 flex w-full border-gray-200 bg-white lg:hidden lg:border-b">
-    <div
-      class="flex w-full items-center justify-between border-b border-gray-200 px-3.5 py-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-4"
-    >
-      <button
-        @click="handleToggle"
-        class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border-gray-200 text-gray-500 hover:bg-gray-100 lg:h-9 lg:w-9"
-      >
-        <svg viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            <path
-              d="M5.5 7.75C5.08579 7.75 4.75 8.08579 4.75 8.5C4.75 8.91421 5.08579 9.25 5.5 9.25V7.75ZM19.5 9.25C19.9142 9.25 20.25 8.91421 20.25 8.5C20.25 8.08579 19.9142 7.75 19.5 7.75V9.25ZM5.5 11.75C5.08579 11.75 4.75 12.0858 4.75 12.5C4.75 12.9142 5.08579 13.25 5.5 13.25V11.75ZM17.5 13.25C17.9142 13.25 18.25 12.9142 18.25 12.5C18.25 12.0858 17.9142 11.75 17.5 11.75V13.25ZM5.5 15.75C5.08579 15.75 4.75 16.0858 4.75 16.5C4.75 16.9142 5.08579 17.25 5.5 17.25V15.75ZM12.5 17.25C12.9142 17.25 13.25 16.9142 13.25 16.5C13.25 16.0858 12.9142 15.75 12.5 15.75V17.25ZM5.5 9.25H19.5V7.75H5.5V9.25ZM5.5 13.25H17.5V11.75H5.5V13.25ZM5.5 17.25H12.5V15.75H5.5V17.25Z"
-              fill="#000000"
-            ></path>
-          </g>
-        </svg>
-      </button>
-
-      <RouterLink to="/dashboard/overview" class="text-lg font-semibold"
-        >MyFitnessJourney</RouterLink
-      >
-
-      <div
-        class="cursor-pointer lg:fixed lg:bottom-0 lg:left-0 lg:w-full lg:border-t lg:border-gray-200 lg:px-3 lg:py-2"
-      >
-        <div
-          class="lg:border-top rounded-lg lg:border-gray-200 lg:px-3 lg:pt-2 lg:pb-1.5 lg:hover:bg-gray-100"
-        >
-          <UserMenu />
-        </div>
-      </div>
-    </div>
-  </header>
-</template>
-
 <script setup>
+import { RouterLink } from 'vue-router'
+
 import { useSidebar } from '@/composables/useSidebar'
 import UserMenu from './header/UserMenu.vue'
-import { RouterLink } from 'vue-router'
 
 const { toggleSidebar, toggleMobileSidebar, isMobileOpen } = useSidebar()
 
@@ -52,3 +15,33 @@ const handleToggle = () => {
   }
 }
 </script>
+
+<template>
+  <header class="sticky top-0 z-90 flex w-full border-b border-gray-200 bg-inherit">
+    <div class="flex w-full items-center justify-between p-3 lg:justify-end lg:px-5 lg:py-4">
+      <div class="flex w-fit items-center gap-2.5 lg:hidden">
+        <button
+          @click="handleToggle"
+          class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border-gray-200 text-gray-500 hover:bg-gray-100"
+        >
+          <svg viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M5.5 7.75C5.08579 7.75 4.75 8.08579 4.75 8.5C4.75 8.91421 5.08579 9.25 5.5 9.25V7.75ZM19.5 9.25C19.9142 9.25 20.25 8.91421 20.25 8.5C20.25 8.08579 19.9142 7.75 19.5 7.75V9.25ZM5.5 11.75C5.08579 11.75 4.75 12.0858 4.75 12.5C4.75 12.9142 5.08579 13.25 5.5 13.25V11.75ZM17.5 13.25C17.9142 13.25 18.25 12.9142 18.25 12.5C18.25 12.0858 17.9142 11.75 17.5 11.75V13.25ZM5.5 15.75C5.08579 15.75 4.75 16.0858 4.75 16.5C4.75 16.9142 5.08579 17.25 5.5 17.25V15.75ZM12.5 17.25C12.9142 17.25 13.25 16.9142 13.25 16.5C13.25 16.0858 12.9142 15.75 12.5 15.75V17.25ZM5.5 9.25H19.5V7.75H5.5V9.25ZM5.5 13.25H17.5V11.75H5.5V13.25ZM5.5 17.25H12.5V15.75H5.5V17.25Z"
+                fill="#000000"
+              ></path>
+            </g>
+          </svg>
+        </button>
+
+        <RouterLink to="/dashboard/overview" class="text-lg font-semibold">
+          MyFitnessJourney
+        </RouterLink>
+      </div>
+
+      <UserMenu />
+    </div>
+  </header>
+</template>

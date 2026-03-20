@@ -1,51 +1,3 @@
-<template>
-  <div class="relative" ref="dropdownRef">
-    <button class="flex cursor-pointer items-center text-gray-700" @click.prevent="toggleDropdown">
-      <div
-        class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800 lg:mr-3 lg:h-10 lg:w-10"
-      >
-        AA
-      </div>
-
-      <p class="hidden text-sm">Angel Andrade</p>
-    </button>
-
-    <!-- Dropdown Start -->
-    <div
-      v-if="dropdownOpen"
-      class="absolute right-0 mt-2 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3"
-    >
-      <!-- Esto es para en la sidebar salga hacia arriba
-       class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3" -->
-      <div class="mb-3">
-        <p class="font-medium text-gray-700">Musharof Chowdhury</p>
-        <p class="mt-0.5 text-gray-500">aandradeb99@gmail.com</p>
-      </div>
-
-      <ul class="flex flex-col gap-1 border-y border-gray-200 pt-3 pb-3">
-        <li v-for="item in menuItems" :key="item.href">
-          <router-link
-            :to="item.href"
-            class="group flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <component :is="item.icon" class="text-gray-500 group-hover:text-gray-700" />
-            {{ item.text }}
-          </router-link>
-        </li>
-      </ul>
-      <router-link
-        to="/signin"
-        @click="signOut"
-        class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
-      >
-        <LogoutIcon class="text-gray-500 group-hover:text-gray-700" />
-        Sign out
-      </router-link>
-    </div>
-    <!-- Dropdown End -->
-  </div>
-</template>
-
 <script setup>
 import { UserCircleIcon, LogoutIcon, SettingsIcon } from '@/icons'
 import { RouterLink } from 'vue-router'
@@ -87,3 +39,47 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 </script>
+
+<template>
+  <div class="relative" ref="dropdownRef">
+    <button class="flex cursor-pointer items-center" @click.prevent="toggleDropdown">
+      <div
+        class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800"
+      >
+        AA
+      </div>
+    </button>
+
+    <!-- Dropdown Start -->
+    <div
+      v-if="dropdownOpen"
+      class="absolute right-0 mt-2 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3"
+    >
+      <div class="mb-3">
+        <p class="font-medium text-gray-700">Musharof Chowdhury</p>
+        <p class="mt-0.5 text-gray-500">aandradeb99@gmail.com</p>
+      </div>
+
+      <ul class="flex flex-col gap-1 border-y border-gray-200 pt-3 pb-3">
+        <li v-for="item in menuItems" :key="item.href">
+          <router-link
+            :to="item.href"
+            class="group flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
+          >
+            <component :is="item.icon" class="text-gray-500 group-hover:text-gray-700" />
+            {{ item.text }}
+          </router-link>
+        </li>
+      </ul>
+      <router-link
+        to="/signin"
+        @click="signOut"
+        class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
+      >
+        <LogoutIcon class="text-gray-500 group-hover:text-gray-700" />
+        Sign out
+      </router-link>
+    </div>
+    <!-- Dropdown End -->
+  </div>
+</template>

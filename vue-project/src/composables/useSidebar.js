@@ -1,15 +1,14 @@
-import { ref, computed, onMounted, onUnmounted, provide, inject } from 'vue'
+import { ref, onMounted, onUnmounted, provide, inject } from 'vue'
 
 const SidebarSymbol = Symbol()
 
 export function useSidebarProvider() {
-  const isExpanded = ref(true)
   const isMobileOpen = ref(false)
   const isMobile = ref(false)
   const activeItem = ref(null)
 
   const handleResize = () => {
-    const mobile = window.innerWidth < 768
+    const mobile = window.innerWidth < 1024
     isMobile.value = mobile
     if (!mobile) {
       isMobileOpen.value = false
@@ -28,8 +27,6 @@ export function useSidebarProvider() {
   const toggleSidebar = () => {
     if (isMobile.value) {
       isMobileOpen.value = !isMobileOpen.value
-    } else {
-      isExpanded.value = !isExpanded.value
     }
   }
 
@@ -42,7 +39,6 @@ export function useSidebarProvider() {
   }
 
   const context = {
-    isExpanded: computed(() => (isMobile.value ? false : isExpanded.value)),
     isMobileOpen,
     activeItem,
     toggleSidebar,
