@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 
-import { GridIcon, PageIcon, TableIcon, ListIcon } from '../../icons'
+import { GridIcon, PageIcon, TableIcon, ListIcon, CrossIcon } from '../../icons'
 import { useSidebar } from '@/composables/useSidebar'
 import SiteLogo from '../SiteLogo.vue'
 

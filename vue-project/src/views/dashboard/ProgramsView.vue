@@ -25,7 +25,7 @@ onMounted(async () => {
 
 <template>
   <AdminLayout>
-    <div class="bg-gray-50 p-4 md:p-6 lg:p-8">
+    <div class="bg-inherit p-4 md:p-6 lg:p-8">
       <div v-if="loading" class="text-center text-gray-500">Loading...</div>
       <div v-else-if="error" class="rounded-lg border border-red-200 bg-red-50 p-4 text-red-600">
         {{ error }}
