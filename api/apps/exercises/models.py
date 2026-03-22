@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class Exercise(models.Model):
+    """Class representing an Exercise model"""
+    title = models.CharField(max_length=128)
+    created = models.DateTimeField(auto_now_add=True)

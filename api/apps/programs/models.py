@@ -1,20 +1,24 @@
 from django.db import models
 
-from apps.users.models import User
-
 
 class Program(models.Model):
+    """Class representing a Program model"""
     created = models.DateTimeField(auto_now_add=True)
     user_id = models.ForeignKey(
-        User,
+        "auth.User",
+        related_name="programs",
         on_delete=models.CASCADE,
     )
     title = models.CharField(max_length=128)
     description = models.CharField(max_length=255)
-    duration_weeks = models.IntegerField()
+    duration_weeks = models.SmallIntegerField()
 
 
 class ProgramSection(models.Model):
+    """Class representing a ProgramSection model"""
+    class Meta:  # pylint: disable=C0115
+        db_table = "programs_program_sections"
+
     created = models.DateTimeField(auto_now_add=True)
     program_id = models.ForeignKey(
         Program,
@@ -24,14 +28,18 @@ class ProgramSection(models.Model):
 
 
 class ProgramExercise(models.Model):
+    """Class representing a ProgramExercise model"""
+    class Meta:  # pylint: disable=C0115
+        db_table = "programs_program_exercises"
+
     created = models.DateTimeField(auto_now_add=True)
     section_id = models.ForeignKey(
         ProgramSection,
         on_delete=models.CASCADE,
     )
     name = models.CharField(max_length=100)
-    sets = models.IntegerField()
-    reps = models.IntegerField()
+    sets = models.SmallIntegerField()
+    reps = models.SmallIntegerField()
     load = models.FloatField(null=True, blank=True)
-    rpe = models.IntegerField()
-    rest_seconds = models.IntegerField(null=True, blank=True)
+    rpe = models.SmallIntegerField()
+    rest_seconds = models.SmallIntegerField(null=True, blank=True)

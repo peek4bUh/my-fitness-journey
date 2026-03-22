@@ -40,7 +40,7 @@ const menuGroups = [
 
 <template>
   <aside
-    class="fixed top-[65px] left-0 z-200 flex h-screen w-64 flex-col border-r border-gray-200 bg-gray-50 text-gray-900 transition-all duration-300 ease-in-out lg:top-0 lg:w-80 lg:translate-x-0"
+    class="fixed top-[65px] left-0 z-200 flex h-screen w-64 flex-col border-r border-gray-200 bg-white text-gray-900 transition-all duration-300 ease-in-out lg:top-0 lg:w-80 lg:translate-x-0"
     :class="[
       {
         'translate-x-0': isMobileOpen,
@@ -48,7 +48,7 @@ const menuGroups = [
       },
     ]"
   >
-    <div class="hidden border-b border-gray-200 bg-white lg:block lg:py-4.5 lg:pl-5">
+    <div class="hidden bg-inherit lg:block lg:py-4.5 lg:pl-5">
       <router-link to="/dashboard/overview" class="flex w-fit items-center gap-2.5 lg:gap-3">
         <SiteLogo />
         <p class="text-lg font-semibold">MyFitnessJourney</p>

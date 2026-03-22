@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'apps.programs',
     'apps.exercises',
     'corsheaders',
+    'drf_spectacular',
+    # 'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +57,28 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.BasicAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'rest_framework.authentication.TokenAuthentication',
+    #     "rest_framework.authtoken",
+    # ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ]
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'MyFitnessJourney',
+    'DESCRIPTION': 'Self hosted FOSS workout tracker',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 

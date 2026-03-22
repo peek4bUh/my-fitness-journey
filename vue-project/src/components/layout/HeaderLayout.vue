@@ -17,7 +17,7 @@ const handleToggle = () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-90 flex w-full border-b border-gray-200 bg-inherit">
+  <header class="sticky top-0 z-90 flex w-full border-b border-gray-200 bg-white">
     <div class="flex w-full items-center justify-between p-3 lg:justify-end lg:px-5 lg:py-4">
       <div class="flex w-fit items-center gap-2.5 lg:hidden">
         <button
