@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'apps.exercises',
     'corsheaders',
     'drf_spectacular',
-    # 'rest_framework.authtoken'
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [

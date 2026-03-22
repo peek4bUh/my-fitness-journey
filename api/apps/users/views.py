@@ -3,8 +3,9 @@ from django.contrib.auth.hashers import check_password
 
 from rest_framework.response import Response
 from rest_framework import generics, authentication, status
+from rest_framework.authtoken.models import Token
 
-from apps.users.serializers import UserSerializer
+from apps.users.serializers import UserSerializer, LoginSerializer
 
 
 class UserList(generics.ListCreateAPIView):
@@ -35,21 +36,22 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class UserLogin(generics.CreateAPIView):
     """View for user login."""
-    serializer_class = UserSerializer
+    serializer_class = LoginSerializer
 
     def post(self, request, format=None):
         """Authenticate user and return token."""
-        user = User.objects.filter(
-            username=request.data.get("username")).first()
+        serializer = self.get_serializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        if user is None:
-            return Response({"detail": "User not found."},
-                            status=status.HTTP_404_NOT_FOUND)
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
 
-        if user.email != request.data.get("email") \
-                or not check_password(request.data.get("password"), user.password):
+        user = User.objects.filter(username=username).first()
+
+        if user is None or not check_password(password, user.password):
             return Response({"detail": "Invalid credentials."},
                             status=status.HTTP_401_UNAUTHORIZED)
 
-        # Implement login logic here
-        return Response({"token": "TOKEN_PLACEHOLDER"}, status=status.HTTP_200_OK)
+        token = Token.objects.get(user=user)
+        return Response({"token": token.key}, status=status.HTTP_200_OK)
