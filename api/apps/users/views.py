@@ -31,7 +31,6 @@ class UserList(generics.ListCreateAPIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    authentication_classes = [authentication.TokenAuthentication]
 
 
 class UserLogin(generics.CreateAPIView):
