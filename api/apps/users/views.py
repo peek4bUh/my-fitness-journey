@@ -2,15 +2,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 
 from rest_framework.response import Response
-from rest_framework import generics, authentication, status
+from rest_framework import generics, status
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
 
 from apps.users.serializers import UserSerializer, LoginSerializer
 
 
 class UserList(generics.ListCreateAPIView):
+    """View for listing all users or creating a new user."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
     def get(self, request, format=None):
         """Return a list of all users."""
@@ -29,6 +32,7 @@ class UserList(generics.ListCreateAPIView):
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    """View for retrieving, updating, or deleting a user."""
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -36,6 +40,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class UserLogin(generics.CreateAPIView):
     """View for user login."""
     serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request, format=None):
         """Authenticate user and return token."""
