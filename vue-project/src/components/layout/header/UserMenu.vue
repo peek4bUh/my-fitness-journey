@@ -21,7 +21,7 @@ const closeDropdown = () => {
 
 const signOut = () => {
   // Implement sign out logic here
-  console.log('Signing out...')
+  localStorage.removeItem('token')
   closeDropdown()
 }
 
@@ -72,7 +72,7 @@ onUnmounted(() => {
         </li>
       </ul>
       <router-link
-        to="/signin"
+        to="/login"
         @click="signOut"
         class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
       >

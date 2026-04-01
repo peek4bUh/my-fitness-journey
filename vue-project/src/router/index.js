@@ -16,9 +16,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      components: {
-        default: () => LoginView,
-      },
+      component: LoginView,
     },
     {
       path: '/register',
@@ -28,6 +26,9 @@ const router = createRouter({
     {
       path: '/dashboard',
       redirect: '/dashboard/overview',
+      meta: {
+        requiresAuth: true,
+      },
       children: [
         {
           path: 'overview',
@@ -50,6 +51,27 @@ const router = createRouter({
       ],
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  if (to.path === '/login' || to.path === '/register') {
+    if (token) {
+      next('/dashboard/overview')
+    } else {
+      next()
+    }
+  }
+
+  if (to.meta.requiresAuth) {
+    if (!token) {
+      next('/login') // Redirect to login if not authenticated
+    } else {
+      next() // Proceed to route if user is authenticated
+    }
+  } else {
+    next() // Proceed to route if it's not protected
+  }
 })
 
 export default router

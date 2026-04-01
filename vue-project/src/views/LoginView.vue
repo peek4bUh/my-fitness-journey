@@ -1,5 +1,34 @@
 <script setup>
+import { ref } from 'vue'
+import axios from 'axios'
 import SiteLogo from '../components/SiteLogo.vue'
+import router from '../router/index.js'
+
+const username = ref('')
+const password = ref('')
+const toggle = ref('no')
+const errorMessage = ref('')
+
+function login() {
+  axios
+    .post('http://127.0.0.1:8000/api/v1/users/login', {
+      username: username.value,
+      password: password.value,
+    })
+    .then(function (response) {
+      if (response.status === 200) {
+        router.push('/dashboard/overview')
+        localStorage.setItem('token', response.data.token)
+      }
+    })
+    .catch(function (error) {
+      if (error.response && error.response.status === 401) {
+        errorMessage.value = 'Incorrect username or password.'
+      } else {
+        errorMessage.value = 'Unable to login. Please try again later.'
+      }
+    })
+}
 </script>
 
 <template>
@@ -25,7 +54,10 @@ import SiteLogo from '../components/SiteLogo.vue'
 
     <!-- Right Column -->
     <div class="flex grow basis-1/2 flex-col justify-between p-6">
-      <SiteLogo />
+      <router-link to="/" class="flex w-fit items-center gap-2.5 lg:gap-3">
+        <SiteLogo />
+        <p class="text-lg font-semibold">MyFitnessJourney</p>
+      </router-link>
 
       <div class="flex flex-1 items-center justify-center">
         <div class="w-full max-w-md">
@@ -34,7 +66,7 @@ import SiteLogo from '../components/SiteLogo.vue'
             <p class="text-gray-600 lg:text-lg">Sign in to continue your fitness journey</p>
           </div>
 
-          <form method="post" sub class="flex flex-col gap-6">
+          <form method="post" v-on:submit.prevent="login" class="flex flex-col gap-6">
             <div>
               <label
                 for="username"
@@ -44,7 +76,8 @@ import SiteLogo from '../components/SiteLogo.vue'
               </label>
               <input
                 type="text"
-                name="username"
+                id="username"
+                v-model="username"
                 required
                 class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
@@ -59,18 +92,22 @@ import SiteLogo from '../components/SiteLogo.vue'
               </label>
               <input
                 type="password"
-                name="password"
+                id="password"
+                v-model="password"
                 required
                 class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
               />
             </div>
 
+            <p v-if="errorMessage" class="text-sm text-red-600">{{ errorMessage }}</p>
+
             <div class="flex items-center justify-between text-sm">
               <label class="flex cursor-pointer items-center gap-2">
                 <input
                   type="checkbox"
-                  name="remember"
-                  value="1"
+                  v-model="toggle"
+                  true-value="yes"
+                  false-value="no"
                   class="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
                 />
                 <span class="text-gray-700">Remember me</span>
