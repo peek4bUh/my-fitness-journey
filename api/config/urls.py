@@ -24,6 +24,9 @@ urlpatterns = [
     path("api/v1/", include("apps.users.urls")),
     path("api/v1/", include("apps.programs.urls")),
     path("api/v1/", include("apps.exercises.urls")),
+    path("api/v1/", include("apps.authentication.urls")),
+
+    # path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/v1/schema', SpectacularAPIView.as_view(), name='schema'),
     path('api/v1/schema/ui',

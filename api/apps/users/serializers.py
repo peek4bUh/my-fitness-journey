@@ -19,9 +19,3 @@ class UserSerializer(serializers.ModelSerializer):
 
         Token.objects.create(user=user)
         return user
-
-
-class LoginSerializer(serializers.Serializer):
-    """Serializer for user login."""
-    username = serializers.CharField()
-    password = serializers.CharField()

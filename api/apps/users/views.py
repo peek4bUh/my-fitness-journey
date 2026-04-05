@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.hashers import check_password
 
 from rest_framework.response import Response
 from rest_framework import generics, status
-from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 
-from apps.users.serializers import UserSerializer, LoginSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from apps.users.serializers import UserSerializer
 
 
 class UserList(generics.ListCreateAPIView):
@@ -37,25 +37,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
 
 
-class UserLogin(generics.CreateAPIView):
-    """View for user login."""
-    serializer_class = LoginSerializer
+class UserLoginView(TokenObtainPairView):
+    """View for authenticate an user and return a JWT token."""
     permission_classes = [AllowAny]
-
-    def post(self, request, format=None):
-        """Authenticate user and return token."""
-        serializer = self.get_serializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        username = serializer.validated_data['username']
-        password = serializer.validated_data['password']
-
-        user = User.objects.filter(username=username).first()
-
-        if user is None or not check_password(password, user.password):
-            return Response({"detail": "Invalid credentials."},
-                            status=status.HTTP_401_UNAUTHORIZED)
-
-        token = Token.objects.get(user=user)
-        return Response({"token": token.key}, status=status.HTTP_200_OK)
