@@ -24,7 +24,7 @@ class AuthLoginView(generics.CreateAPIView):
     serializer_class = AuthLoginSerializer
     permission_classes = [AllowAny]
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         """Authenticate user and return API key"""
         serializer = self.get_serializer(data=request.data)
         if not serializer.is_valid():

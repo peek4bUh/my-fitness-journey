@@ -4,10 +4,7 @@ from apps.users import views
 
 
 urlpatterns = [
-    path("users", views.UserList.as_view()),
-    path("users/<int:pk>", views.UserDetail.as_view()),
+    path("users", views.UserListView.as_view()),
     path("users/login", views.UserLoginView.as_view()),
-    # path("users/logout", views.UserDetail.as_view()),
-    # path("users/password_change", views.UserDetail.as_view()),
-    # path("users/password_reset", views.UserDetail.as_view()),
+    path("users/login/refresh", views.UserRefreshView.as_view()),
 ]

@@ -3,8 +3,8 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from apps.programs.serializers import ProgramSerializer, ProgramSectionSerializer, ProgramExerciseSerializer
-from apps.programs.models import Program, ProgramSection, ProgramExercise
+from apps.programs.serializers import ProgramSerializer
+from apps.programs.models import Program
 
 
 class ProgramView(generics.GenericAPIView):
@@ -12,7 +12,7 @@ class ProgramView(generics.GenericAPIView):
     queryset = Program.objects.all()
     serializer_class = ProgramSerializer
 
-    def get(self, request, pk=None, format=None):
+    def get(self, request, pk=None):
         """Retrieve programs for the authenticated user."""
         if pk:
             # Retrieve a specific program by ID, but only if it belongs to the user
@@ -28,7 +28,7 @@ class ProgramView(generics.GenericAPIView):
             serializer = self.get_serializer(programs, many=True)
             return Response(serializer.data)
 
-    def post(self, request, format=None):
+    def post(self, request):
         """Create a new program."""
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -61,7 +61,7 @@ class ProgramDetailView(generics.GenericAPIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request):
         """Delete an existing program."""
