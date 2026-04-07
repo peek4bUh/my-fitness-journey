@@ -1,33 +1,23 @@
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
 import SiteLogo from '../components/SiteLogo.vue'
 import router from '../router/index.js'
+import { useAuth } from '../composables/useAuth.js'
+
+const { login } = useAuth()
 
 const username = ref('')
 const password = ref('')
-const toggle = ref('no')
 const errorMessage = ref('')
 
-function login() {
-  axios
-    .post('http://127.0.0.1:8000/api/v1/users/login', {
-      username: username.value,
-      password: password.value,
-    })
-    .then(function (response) {
-      if (response.status === 200) {
-        router.push('/dashboard/overview')
-        localStorage.setItem('token', response.data.token)
-      }
-    })
-    .catch(function (error) {
-      if (error.response && error.response.status === 401) {
-        errorMessage.value = 'Incorrect username or password.'
-      } else {
-        errorMessage.value = 'Unable to login. Please try again later.'
-      }
-    })
+async function handleLogin() {
+  const result = await login(username.value, password.value)
+
+  if (result.success) {
+    router.push('/dashboard/overview')
+  } else {
+    errorMessage.value = result.error
+  }
 }
 </script>
 
@@ -66,7 +56,7 @@ function login() {
             <p class="text-gray-600 lg:text-lg">Sign in to continue your fitness journey</p>
           </div>
 
-          <form method="post" v-on:submit.prevent="login" class="flex flex-col gap-6">
+          <form method="post" v-on:submit.prevent="handleLogin" class="flex flex-col gap-6">
             <div>
               <label
                 for="username"

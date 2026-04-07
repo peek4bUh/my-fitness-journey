@@ -2,6 +2,10 @@
 import { UserCircleIcon, LogoutIcon, SettingsIcon } from '@/icons'
 import { RouterLink } from 'vue-router'
 import { ref, onMounted, onUnmounted } from 'vue'
+import axios from 'axios'
+import { useAuth } from '@/composables/useAuth.js'
+
+const { logout, user } = useAuth()
 
 const dropdownOpen = ref(false)
 const dropdownRef = ref(null)
@@ -20,9 +24,7 @@ const closeDropdown = () => {
 }
 
 const signOut = () => {
-  // Implement sign out logic here
-  localStorage.removeItem('token')
-  closeDropdown()
+  logout()
 }
 
 const handleClickOutside = (event) => {
@@ -56,8 +58,8 @@ onUnmounted(() => {
       class="absolute right-0 mt-2 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3"
     >
       <div class="mb-3">
-        <p class="font-medium text-gray-700">Musharof Chowdhury</p>
-        <p class="mt-0.5 text-gray-500">aandradeb99@gmail.com</p>
+        <p class="font-medium text-gray-700">{{ user?.username || 'User' }}</p>
+        <p class="mt-0.5 text-gray-500">{{ user?.email || '' }}</p>
       </div>
 
       <ul class="flex flex-col gap-1 border-y border-gray-200 pt-3 pb-3">

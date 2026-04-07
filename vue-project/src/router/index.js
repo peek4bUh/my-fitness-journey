@@ -53,10 +53,15 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token')
+import { useAuth } from '@/composables/useAuth.js'
+
+const { checkAuth } = useAuth()
+
+router.beforeEach(async (to, from, next) => {
+  const isAuth = await checkAuth()
+
   if (to.path === '/login' || to.path === '/register') {
-    if (token) {
+    if (isAuth) {
       next('/dashboard/overview')
     } else {
       next()
@@ -64,7 +69,7 @@ router.beforeEach((to, from, next) => {
   }
 
   if (to.meta.requiresAuth) {
-    if (!token) {
+    if (!isAuth) {
       next('/login') // Redirect to login if not authenticated
     } else {
       next() // Proceed to route if user is authenticated
