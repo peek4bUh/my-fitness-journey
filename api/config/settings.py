@@ -37,7 +37,9 @@ DEBUG = True
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.messages',
     'django.contrib.sessions',
+    'django.contrib.staticfiles',
 
     'corsheaders',
     'drf_spectacular',
@@ -52,15 +54,33 @@ INSTALLED_APPS = [
 
 # https://docs.djangoproject.com/en/6.0/ref/middleware/
 MIDDLEWARE = [
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
 ]
+
+# https://docs.djangoproject.com/en/6.0/topics/templates/
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 
 # Django REST Framework
 # https://www.django-rest-framework.org/
