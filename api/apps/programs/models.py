@@ -17,8 +17,8 @@ class Program(models.Model):
     created_at = models.DateTimeField(
         verbose_name="Creation date", auto_now_add=True)
 
-    def __repr__(self):
-        return super().__repr__()
+    def __str__(self):
+        return self.title
 
 
 class ProgramSection(models.Model):
@@ -31,6 +31,9 @@ class ProgramSection(models.Model):
     name = models.CharField(verbose_name="Section name", max_length=100)
     created_at = models.DateTimeField(
         verbose_name="Creation date", auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
 
 class ProgramExercise(models.Model):
