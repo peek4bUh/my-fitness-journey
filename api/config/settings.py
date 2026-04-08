@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 
     'apps.authentication',
     'apps.exercises',
