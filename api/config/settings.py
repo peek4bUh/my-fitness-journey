@@ -38,25 +38,28 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'rest_framework',
-    'apps.users',
-    'apps.programs',
-    'apps.exercises',
-    'apps.authentication',
+
     'corsheaders',
     'drf_spectacular',
+    'rest_framework',
     'rest_framework.authtoken'
+
+    'apps.authentication',
+    'apps.exercises',
+    'apps.programs',
+    'apps.users',
 ]
 
 # https://docs.djangoproject.com/en/6.0/ref/middleware/
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # Django REST Framework
