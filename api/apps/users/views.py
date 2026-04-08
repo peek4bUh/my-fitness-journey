@@ -2,9 +2,8 @@
 from django.contrib.auth import authenticate
 
 from rest_framework import generics, status
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 
@@ -15,7 +14,6 @@ from apps.users.serializers import UserSerializer
 
 class UserListView(generics.GenericAPIView):
     """View for listing current user or creating a new user."""
-    authentication_classes = [JWTAuthentication]
     serializer_class = UserSerializer
 
     def get_permissions(self):
