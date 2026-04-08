@@ -1,14 +1,17 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import AllowAny
 
 from apps.exercises.serializers import ExerciseSerializer
 from apps.exercises.models import Exercise
 
 
-class ExerciseList(ListCreateAPIView):
+class ExerciseList(ListAPIView):
+    permission_classes = [AllowAny]
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
 
 
-class ExerciseDetail(RetrieveUpdateDestroyAPIView):
+class ExerciseDetail(ListAPIView):
+    permission_classes = [AllowAny]
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
