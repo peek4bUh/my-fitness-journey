@@ -1,9 +1,9 @@
 <script setup>
-import AdminLayout from '@/components/layout/DashboardLayout.vue'
+import AppLayout from '../../layout/AppLayout.vue'
 </script>
 
 <template>
-  <AdminLayout>
+  <AppLayout>
     <div class="bg-inherit p-4 md:p-6 lg:p-8">
       <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div class="rounded-lg border border-gray-200 bg-white p-4">
@@ -119,5 +119,5 @@ import AdminLayout from '@/components/layout/DashboardLayout.vue'
         </div>
       </div>
     </div>
-  </AdminLayout>
+  </AppLayout>
 </template>

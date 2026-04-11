@@ -1,9 +1,9 @@
 <template>
-  <SidebarProvider>
+  <AppSidebarProvider>
     <RouterView />
-  </SidebarProvider>
+  </AppSidebarProvider>
 </template>
 
 <script setup>
-import SidebarProvider from './components/layout/SidebarProvider.vue'
+import AppSidebarProvider from './layout/components/AppSidebarProvider.vue'
 </script>

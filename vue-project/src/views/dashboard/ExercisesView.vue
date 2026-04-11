@@ -1,9 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import AdminLayout from '@/components/layout/DashboardLayout.vue'
-
-const defaultImage = '/images/exercise-placeholder.jpg'
+import AppLayout from '../../layout/AppLayout.vue'
 
 const exercises = ref([])
 const loading = ref(true)
@@ -24,7 +22,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AdminLayout>
+  <AppLayout>
     <div class="bg-inherit p-4 md:p-6 lg:p-8">
       <!-- Loading State -->
       <div v-if="loading" class="flex items-center justify-center py-12">
@@ -87,5 +85,5 @@ onMounted(async () => {
         <p class="text-gray-500">No exercises found</p>
       </div>
     </div>
-  </AdminLayout>
+  </AppLayout>
 </template>

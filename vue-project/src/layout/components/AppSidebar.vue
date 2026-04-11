@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 
 import { GridIcon, PageIcon, TableIcon, ListIcon, BoxCubeIcon } from '../../icons'
 import { useSidebar } from '@/composables/useSidebar'
-import SiteLogo from '../SiteLogo.vue'
+import SiteLogo from '../../components/SiteLogo.vue'
 
 const { isMobileOpen } = useSidebar()
 

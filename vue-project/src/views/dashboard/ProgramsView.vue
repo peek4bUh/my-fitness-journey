@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import AdminLayout from '@/components/layout/DashboardLayout.vue'
+import AppLayout from '../../layout/AppLayout.vue'
 
 import Button from 'primevue/button'
 
@@ -24,7 +24,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AdminLayout>
+  <AppLayout>
     <div class="bg-inherit p-4 md:p-6 lg:p-8">
       <div v-if="loading" class="text-center text-gray-500">Loading...</div>
       <div v-else-if="error" class="rounded-lg border border-red-200 bg-red-50 p-4 text-red-600">
@@ -84,5 +84,5 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-  </AdminLayout>
+  </AppLayout>
 </template>
