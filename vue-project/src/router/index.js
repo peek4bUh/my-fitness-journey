@@ -1,39 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { useAuth } from '@/composables/useAuth.js'
 import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import OverviewView from '@/views/dashboard/OverviewView.vue'
 import ProgramsView from '@/views/dashboard/ProgramsView.vue'
 import ProgramDetailView from '@/views/dashboard/ProgramDetailView.vue'
+import ExercisesView from '@/views/dashboard/ExercisesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      redirect: 'login',
-    },
+    { path: '/', redirect: '/login' },
     {
       path: '/login',
       name: 'login',
       component: LoginView,
+      meta: { guestOnly: true },
     },
     {
       path: '/register',
       name: 'signup',
       component: SignupView,
+      meta: { guestOnly: true },
     },
     {
       path: '/dashboard',
-      redirect: '/dashboard/overview',
-      meta: {
-        requiresAuth: true,
-      },
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'overview',
           name: 'overview',
           component: OverviewView,
+        },
+        {
+          path: 'exercises',
+          name: 'exercises',
+          component: ExercisesView,
         },
         {
           path: 'programs',
@@ -53,30 +55,27 @@ const router = createRouter({
   ],
 })
 
-import { useAuth } from '@/composables/useAuth.js'
-
-const { checkAuth } = useAuth()
-
 router.beforeEach(async (to, from, next) => {
-  const isAuth = await checkAuth()
+  const auth = useAuth()
 
-  if (to.path === '/login' || to.path === '/register') {
-    if (isAuth) {
-      next('/dashboard/overview')
-    } else {
-      next()
-    }
+  // 1. Only hit the backend if we haven't checked for a session yet
+  if (!auth.isInitialCheckDone.value) {
+    await auth.checkAuth()
   }
 
-  if (to.meta.requiresAuth) {
-    if (!isAuth) {
-      next('/login') // Redirect to login if not authenticated
-    } else {
-      next() // Proceed to route if user is authenticated
-    }
-  } else {
-    next() // Proceed to route if it's not protected
+  const isLoggedIn = auth.isAuthenticated.value
+
+  // 2. Logic for Guest-only pages (Login/Register)
+  if (to.meta.guestOnly && isLoggedIn) {
+    return next('/dashboard/overview')
   }
+
+  // 3. Logic for Protected pages
+  if (to.meta.requiresAuth && !isLoggedIn) {
+    return next('/login')
+  }
+
+  next()
 })
 
 export default router

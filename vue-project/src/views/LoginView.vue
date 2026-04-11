@@ -3,12 +3,14 @@ import { ref } from 'vue'
 import SiteLogo from '../components/SiteLogo.vue'
 import router from '../router/index.js'
 import { useAuth } from '../composables/useAuth.js'
+import axios from 'axios'
 
 const { login } = useAuth()
 
 const username = ref('')
 const password = ref('')
 const errorMessage = ref('')
+const rememberMe = ref(false)
 
 async function handleLogin() {
   const result = await login(username.value, password.value)
@@ -56,7 +58,7 @@ async function handleLogin() {
             <p class="text-gray-600 lg:text-lg">Sign in to continue your fitness journey</p>
           </div>
 
-          <form method="post" v-on:submit.prevent="handleLogin" class="flex flex-col gap-6">
+          <form method="post" @submit.prevent="handleLogin" class="flex flex-col gap-6">
             <div>
               <label
                 for="username"
@@ -92,16 +94,15 @@ async function handleLogin() {
             <p v-if="errorMessage" class="text-sm text-red-600">{{ errorMessage }}</p>
 
             <div class="flex items-center justify-between text-sm">
-              <label class="flex cursor-pointer items-center gap-2">
+              <div class="flex cursor-pointer items-center gap-2">
                 <input
                   type="checkbox"
-                  v-model="toggle"
-                  true-value="yes"
-                  false-value="no"
+                  id="rememberMe"
+                  v-model="rememberMe"
                   class="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
                 />
-                <span class="text-gray-700">Remember me</span>
-              </label>
+                <label for="rememberMe" class="text-gray-700">Remember me</label>
+              </div>
 
               <RouterLink
                 to="/forgot-password"
