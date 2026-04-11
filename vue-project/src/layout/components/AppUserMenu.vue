@@ -2,7 +2,6 @@
 import { UserCircleIcon, LogoutIcon, SettingsIcon } from '@/icons'
 import { RouterLink } from 'vue-router'
 import { ref, onMounted, onUnmounted } from 'vue'
-import axios from 'axios'
 import { useAuth } from '@/composables/useAuth.js'
 
 const { logout, user } = useAuth()
