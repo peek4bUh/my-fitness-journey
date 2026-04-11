@@ -72,7 +72,7 @@ router.beforeEach(async (to, from, next) => {
 
   // 3. Logic for Protected pages
   if (to.meta.requiresAuth && !isLoggedIn) {
-    return next('/login')
+    return { name: 'Login' }
   }
 
   next()
