@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 
-import { GridIcon, PageIcon, TableIcon, ListIcon, CrossIcon } from '../../icons'
+import { GridIcon, PageIcon, TableIcon, ListIcon, BoxCubeIcon } from '../../icons'
 import { useSidebar } from '@/composables/useSidebar'
 import SiteLogo from '../SiteLogo.vue'
 
@@ -27,6 +27,11 @@ const menuGroups = [
         icon: ListIcon,
         name: 'Workouts',
         path: '/dashboard/workouts',
+      },
+      {
+        icon: BoxCubeIcon,
+        name: 'Exercises',
+        path: '/dashboard/exercises',
       },
       {
         icon: TableIcon,
