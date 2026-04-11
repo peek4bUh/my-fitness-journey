@@ -23,10 +23,6 @@ const closeDropdown = () => {
   dropdownOpen.value = false
 }
 
-const signOut = () => {
-  logout()
-}
-
 const handleClickOutside = (event) => {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
     closeDropdown()
@@ -75,7 +71,7 @@ onUnmounted(() => {
       </ul>
       <router-link
         to="/login"
-        @click="signOut"
+        @click="logout"
         class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
       >
         <LogoutIcon class="text-gray-500 group-hover:text-gray-700" />
