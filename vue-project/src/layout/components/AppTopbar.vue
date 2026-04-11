@@ -1,9 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 
+import { HamburgerIcon, CrossIcon } from '@/icons'
 import { useSidebar } from '@/composables/useSidebar'
 import UserMenu from './AppUserMenu.vue'
-import { HamburgerIcon, CrossIcon } from '@/icons'
 
 const { toggleSidebar, toggleMobileSidebar, isMobileOpen } = useSidebar()
 

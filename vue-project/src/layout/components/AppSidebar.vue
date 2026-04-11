@@ -6,7 +6,6 @@ import { useSidebar } from '@/composables/useSidebar'
 import SiteLogo from '../../components/SiteLogo.vue'
 
 const { isMobileOpen } = useSidebar()
-
 const route = useRoute()
 const isActive = (path) => route.path === path
 const menuGroups = [

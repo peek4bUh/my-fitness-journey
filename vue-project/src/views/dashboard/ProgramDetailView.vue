@@ -2,11 +2,12 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
-import AppLayout from '../../layout/AppLayout.vue'
 
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
+
+import AppLayout from '../../layout/AppLayout.vue'
 
 const route = useRoute()
 const id = route.params.id

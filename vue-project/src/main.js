@@ -2,13 +2,14 @@ import 'primeicons/primeicons.css'
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import App from './App.vue'
-import PrimeVue from 'primevue/config'
 import { definePreset } from '@primeuix/themes'
-import router from './router'
-import { useAuth } from './composables/useAuth'
 import Aura from '@primeuix/themes/aura'
 import axios from 'axios'
+import PrimeVue from 'primevue/config'
+
+import { useAuth } from './composables/useAuth'
+import App from './App.vue'
+import router from './router'
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8000/api/v1/'

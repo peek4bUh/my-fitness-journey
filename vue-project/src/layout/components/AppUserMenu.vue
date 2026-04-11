@@ -1,11 +1,11 @@
 <script setup>
-import { UserCircleIcon, LogoutIcon, SettingsIcon } from '@/icons'
-import { RouterLink } from 'vue-router'
 import { ref, onMounted, onUnmounted } from 'vue'
+import { RouterLink } from 'vue-router'
+
+import { UserCircleIcon, LogoutIcon, SettingsIcon } from '@/icons'
 import { useAuth } from '@/composables/useAuth.js'
 
 const { logout, user } = useAuth()
-
 const dropdownOpen = ref(false)
 const dropdownRef = ref(null)
 

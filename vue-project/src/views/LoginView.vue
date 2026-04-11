@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import SiteLogo from '../components/SiteLogo.vue'
-import router from '../router/index.js'
+
 import { useAuth } from '../composables/useAuth.js'
-import axios from 'axios'
+import router from '../router/index.js'
+import SiteLogo from '../components/SiteLogo.vue'
 
 const { login } = useAuth()
 
