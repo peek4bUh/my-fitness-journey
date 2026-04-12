@@ -38,45 +38,51 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative" ref="dropdownRef">
-    <button class="flex cursor-pointer items-center" @click.prevent="toggleDropdown">
-      <div
-        class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800"
-      >
-        AA
-      </div>
-    </button>
-
-    <!-- Dropdown Start -->
+  <button
+    class="flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 pt-2 pb-1.5 hover:bg-gray-100"
+    @click.prevent="toggleDropdown"
+    ref="dropdownRef"
+  >
     <div
-      v-if="dropdownOpen"
-      class="absolute right-0 mt-2 flex w-[260px] flex-col rounded-2xl border border-gray-200 bg-white p-3"
+      class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800"
     >
-      <div class="mb-3">
-        <p class="font-medium text-gray-700">{{ user?.username || 'User' }}</p>
-        <p class="mt-0.5 text-gray-500">{{ user?.email || '' }}</p>
-      </div>
-
-      <ul class="flex flex-col gap-1 border-y border-gray-200 pt-3 pb-3">
-        <li v-for="item in menuItems" :key="item.href">
-          <router-link
-            :to="item.href"
-            class="group flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
-          >
-            <component :is="item.icon" class="text-gray-500 group-hover:text-gray-700" />
-            {{ item.text }}
-          </router-link>
-        </li>
-      </ul>
-      <router-link
-        to="/login"
-        @click="logout"
-        class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
-      >
-        <LogoutIcon class="text-gray-500 group-hover:text-gray-700" />
-        Sign out
-      </router-link>
+      AA
     </div>
-    <!-- Dropdown End -->
+
+    <div>
+      <p class="text-color text-left text-sm leading-5 font-medium">
+        {{ user?.username || 'John Doe' }}
+      </p>
+      <p class="text-muted-color mt-1 text-xs leading-4">
+        {{ user?.email || 'john.doe@email.com' }}
+      </p>
+    </div>
+  </button>
+
+  <!-- Dropdown Start -->
+  <div
+    v-if="dropdownOpen"
+    class="absolute bottom-16 left-1/2 mb-1 flex w-[calc(100%-32px)] -translate-x-1/2 transform flex-col rounded-md border border-gray-200 bg-white p-3"
+  >
+    <ul class="flex flex-col gap-1 pt-3 pb-3">
+      <li v-for="item in menuItems" :key="item.href">
+        <router-link
+          :to="item.href"
+          class="group flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
+        >
+          <component :is="item.icon" class="text-gray-500 group-hover:text-gray-700" />
+          {{ item.text }}
+        </router-link>
+      </li>
+    </ul>
+    <router-link
+      to="/login"
+      @click="logout"
+      class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
+    >
+      <LogoutIcon class="text-gray-500 group-hover:text-gray-700" />
+      Sign out
+    </router-link>
   </div>
+  <!-- Dropdown End -->
 </template>
