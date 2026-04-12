@@ -4,8 +4,9 @@ import { useRoute } from 'vue-router'
 import { GridIcon, PageIcon, TableIcon, ListIcon, BoxCubeIcon } from '../../icons'
 import { useSidebar } from '@/composables/useSidebar'
 import SiteLogo from '../../components/SiteLogo.vue'
+import { CrossIcon } from '@/icons'
 
-const { isMobileOpen } = useSidebar()
+const { isMobileOpen, toggleSidebar } = useSidebar()
 const route = useRoute()
 const isActive = (path) => route.path === path
 const menuGroups = [
@@ -44,7 +45,7 @@ const menuGroups = [
 
 <template>
   <aside
-    class="fixed top-[65px] left-0 z-200 flex h-screen w-64 flex-col border-r border-gray-200 bg-white text-gray-900 transition-all duration-300 ease-in-out lg:top-0 lg:w-80 lg:translate-x-0"
+    class="fixed top-0 left-0 z-95 flex h-screen w-full max-w-112.5 flex-col border-r border-gray-200 bg-white text-gray-900 transition-all duration-300 ease-in-out lg:top-0 lg:w-80 lg:translate-x-0"
     :class="[
       {
         'translate-x-0': isMobileOpen,
@@ -52,13 +53,22 @@ const menuGroups = [
       },
     ]"
   >
-    <div class="hidden bg-inherit lg:block lg:py-4.5 lg:pl-5">
-      <router-link to="/dashboard/overview" class="flex w-fit items-center gap-2.5 lg:gap-3">
+    <div class="flex justify-between border-b border-gray-200 bg-inherit p-3 lg:py-4.5 lg:pl-5">
+      <div class="flex items-center gap-3">
         <SiteLogo />
-        <p class="text-lg font-semibold">MyFitnessJourney</p>
-      </router-link>
+        <router-link to="/dashboard/overview" class="flex items-center">
+          <h1 class="text-lg font-semibold">MyFitnessJourney</h1>
+        </router-link>
+      </div>
+
+      <button
+        @click="toggleSidebar()"
+        class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100"
+      >
+        <CrossIcon />
+      </button>
     </div>
-    <div class="px-3 py-5 lg:px-5 lg:py-8">
+    <div class="px-4 py-5 lg:px-5 lg:py-8">
       <div class="no-scrollbar overflow-y-autoduration-300 flex flex-col ease-linear">
         <nav class="mb-6">
           <div class="flex flex-col gap-4">
@@ -72,11 +82,11 @@ const menuGroups = [
                 <li v-for="item in menuGroup.items" :key="item.name">
                   <router-link
                     :to="item.subItems ? item.subItems[0]?.path : item.path"
-                    class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-gray-900 hover:bg-gray-100"
+                    class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
                     :class="[
                       isActive(item.subItems ? item.subItems[0]?.path : item.path)
-                        ? 'bg-gray-100'
-                        : '',
+                        ? 'bg-primary text-white'
+                        : 'text-gray-900 hover:bg-gray-100',
                     ]"
                   >
                     <span class="flex items-center">

@@ -9,10 +9,7 @@ export function useSidebarProvider() {
 
   const handleResize = () => {
     const mobile = window.innerWidth < 1024
-    isMobile.value = mobile
-    if (!mobile) {
-      isMobileOpen.value = false
-    }
+    isMobile.value = !mobile
   }
 
   onMounted(() => {
@@ -25,12 +22,6 @@ export function useSidebarProvider() {
   })
 
   const toggleSidebar = () => {
-    if (isMobile.value) {
-      isMobileOpen.value = !isMobileOpen.value
-    }
-  }
-
-  const toggleMobileSidebar = () => {
     isMobileOpen.value = !isMobileOpen.value
   }
 
@@ -42,7 +33,6 @@ export function useSidebarProvider() {
     isMobileOpen,
     activeItem,
     toggleSidebar,
-    toggleMobileSidebar,
     setActiveItem,
   }
 
