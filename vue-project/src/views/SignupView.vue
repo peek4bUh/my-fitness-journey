@@ -1,116 +1,119 @@
 <script setup>
-import SiteLogo from '../components/SiteLogo.vue'
+import { reactive, ref } from 'vue'
+
+import AuthLayout from '@/layout/AuthLayout.vue'
+import { useAuth } from '../composables/useAuth.js'
+import router from '../router/index.js'
+import { Form } from '@primevue/forms'
+import InputText from 'primevue/inputtext'
+import Password from 'primevue/password'
+import FloatLabel from 'primevue/floatlabel'
+import Button from 'primevue/button'
+
+import IconField from 'primevue/iconfield'
+import InputIcon from 'primevue/inputicon'
+
+const { login } = useAuth()
+
+const username = ref('')
+const password = ref('')
+const errorMessage = ref('')
+const initialValues = reactive({
+  username: '',
+})
+
+const resolver = ({ values }) => {
+  const errors = {}
+
+  if (!values.username) {
+    errors.username = [{ message: 'Username is required.' }]
+  }
+
+  return {
+    values, // (Optional) Used to pass current form values to submit event.
+    errors,
+  }
+}
+
+async function handleLogin() {
+  const result = await login(username.value, password.value)
+
+  if (result.success) {
+    router.push('/dashboard/overview')
+  } else {
+    errorMessage.value = result.error
+  }
+}
 </script>
 
 <template>
-  <div class="flex h-screen">
-    <!-- Left Column -->
-    <div class="relative hidden basis-2/4 lg:block">
-      <img
-        class="absolute z-0 h-full object-cover"
-        src="../assets/images/bb-romanian-deadlift.jpg"
-        alt="Barbell Romanian Deadlift"
-      />
-      <div
-        class="absolute inset-0 z-10 flex h-full w-full flex-col items-start justify-center bg-black/50 pl-10"
+  <AuthLayout title="Create Account" subtitle="Start your journey today">
+    <Form
+      v-slot="$form"
+      :initialValues
+      :resolver
+      @submit="handleLogin"
+      class="flex w-full max-w-md flex-col gap-8"
+    >
+      <div class="flex grow flex-col gap-4">
+        <FloatLabel variant="on">
+          <IconField>
+            <InputIcon class="pi pi-user" />
+            <InputText id="username" v-model="username" autocomplete="off" class="w-full" />
+          </IconField>
+          <label for="username" class="font-normal! text-gray-500!">Username</label>
+        </FloatLabel>
+
+        <FloatLabel variant="on">
+          <IconField>
+            <InputIcon class="pi pi-at" />
+            <InputText id="email" v-model="email" autocomplete="off" class="w-full" />
+          </IconField>
+          <label for="email" class="font-normal! text-gray-500!">Email</label>
+        </FloatLabel>
+
+        <FloatLabel variant="on">
+          <IconField>
+            <InputIcon class="pi pi-lock" />
+            <Password
+              id="password"
+              v-model="password"
+              inputId="password"
+              variant="filled"
+              :feedback="false"
+              toggleMask
+              class="w-full"
+              inputClass="w-full bg-white!"
+            />
+          </IconField>
+          <label for="password" class="font-normal! text-gray-500!">Password</label>
+        </FloatLabel>
+
+        <FloatLabel variant="on">
+          <IconField>
+            <InputIcon class="pi pi-lock" />
+            <Password
+              id="password"
+              v-model="password"
+              inputId="password"
+              variant="filled"
+              :feedback="false"
+              toggleMask
+              class="w-full"
+              inputClass="w-full bg-white!"
+            />
+          </IconField>
+          <label for="password" class="font-normal! text-gray-500!">Repeat Password</label>
+        </FloatLabel>
+      </div>
+      <Button type="submit" label="Create" />
+    </Form>
+
+    <p class="text-center text-gray-600">
+      Already registered?
+      <RouterLink :to="{ name: 'login' }" class="font-medium text-black hover:underline"
+        >Login</RouterLink
       >
-        <h2 class="mb-4 text-4xl font-bold text-white drop-shadow-lg md:text-5xl">
-          Push Your Limits.
-        </h2>
-        <p class="max-w-md text-lg text-gray-200">
-          Every small step adds up. Stay consistent, show up, and watch your journey transform.
-        </p>
-      </div>
-    </div>
-
-    <!-- Right Column -->
-    <div class="flex grow basis-1/2 flex-col justify-between p-6">
-      <SiteLogo />
-
-      <div class="flex flex-1 items-center justify-center">
-        <div class="w-full max-w-md">
-          <div class="mt-0 mb-8 text-center">
-            <h2 class="mb-2 text-3xl font-bold text-black lg:text-4xl">Create Account</h2>
-            <p class="text-gray-600 lg:text-lg">Start your fitness journey today</p>
-          </div>
-
-          <form method="post" class="flex flex-col gap-6">
-            <div>
-              <label
-                for="username"
-                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
-              >
-                Username
-              </label>
-              <input
-                type="text"
-                name="username"
-                required
-                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
-              />
-            </div>
-
-            <div>
-              <label
-                for="email"
-                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
-              >
-                Email
-              </label>
-              <input
-                type="text"
-                name="email"
-                required
-                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
-              />
-            </div>
-
-            <div>
-              <label
-                for="password"
-                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                required
-                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
-              />
-            </div>
-
-            <div>
-              <label
-                for="confirm-password"
-                class="mb-1 block text-sm font-semibold text-gray-600 lg:text-base"
-              >
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                name="confirm-password"
-                required
-                class="w-full border-b border-gray-400 bg-transparent py-1 text-sm transition-colors focus:border-black focus:outline-none lg:text-base"
-              />
-            </div>
-
-            <button
-              type="submit"
-              class="w-full rounded-lg bg-black py-3 font-semibold text-white transition duration-200 hover:bg-gray-800"
-            >
-              Create Account
-            </button>
-          </form>
-
-          <div class="mt-8 text-center">
-            <p class="text-gray-600">
-              Already registered?
-              <a href="/login" class="font-semibold text-black hover:underline">Login</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </p>
+  </AuthLayout>
 </template>
