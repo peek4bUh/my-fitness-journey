@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 
 import router from '@/router/index.js'
 import AuthLayout from '@/layout/AuthLayout.vue'
-import { useAuth } from '../composables/useAuth.js'
+import { useAuth } from '../../composables/useAuth.js'
 import { Form, FormField } from '@primevue/forms'
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'

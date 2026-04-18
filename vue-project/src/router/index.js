@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuth } from '@/composables/useAuth.js'
-import LoginView from '@/views/LoginView.vue'
-import SignupView from '@/views/SignupView.vue'
+import LoginView from '@/views/auth/LoginView.vue'
+import SignupView from '@/views/auth/SignupView.vue'
+import PasswordRecovery from '@/views/auth/PasswordRecovery.vue'
 import OverviewView from '@/views/dashboard/OverviewView.vue'
 import ProgramsView from '@/views/dashboard/ProgramsView.vue'
 import ProgramDetailView from '@/views/dashboard/ProgramDetailView.vue'
@@ -21,6 +22,12 @@ const router = createRouter({
       path: '/register',
       name: 'signup',
       component: SignupView,
+      meta: { guestOnly: true },
+    },
+    {
+      path: '/forgot-password',
+      name: 'forgotPassword',
+      component: PasswordRecovery,
       meta: { guestOnly: true },
     },
     {
