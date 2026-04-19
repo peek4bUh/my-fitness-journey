@@ -9,35 +9,35 @@ import AppUserMenu from './AppUserMenu.vue'
 
 const { isMobileOpen, toggleSidebar } = useSidebar()
 const route = useRoute()
-const isActive = (path) => route.path === path
+const isActive = (itemPath) => route.path === `/${itemPath}`
 const menuGroups = [
   {
     title: 'Menu',
     items: [
       {
         icon: GridIcon,
-        name: 'Overview',
-        path: '/dashboard/overview',
+        name: 'Dashboard',
+        path: 'dashboard',
       },
       {
         icon: PageIcon,
         name: 'Programs',
-        path: '/dashboard/programs',
+        path: 'programs',
       },
       {
         icon: ListIcon,
         name: 'Workouts',
-        path: '/dashboard/workouts',
+        path: null,
       },
       {
         icon: BoxCubeIcon,
         name: 'Exercises',
-        path: '/dashboard/exercises',
+        path: 'exercises',
       },
       {
         icon: TableIcon,
         name: 'Body Weights',
-        path: '/dashboard/body-weights',
+        path: null,
       },
     ],
   },
@@ -55,11 +55,11 @@ const menuGroups = [
     ]"
   >
     <div
-      class="flex justify-between border-b border-gray-200 bg-inherit px-4 py-3 lg:py-4.5 lg:pl-5"
+      class="flex justify-between border-b border-gray-200 bg-inherit px-4 py-3 lg:border-0 lg:px-5 lg:pt-8 lg:pb-4"
     >
       <div class="flex items-center gap-3">
         <SiteLogo />
-        <router-link to="/dashboard/overview" class="flex items-center">
+        <router-link :to="{ name: 'dashboard' }" class="flex items-center">
           <h1 class="text-lg font-semibold">MyFitnessJourney</h1>
         </router-link>
       </div>
@@ -68,11 +68,11 @@ const menuGroups = [
         @click="toggleSidebar()"
         class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100"
       >
-        <CrossIcon />
+        <CrossIcon class="lg:hidden" />
       </button>
     </div>
 
-    <div class="px-4 py-5 lg:px-5 lg:py-8">
+    <div class="px-4 py-5 lg:px-5 lg:py-6">
       <div class="no-scrollbar overflow-y-autoduration-300 flex flex-col ease-linear">
         <nav class="mb-6">
           <div class="flex flex-col gap-4">
@@ -85,7 +85,9 @@ const menuGroups = [
               <ul class="flex flex-col gap-1.5">
                 <li v-for="item in menuGroup.items" :key="item.name">
                   <router-link
-                    :to="item.subItems ? item.subItems[0]?.path : item.path"
+                    :to="{
+                      name: item.subItems?.length ? item.subItems[0].path : item.path,
+                    }"
                     class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
                     :class="[
                       isActive(item.subItems ? item.subItems[0]?.path : item.path)

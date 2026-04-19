@@ -3,10 +3,10 @@ import { useAuth } from '@/composables/useAuth.js'
 import LoginView from '@/views/auth/LoginView.vue'
 import SignupView from '@/views/auth/SignupView.vue'
 import PasswordRecovery from '@/views/auth/PasswordRecovery.vue'
-import OverviewView from '@/views/dashboard/OverviewView.vue'
-import ProgramsView from '@/views/dashboard/ProgramsView.vue'
-import ProgramDetailView from '@/views/dashboard/ProgramDetailView.vue'
-import ExercisesView from '@/views/dashboard/ExercisesView.vue'
+import DashboardView from '@/views/DashboardView.vue'
+import ProgramsView from '@/views/ProgramsView.vue'
+import ProgramDetailView from '@/views/ProgramDetailView.vue'
+import ExercisesView from '@/views/ExercisesView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,30 +32,27 @@ const router = createRouter({
     },
     {
       path: '/dashboard',
+      name: 'dashboard',
+      component: DashboardView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/exercises',
+      name: 'exercises',
+      component: ExercisesView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/programs',
+      name: 'programs',
+      component: ProgramsView,
       meta: { requiresAuth: true },
       children: [
         {
-          path: 'overview',
-          name: 'overview',
-          component: OverviewView,
-        },
-        {
-          path: 'exercises',
-          name: 'exercises',
-          component: ExercisesView,
-        },
-        {
-          path: 'programs',
-          name: 'programs',
-          component: ProgramsView,
-          children: [
-            {
-              path: ':id',
-              name: 'program-detail',
-              component: ProgramDetailView,
-              props: true,
-            },
-          ],
+          path: ':id',
+          name: 'program-detail',
+          component: ProgramDetailView,
+          props: true,
         },
       ],
     },

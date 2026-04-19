@@ -7,7 +7,7 @@ import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import Button from 'primevue/button'
 
-import AppLayout from '../../layout/AppLayout.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 
 const route = useRoute()
 const id = route.params.id

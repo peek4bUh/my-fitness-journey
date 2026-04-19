@@ -43,7 +43,7 @@ async function onFormSubmit({ valid, values }) {
 
   const result = await login(values.username, values.password)
   if (result.success) {
-    router.push('/dashboard/overview')
+    router.push('/dashboard')
   } else {
     console.error('Login error: ' + result.error)
   }

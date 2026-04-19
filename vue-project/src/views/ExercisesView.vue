@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
-import AppLayout from '../../layout/AppLayout.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 
 const exercises = ref([])
 const loading = ref(true)

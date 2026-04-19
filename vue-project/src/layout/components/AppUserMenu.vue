@@ -10,8 +10,9 @@ const dropdownOpen = ref(false)
 const dropdownRef = ref(null)
 
 const menuItems = [
-  { href: '/profile', icon: UserCircleIcon, text: 'Edit profile' },
-  { href: '/chat', icon: SettingsIcon, text: 'Account settings' },
+  { href: '/profile', icon: UserCircleIcon, text: 'Edit profile', onClick: null },
+  { href: '/chat', icon: SettingsIcon, text: 'Account settings', onClick: null },
+  { href: '/login', icon: LogoutIcon, text: 'Sign out', onClick: logout },
 ]
 
 const toggleDropdown = () => {
@@ -64,10 +65,11 @@ onUnmounted(() => {
     v-if="dropdownOpen"
     class="absolute bottom-16 left-1/2 mb-1 flex w-[calc(100%-32px)] -translate-x-1/2 transform flex-col rounded-md border border-gray-200 bg-white p-3"
   >
-    <ul class="flex flex-col gap-1 pt-3 pb-3">
+    <ul class="flex flex-col gap-1">
       <li v-for="item in menuItems" :key="item.href">
         <router-link
           :to="item.href"
+          @click="item.onClick ? item.onClick() : null"
           class="group flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
         >
           <component :is="item.icon" class="text-gray-500 group-hover:text-gray-700" />
@@ -75,14 +77,6 @@ onUnmounted(() => {
         </router-link>
       </li>
     </ul>
-    <router-link
-      to="/login"
-      @click="logout"
-      class="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700"
-    >
-      <LogoutIcon class="text-gray-500 group-hover:text-gray-700" />
-      Sign out
-    </router-link>
   </div>
   <!-- Dropdown End -->
 </template>

@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import Button from 'primevue/button'
 
-import AppLayout from '../../layout/AppLayout.vue'
+import AppLayout from '@/layout/AppLayout.vue'
 
 const programs = ref([])
 const loading = ref(true)
@@ -43,7 +43,7 @@ onMounted(async () => {
           <div class="p-5 pb-3">
             <div class="mb-2 flex items-start justify-between gap-3">
               <RouterLink
-                :to="`/dashboard/programs/${program.id}`"
+                :to="`/programs/${program.id}`"
                 class="line-clamp-2 text-lg font-semibold text-gray-900 transition-colors hover:text-blue-600"
               >
                 {{ program.title }}
