@@ -1,0 +1,16 @@
+{
+  "data": [
+    { "label": "Chest", "value": "Chest" },
+    { "label": "Back", "value": "Back" },
+    { "label": "Shoulders", "value": "Shoulders" },
+    { "label": "Biceps", "value": "Biceps" },
+    { "label": "Triceps", "value": "Triceps" },
+    { "label": "Quadriceps", "value": "Quadriceps" },
+    { "label": "Hamstrings", "value": "Hamstrings" },
+    { "label": "Glutes", "value": "Glutes" },
+    { "label": "Calves", "value": "Calves" },
+    { "label": "Core", "value": "Core" },
+    { "label": "Traps", "value": "Traps" },
+    { "label": "Rear Delts", "value": "Rear Delts" }
+  ]
+}

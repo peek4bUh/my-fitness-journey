@@ -1,0 +1,49 @@
+{
+  "exercises": [
+    {
+      "id": "1",
+      "name": "Barbell Squat",
+      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "targetMuscle": "Quadriceps",
+      "type": "Compound",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "id": "2",
+      "name": "Deadlift",
+      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "targetMuscle": "Back",
+      "type": "Compound",
+      "equipment": "Barbell",
+      "difficulty": "Advanced"
+    },
+    {
+      "id": "3",
+      "name": "Dumbell Bench Press",
+      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "targetMuscle": "Chest",
+      "type": "Compound",
+      "equipment": "Dumbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "id": "4",
+      "name": "Pull-Up",
+      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "targetMuscle": "Back",
+      "type": "Compound",
+      "equipment": "Bodyweight",
+      "difficulty": "Intermediate"
+    },
+    {
+      "id": "5",
+      "name": "Barbell Bench Press",
+      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "targetMuscle": "Chest",
+      "type": "Compound",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    }
+  ]
+}
