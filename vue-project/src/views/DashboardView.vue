@@ -1,79 +1,31 @@
 <script setup>
 import AppLayout from '@/layout/AppLayout.vue'
+import StatCard from '@/components/dashboard/StatCard.vue'
+import WorkoutItem from '@/components/dashboard/WorkoutItem.vue'
+
+const recentWorkouts = [
+  { name: 'Upper Body', duration: '45 min', calories: 320, time: 'Today' },
+  { name: 'HIIT Cardio', duration: '30 min', calories: 280, time: 'Yesterday' },
+  { name: 'Leg Day', duration: '50 min', calories: 400, time: '2 days ago' },
+  { name: 'Core Training', duration: '25 min', calories: 180, time: '3 days ago' },
+]
 </script>
 
 <template>
   <AppLayout>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Total Workouts</h3>
-            <p class="text-2xl font-bold text-gray-900">127</p>
+      <StatCard title="Total Workouts" value="127" subtitle="+12% from last week" />
+      <StatCard title="Calories Burned" value="45,230" subtitle="+8% from last month" />
+      <StatCard title="Active Days This Month" value="24" />
+      <StatCard title="Avg Duration" value="52m" subtitle="Per workout" />
+
+      <div class="lg:col-span-2">
+        <div class="rounded-md border border-gray-200 bg-white p-4 md:p-6">
+          <h2 class="text-sm font-medium text-gray-600">Recent Workouts</h2>
+          <div v-for="workout in recentWorkouts" :key="workout.name">
+            <WorkoutItem :name="workout.name" :duration="workout.duration" :time="workout.time" />
           </div>
         </div>
-        <p class="text-sm text-gray-600">+12% from last month</p>
-      </div>
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Calories Burned</h3>
-            <p class="text-2xl font-bold text-gray-900">45,230</p>
-          </div>
-        </div>
-        <p class="text-sm text-gray-600">+8% from last month</p>
-      </div>
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Active Days This Month</h3>
-            <p class="text-2xl font-bold text-gray-900">24</p>
-          </div>
-        </div>
-      </div>
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Avg Duration</h3>
-            <p class="text-2xl font-bold text-gray-900">52m</p>
-          </div>
-        </div>
-        <p class="text-sm text-gray-600">Per workout</p>
-      </div>
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Total Workouts</h3>
-            <p class="text-2xl font-bold text-gray-900">127</p>
-          </div>
-        </div>
-        <p class="text-sm text-gray-600">+12% from last month</p>
-      </div>
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Calories Burned</h3>
-            <p class="text-2xl font-bold text-gray-900">45,230</p>
-          </div>
-        </div>
-        <p class="text-sm text-gray-600">+8% from last month</p>
-      </div>
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Active Days This Month</h3>
-            <p class="text-2xl font-bold text-gray-900">24</p>
-          </div>
-        </div>
-      </div>
-      <div class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-4 flex items-center justify-between">
-          <div>
-            <h3 class="text-sm font-medium text-gray-600">Avg Duration</h3>
-            <p class="text-2xl font-bold text-gray-900">52m</p>
-          </div>
-        </div>
-        <p class="text-sm text-gray-600">Per workout</p>
       </div>
     </div>
   </AppLayout>

@@ -1,12 +1,21 @@
 <script setup>
 import { useRoute } from 'vue-router'
 
-import { GridIcon, PageIcon, ListIcon, BoxCubeIcon } from '../../icons'
+import { useAuth } from '@/composables/useAuth.js'
 import { useSidebar } from '@/composables/useSidebar'
-import SiteLogo from '../../components/SiteLogo.vue'
 import { CrossIcon } from '@/icons'
-import AppUserMenu from './AppUserMenu.vue'
+import SiteLogo from '../../components/SiteLogo.vue'
+import {
+  BoxCubeIcon,
+  GridIcon,
+  ListIcon,
+  LogoutIcon,
+  PageIcon,
+  SettingsIcon,
+  UserCircleIcon,
+} from '../../icons'
 
+const { logout, user } = useAuth()
 const { isMobileOpen, toggleSidebar } = useSidebar()
 const route = useRoute()
 const isActive = (itemPath) => route.path === `/${itemPath}`
@@ -18,21 +27,48 @@ const menuGroups = [
         icon: GridIcon,
         name: 'Dashboard',
         path: 'dashboard',
+        onClick: null,
       },
       {
         icon: PageIcon,
         name: 'Programs',
         path: 'programs',
+        onClick: null,
       },
       {
         icon: ListIcon,
         name: 'Workouts',
         path: null,
+        onClick: null,
       },
       {
         icon: BoxCubeIcon,
         name: 'Exercises',
         path: 'exercises',
+        onClick: null,
+      },
+    ],
+  },
+  {
+    title: 'Account',
+    items: [
+      {
+        icon: UserCircleIcon,
+        name: 'Profile',
+        path: null,
+        onClick: null,
+      },
+      {
+        icon: SettingsIcon,
+        name: 'Settings',
+        path: null,
+        onClick: null,
+      },
+      {
+        icon: LogoutIcon,
+        name: 'Logout',
+        path: 'login',
+        onClick: logout,
       },
     ],
   },
@@ -89,6 +125,7 @@ const menuGroups = [
                         ? 'bg-primary text-white'
                         : 'text-gray-900 hover:bg-gray-100',
                     ]"
+                    @click="item.onClick ? item.onClick() : null"
                   >
                     <span class="flex items-center">
                       <component :is="item.icon" />
@@ -104,7 +141,23 @@ const menuGroups = [
     </div>
 
     <div class="fixed bottom-0 left-0 w-full border-t border-gray-200 px-4 py-2">
-      <AppUserMenu />
+      <!-- User Info -->
+      <div class="flex w-full items-center gap-3 rounded-lg px-4 pt-2 pb-1.5">
+        <div
+          class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800"
+        >
+          AA
+        </div>
+
+        <div>
+          <p class="text-color text-left text-sm leading-5 font-medium">
+            {{ user?.username || 'John Doe' }}
+          </p>
+          <p class="text-muted-color mt-1 text-xs leading-4">
+            {{ user?.email || 'john.doe@email.com' }}
+          </p>
+        </div>
+      </div>
     </div>
   </aside>
 </template>

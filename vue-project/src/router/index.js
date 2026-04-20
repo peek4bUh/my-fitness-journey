@@ -1,12 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import { useAuth } from '@/composables/useAuth.js'
-import LoginView from '@/views/auth/LoginView.vue'
-import SignupView from '@/views/auth/SignupView.vue'
-import PasswordRecovery from '@/views/auth/PasswordRecovery.vue'
-import DashboardView from '@/views/DashboardView.vue'
-import ProgramsView from '@/views/ProgramsView.vue'
-import ProgramDetailView from '@/views/ProgramDetailView.vue'
-import ExercisesView from '@/views/ExercisesView.vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,43 +8,43 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      component: () => import('@/views/auth/LoginView.vue'),
       meta: { guestOnly: true },
     },
     {
       path: '/register',
       name: 'signup',
-      component: SignupView,
+      component: () => import('@/views/auth/SignupView.vue'),
       meta: { guestOnly: true },
     },
     {
       path: '/forgot-password',
       name: 'forgotPassword',
-      component: PasswordRecovery,
+      component: () => import('@/views/auth/PasswordRecoveryView.vue'),
       meta: { guestOnly: true },
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: DashboardView,
+      component: () => import('@/views/DashboardView.vue'),
       meta: { requiresAuth: true },
     },
     {
       path: '/exercises',
       name: 'exercises',
-      component: ExercisesView,
+      component: () => import('@/views/ExercisesView.vue'),
       meta: { requiresAuth: true },
     },
     {
       path: '/programs',
       name: 'programs',
-      component: ProgramsView,
+      component: () => import('@/views/ProgramsView.vue'),
       meta: { requiresAuth: true },
       children: [
         {
           path: ':id',
           name: 'program-detail',
-          component: ProgramDetailView,
+          component: () => import('@/views/ProgramDetailView.vue'),
           props: true,
         },
       ],
@@ -71,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
 
   // 2. Logic for Guest-only pages (Login/Register)
   if (to.meta.guestOnly && isLoggedIn) {
-    return next('/dashboard/overview')
+    return next('/dashboard')
   }
 
   // 3. Logic for Protected pages
