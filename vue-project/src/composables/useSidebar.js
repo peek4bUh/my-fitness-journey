@@ -1,8 +1,8 @@
-import { ref, onMounted, onUnmounted, provide, inject } from 'vue'
+import { onMounted, onUnmounted, provide, ref } from 'vue'
 
 const SidebarSymbol = Symbol()
 
-export function useSidebarProvider() {
+export function useSidebar() {
   const isMobileOpen = ref(false)
   const isMobile = ref(false)
   const activeItem = ref(null)
@@ -38,15 +38,5 @@ export function useSidebarProvider() {
 
   provide(SidebarSymbol, context)
 
-  return context
-}
-
-export function useSidebar() {
-  const context = inject(SidebarSymbol)
-  if (!context) {
-    throw new Error(
-      'useSidebar must be used within a component that has SidebarProvider as an ancestor',
-    )
-  }
   return context
 }
