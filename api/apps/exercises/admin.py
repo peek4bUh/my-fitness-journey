@@ -7,6 +7,7 @@ class ExerciseAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "name",
+        "description",
         "difficulty",
     )
 

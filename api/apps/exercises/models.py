@@ -17,6 +17,7 @@ class Difficulty(models.Model):
 class Exercise(models.Model):
     """Class representing an Exercise model."""
     name = models.CharField(max_length=128, unique=True, null=True, blank=True)
+    description = models.CharField(max_length=255, null=False)
     difficulty = models.ForeignKey(
         Difficulty,
         on_delete=models.CASCADE,
