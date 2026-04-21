@@ -21,4 +21,5 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
     class Meta:  # pylint: disable=C0115
         model = Exercise
-        fields = ["id", "name", "difficulty", "difficulty_id", "created"]
+        fields = ["id", "name", "description",
+                  "difficulty", "difficulty_id", "created"]
