@@ -1,5 +1,5 @@
-import { ref, computed } from 'vue'
 import axios from 'axios'
+import { computed, ref } from 'vue'
 
 const user = ref(null)
 const isAuthenticated = ref(false)
@@ -39,10 +39,11 @@ const checkAuth = async (force = false) => {
 const logout = async () => {
   try {
     await axios.post('auth/logout')
+    return true
   } catch (error) {
     console.error('Logout error:', error)
+    return false
   } finally {
-    // Reset state locally regardless of server success
     user.value = null
     isAuthenticated.value = false
     isInitialCheckDone.value = false

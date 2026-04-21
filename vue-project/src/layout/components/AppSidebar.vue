@@ -1,24 +1,28 @@
 <script setup>
-import { useRoute } from 'vue-router'
-
+import SiteLogo from '@/components/SiteLogo.vue'
 import { useAuth } from '@/composables/useAuth.js'
 import { useSidebar } from '@/composables/useSidebar'
-import { CrossIcon } from '@/icons'
-import SiteLogo from '../../components/SiteLogo.vue'
 import {
   BoxCubeIcon,
+  CrossIcon,
   GridIcon,
   ListIcon,
   LogoutIcon,
   PageIcon,
   SettingsIcon,
   UserCircleIcon,
-} from '../../icons'
+} from '@/icons'
+import router from '@/router/index.js'
+import { useRoute } from 'vue-router'
 
 const { logout, user } = useAuth()
 const { isMobileOpen, toggleSidebar } = useSidebar()
 const route = useRoute()
 const isActive = (itemPath) => route.path === `/${itemPath}`
+const handleLogout = async () => {
+  await logout()
+  router.push({ name: 'login' })
+}
 const menuGroups = [
   {
     title: 'Menu',
@@ -67,8 +71,8 @@ const menuGroups = [
       {
         icon: LogoutIcon,
         name: 'Logout',
-        path: 'login',
-        onClick: logout,
+        path: null,
+        onClick: handleLogout,
       },
     ],
   },
@@ -90,9 +94,9 @@ const menuGroups = [
     >
       <div class="flex items-center gap-3">
         <SiteLogo />
-        <router-link :to="{ name: 'dashboard' }" class="flex items-center">
+        <RouterLink :to="{ name: 'dashboard' }" class="flex items-center">
           <h1 class="text-lg font-semibold">MyFitnessJourney</h1>
-        </router-link>
+        </RouterLink>
       </div>
 
       <button
@@ -115,23 +119,33 @@ const menuGroups = [
               </h2>
               <ul class="flex flex-col gap-1.5">
                 <li v-for="item in menuGroup.items" :key="item.name">
-                  <router-link
-                    :to="{
-                      name: item.subItems?.length ? item.subItems[0].path : item.path,
-                    }"
+                  <RouterLink
+                    v-if="!item.onClick"
+                    :to="{ name: item.path }"
                     class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
                     :class="[
-                      isActive(item.subItems ? item.subItems[0]?.path : item.path)
+                      isActive(item.path)
                         ? 'bg-primary text-white'
                         : 'text-gray-900 hover:bg-gray-100',
                     ]"
-                    @click="item.onClick ? item.onClick() : null"
                   >
                     <span class="flex items-center">
                       <component :is="item.icon" />
                     </span>
                     <span>{{ item.name }}</span>
-                  </router-link>
+                  </RouterLink>
+
+                  <button
+                    v-else
+                    @click="item.onClick"
+                    class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 cursor-pointer"
+                    :class="['text-gray-900 hover:bg-gray-100']"
+                  >
+                    <span class="flex items-center">
+                      <component :is="item.icon" />
+                    </span>
+                    <span>{{ item.name }}</span>
+                  </button>
                 </li>
               </ul>
             </div>
