@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Barbell Squat",
-      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "description": "A fundamental lower-body strength exercise targeting the quads, hamstrings, glutes, and lower back, offering benefits like increased power, endurance, and stability.",
       "targetMuscle": "Quadriceps",
       "type": "Compound",
       "equipment": "Barbell",
@@ -12,7 +12,7 @@
     {
       "id": "2",
       "name": "Deadlift",
-      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "description": "A strength exercise that lifts weight from the floor to hip level, primarily targeting the posterior chain (glutes, hamstrings, and back).",
       "targetMuscle": "Back",
       "type": "Compound",
       "equipment": "Barbell",
@@ -21,7 +21,7 @@
     {
       "id": "3",
       "name": "Dumbell Bench Press",
-      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "description": "A strength training exercise that primarily targets the chest muscles, along with the triceps and shoulders.",
       "targetMuscle": "Chest",
       "type": "Compound",
       "equipment": "Dumbell",
@@ -30,7 +30,7 @@
     {
       "id": "4",
       "name": "Pull-Up",
-      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "description": "A closed-chain movement where the body is suspended by the hands, gripping a bar or other implement at a distance typically wider than shoulder-width, and pulled up.",
       "targetMuscle": "Back",
       "type": "Compound",
       "equipment": "Bodyweight",
@@ -39,7 +39,7 @@
     {
       "id": "5",
       "name": "Barbell Bench Press",
-      "description": "A compound movement targeting 0 muscle groups for maximum efficiency and strength gains.",
+      "description": "A compound upper-body exercise targeting the chest, triceps, and shoulders, used to build strength in powerlifting and bodybuilding.",
       "targetMuscle": "Chest",
       "type": "Compound",
       "equipment": "Barbell",

@@ -1,0 +1,12 @@
+{
+  "data": [
+    { "label": "Novice", "value": "Novice" },
+    { "label": "Beginner", "value": "Beginner" },
+    { "label": "Intermediate", "value": "Intermediate" },
+    { "label": "Advanced", "value": "Advanced" },
+    { "label": "Expert", "value": "Expert" },
+    { "label": "Master", "value": "Master" },
+    { "label": "Grand Master", "value": "Grand Master" },
+    { "label": "Legendary", "value": "Legendary" }
+  ]
+}
