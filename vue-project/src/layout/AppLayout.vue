@@ -1,7 +1,7 @@
 <script setup>
+import Backdrop from '../components/Backdrop.vue'
 import AppSidebar from './components/AppSidebar.vue'
 import AppTopbar from './components/AppTopbar.vue'
-import Backdrop from '../components/Backdrop.vue'
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import Backdrop from '../components/Backdrop.vue'
     <Backdrop />
     <div class="flex-1 bg-gray-50 transition-all duration-300 ease-in-out lg:ml-80">
       <AppTopbar />
-      <div class="mx-auto max-w-(--breakpoint-3xl) p-4 sm:p-6 lg:p-10">
+      <div class="mx-auto max-w-(--breakpoint-3xl) p-6 lg:p-8">
         <slot />
       </div>
     </div>
