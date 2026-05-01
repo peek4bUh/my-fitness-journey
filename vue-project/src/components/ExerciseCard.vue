@@ -1,57 +1,65 @@
 <script setup>
 import Card from 'primevue/card'
+import Tag from 'primevue/tag'
+import { computed, ref } from 'vue'
 
-defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  overview: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  difficulty: {
-    type: String,
-    required: true,
-  },
-  targetMuscle: {
-    type: String,
-    required: true,
-  },
+const props = defineProps({
+  title: { type: String, required: true },
+  overview: { type: String, required: true },
+  type: { type: String, required: true },
+  level: { type: String, required: true },
+  targetMuscle: { type: String, required: true },
 })
+
+const levelKey = ref(props.level.toLowerCase())
+
+const topBorderClass = computed(() => {
+  const map = {
+    beginner: 'border-t-green-500',
+    intermediate: 'border-t-blue-500',
+    advanced: 'border-t-amber-500',
+    expert: 'border-t-red-500',
+  }
+  return map[levelKey.value] || ''
+})
+
+const rootClasses = computed(
+  () =>
+    `bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg border-t-4 ${topBorderClass.value}`,
+)
 </script>
 
 <template>
   <Card
-    class="rounded-lg border border-gray-100 shadow-none transition-colors hover:border-gray-200"
+    :pt="{
+      root: rootClasses,
+      header: 'px-6 pt-6 pb-2',
+      body: 'px-6 pb-6',
+      content: 'space-y-4',
+      title: 'text-xl font-bold text-gray-800',
+      subtitle: 'text-sm text-gray-500',
+    }"
   >
-    <template #title>
-      <h3 class="font-medium text-gray-900">{{ title }}</h3>
-    </template>
-
-    <template #subtitle>
-      <div class="flex items-center gap-2 text-xs">
-        <span class="text-gray-600">{{ type }}</span>
-        <span class="text-gray-300">•</span>
-        <span class="text-gray-500">{{ difficulty }}</span>
-      </div>
-    </template>
+    <template #title>{{ title }}</template>
 
     <template #content>
-      <p class="text-sm leading-relaxed text-gray-500">
+      <p class="text-gray-600 leading-relaxed mb-2">
         {{ overview }}
       </p>
     </template>
 
     <template #footer>
-      <span class="text-xs text-gray-500">
-        <span class="text-gray-400">Target: </span>
-        {{ targetMuscle }}
-      </span>
+      <div class="flex items-center gap-2 pt-1">
+        <span class="text-xs text-gray-400">Target</span>
+        <Tag
+          :pt="{
+            root: 'bg-gray-100!',
+            label: { class: 'text-xs text-gray-700 font-medium' },
+          }"
+          severity="secondary"
+          :value="targetMuscle"
+        />
+      </div>
     </template>
   </Card>
 </template>

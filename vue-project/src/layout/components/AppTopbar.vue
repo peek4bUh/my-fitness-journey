@@ -1,7 +1,12 @@
 <script setup>
 import { useSidebar } from '@/composables/useSidebar'
+import { useRoute } from 'vue-router'
 
 const { toggleSidebar } = useSidebar()
+const route = useRoute()
+const titlePage = route.meta.title
+
+document.title = titlePage + ' | MyFitnessJourney'
 </script>
 
 <template>
@@ -17,7 +22,7 @@ const { toggleSidebar } = useSidebar()
           <span class="pi pi-bars before:text-2xl"></span>
         </button>
 
-        <h2 class="text-lg font-semibold">SectionName</h2>
+        <h2 class="text-lg font-semibold">MyFitnessJourney</h2>
       </div>
     </div>
   </div>

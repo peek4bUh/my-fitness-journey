@@ -1,75 +1,82 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import axios from 'axios'
-import AppLayout from '@/layout/AppLayout.vue'
-import MultiSelect from 'primevue/multiselect'
 import ExerciseCard from '@/components/ExerciseCard.vue'
+import AppLayout from '@/layout/AppLayout.vue'
+import Button from 'primevue/button'
+import MultiSelect from 'primevue/multiselect'
+import SelectButton from 'primevue/selectbutton'
+import { computed, onMounted, ref } from 'vue'
+
+import difficultyGroupData from '@/mocks/difficulties.json'
+import exercisesData from '@/mocks/exercises.json'
+import muscleGroupData from '@/mocks/muscleGroup.json'
 
 const loading = ref(true)
 const error = ref(null)
 
-// Filter states
-const selectedTypes = ref([])
+// --- Filter states ---
+const selectedType = ref('all')
+const selectedDifficultyGroups = ref([])
 const selectedMuscleGroups = ref([])
 
-// Type options
+// --- Options ---
 const typeOptions = [
-  { label: 'All Types', value: 'all' },
+  { label: 'All', value: 'all' },
   { label: 'Compound', value: 'compound' },
   { label: 'Isolation', value: 'isolation' },
 ]
 
-import exercisesData from '@/mocks/exercises.json'
-import muscleGroupData from '@/mocks/muscleGroup.json'
-const exercises = ref(exercisesData.exercises)
+const difficultyGroupOptions = difficultyGroupData.data
 const muscleGroupOptions = muscleGroupData.data
+const exercises = ref(exercisesData.exercises)
 
-// Filter exercises based on selected filters
+function matchesTypeFilter(exercise) {
+  if (selectedType.value === 'all') return true
+  const exerciseType = (exercise.type || '').toLowerCase()
+  return exerciseType === selectedType.value.toLowerCase()
+}
+
+function matchesDifficultyFilter(exercise) {
+  if (selectedDifficultyGroups.value.length === 0) return true
+
+  const selectedDifficultyValues = selectedDifficultyGroups.value.map((item) =>
+    typeof item === 'object' ? item.value || item.label : item,
+  )
+  const exerciseDifficulty = (exercise.difficulty || '').toLowerCase()
+
+  return selectedDifficultyValues.some((selected) => exerciseDifficulty === selected.toLowerCase())
+}
+
+function matchesMuscleFilter(exercise) {
+  if (selectedMuscleGroups.value.length === 0) return true
+
+  const selectedMuscleValues = selectedMuscleGroups.value.map((item) =>
+    typeof item === 'object' ? item.value || item.label : item,
+  )
+  const exerciseMuscle = (exercise.targetMuscle || '').toLowerCase()
+
+  return selectedMuscleValues.some((selected) => exerciseMuscle === selected.toLowerCase())
+}
+
 const filteredExercises = computed(() => {
-  return exercises.value.filter((exercise) => {
-    // Type filter
-    let typeMatch = true
-    if (selectedTypes.value.length > 0 && !selectedTypes.value.includes('all')) {
-      const exerciseType = (exercise.type || '').toLowerCase()
-      const selectedTypeValues = selectedTypes.value.map((item) =>
-        typeof item === 'object' ? item.value : item,
-      )
-      typeMatch = selectedTypeValues.some((type) => exerciseType === type.toLowerCase())
-    }
-
-    // Muscle group filter - FIXED for string instead of array
-    let muscleMatch = true
-    if (selectedMuscleGroups.value.length > 0) {
-      // Extract the actual muscle group names from selected items
-      const selectedMuscleValues = selectedMuscleGroups.value.map((item) => {
-        if (typeof item === 'object') {
-          return item.value || item.label
-        }
-        return item
-      })
-
-      // targetMuscle is a string, not an array
-      const exerciseMuscle = exercise.targetMuscle || ''
-
-      // Check if the exercise's target muscle matches any selected muscle
-      muscleMatch = selectedMuscleValues.some(
-        (selectedMuscle) => exerciseMuscle.toLowerCase() === selectedMuscle.toLowerCase(),
-      )
-    }
-
-    return typeMatch && muscleMatch
-  })
+  return exercises.value.filter(
+    (exercise) =>
+      matchesTypeFilter(exercise) &&
+      matchesDifficultyFilter(exercise) &&
+      matchesMuscleFilter(exercise),
+  )
 })
 
 const clearFilters = () => {
-  selectedTypes.value = []
+  selectedType.value = 'all'
+  selectedDifficultyGroups.value = []
   selectedMuscleGroups.value = []
 }
 
 onMounted(async () => {
   try {
-    // Debug: Log the data structure
+    // Debug: Log the data structure (optional)
     console.log('First exercise:', exercises.value[0])
+    console.log('Difficulty group options:', difficultyGroupOptions)
     console.log('Muscle group options:', muscleGroupOptions)
   } catch (err) {
     error.value = err.response?.data?.message || 'Failed to load exercises'
@@ -135,7 +142,7 @@ onMounted(async () => {
     <!-- Exercises Content -->
     <div v-else>
       <!-- Header -->
-      <div class="mb-6">
+      <div class="mb-6 hidden lg:block">
         <h1 class="text-xl font-semibold tracking-tight md:text-2xl">Exercises</h1>
         <p class="md:text-normal mt-0.5 text-sm text-gray-600">Browse the exercise library</p>
       </div>
@@ -143,24 +150,38 @@ onMounted(async () => {
       <!-- Filters Section -->
       <div class="mb-6 space-y-4">
         <div class="flex flex-wrap gap-4">
-          <!-- Type Filter -->
-          <div class="min-w-[200px] flex-1">
+          <!-- Exercise Type Filter - SelectButton -->
+          <div class="min-w-[280px]">
             <label class="mb-2 block text-sm font-medium text-gray-700">Exercise Type</label>
-            <MultiSelect
-              v-model="selectedTypes"
+            <SelectButton
+              v-model="selectedType"
               :options="typeOptions"
               optionLabel="label"
               optionValue="value"
-              placeholder="Select types"
               class="w-full"
-              :maxSelectedLabels="2"
+            />
+          </div>
+
+          <!-- Difficulty Group Filter -->
+          <div class="min-w-[200px] flex-1">
+            <label class="mb-2 block text-sm font-medium text-gray-700">Exercise Difficulty</label>
+            <MultiSelect
+              v-model="selectedDifficultyGroups"
+              :options="difficultyGroupOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select difficulty groups"
+              class="w-full"
+              :maxSelectedLabels="3"
               display="chip"
+              filter
+              :filterFields="['label']"
             />
           </div>
 
           <!-- Muscle Group Filter -->
           <div class="min-w-[200px] flex-1">
-            <label class="mb-2 block text-sm font-medium text-gray-700">Muscle Groups</label>
+            <label class="mb-2 block text-sm font-medium text-gray-700">Muscles Worked</label>
             <MultiSelect
               v-model="selectedMuscleGroups"
               :options="muscleGroupOptions"
@@ -177,13 +198,16 @@ onMounted(async () => {
 
           <!-- Clear Filters Button -->
           <div class="flex items-end">
-            <button
-              v-if="selectedTypes.length > 0 || selectedMuscleGroups.length > 0"
+            <Button
               @click="clearFilters"
-              class="rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900"
+              :disabled="
+                selectedType === 'all' &&
+                selectedDifficultyGroups.length == 0 &&
+                selectedMuscleGroups.length == 0
+              "
             >
               Clear Filters
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -196,17 +220,17 @@ onMounted(async () => {
       <!-- Exercises Grid -->
       <div
         v-if="filteredExercises.length > 0"
-        class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
       >
-        <div v-for="exercise in filteredExercises" :key="exercise.id" class="group relative">
-          <ExerciseCard
-            :title="exercise.name"
-            :overview="exercise.description"
-            :type="exercise.type"
-            :difficulty="exercise.difficulty"
-            :targetMuscle="exercise.targetMuscle"
-          />
-        </div>
+        <ExerciseCard
+          v-for="exercise in filteredExercises"
+          :key="exercise.id"
+          :title="exercise.name"
+          :overview="exercise.description"
+          :type="exercise.type"
+          :level="exercise.difficulty"
+          :targetMuscle="exercise.targetMuscle"
+        />
       </div>
 
       <!-- No Results State -->

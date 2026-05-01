@@ -1,13 +1,13 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
 import { definePreset } from '@primeuix/themes'
 import Aura from '@primeuix/themes/aura'
 import axios from 'axios'
 import PrimeVue from 'primevue/config'
+import { createApp } from 'vue'
 
-import { useAuth } from './composables/useAuth'
 import App from './App.vue'
+import { useAuth } from './composables/useAuth'
 import router from './router'
 
 axios.defaults.withCredentials = true

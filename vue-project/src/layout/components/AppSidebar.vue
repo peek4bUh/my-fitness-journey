@@ -13,12 +13,14 @@ import {
   UserCircleIcon,
 } from '@/icons'
 import router from '@/router/index.js'
+import Avatar from 'primevue/avatar'
 import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const isActive = (itemPath) => route.path === `/${itemPath}`
 
 const { logout, user } = useAuth()
 const { isMobileOpen, toggleSidebar } = useSidebar()
-const route = useRoute()
-const isActive = (itemPath) => route.path === `/${itemPath}`
 const handleLogout = async () => {
   await logout()
   router.push({ name: 'login' })
@@ -29,26 +31,26 @@ const menuGroups = [
     items: [
       {
         icon: GridIcon,
-        name: 'Dashboard',
-        path: 'dashboard',
+        label: 'Dashboard',
+        name: 'dashboard',
         onClick: null,
       },
       {
         icon: PageIcon,
-        name: 'Programs',
-        path: 'programs',
+        label: 'Programs',
+        name: 'programs',
         onClick: null,
       },
       {
         icon: ListIcon,
-        name: 'Workouts',
-        path: null,
+        label: 'Workouts',
+        name: null,
         onClick: null,
       },
       {
         icon: BoxCubeIcon,
-        name: 'Exercises',
-        path: 'exercises',
+        label: 'Exercises',
+        name: 'exercises',
         onClick: null,
       },
     ],
@@ -58,20 +60,20 @@ const menuGroups = [
     items: [
       {
         icon: UserCircleIcon,
-        name: 'Profile',
-        path: null,
+        label: 'Profile',
+        name: null,
         onClick: null,
       },
       {
         icon: SettingsIcon,
-        name: 'Settings',
-        path: null,
+        label: 'Settings',
+        name: null,
         onClick: null,
       },
       {
         icon: LogoutIcon,
-        name: 'Logout',
-        path: null,
+        label: 'Logout',
+        name: null,
         onClick: handleLogout,
       },
     ],
@@ -118,13 +120,13 @@ const menuGroups = [
                 {{ menuGroup.title }}
               </h2>
               <ul class="flex flex-col gap-1.5">
-                <li v-for="item in menuGroup.items" :key="item.name">
+                <li v-for="item in menuGroup.items" :key="item.label">
                   <RouterLink
                     v-if="!item.onClick"
-                    :to="{ name: item.path }"
+                    :to="{ name: item.name !== null ? item.name : 'login' }"
                     class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5"
                     :class="[
-                      isActive(item.path)
+                      isActive(item.name)
                         ? 'bg-primary text-white'
                         : 'text-gray-900 hover:bg-gray-100',
                     ]"
@@ -132,7 +134,7 @@ const menuGroups = [
                     <span class="flex items-center">
                       <component :is="item.icon" />
                     </span>
-                    <span>{{ item.name }}</span>
+                    <span>{{ item.label }}</span>
                   </RouterLink>
 
                   <button
@@ -144,7 +146,7 @@ const menuGroups = [
                     <span class="flex items-center">
                       <component :is="item.icon" />
                     </span>
-                    <span>{{ item.name }}</span>
+                    <span>{{ item.label }}</span>
                   </button>
                 </li>
               </ul>
@@ -154,14 +156,10 @@ const menuGroups = [
       </div>
     </div>
 
+    <!-- User Info -->
     <div class="fixed bottom-0 left-0 w-full border-t border-gray-200 px-4 py-2">
-      <!-- User Info -->
       <div class="flex w-full items-center gap-3 rounded-lg px-4 pt-2 pb-1.5">
-        <div
-          class="flex h-9 w-9 items-center justify-center rounded-full bg-gray-200 text-sm font-semibold text-gray-800"
-        >
-          AA
-        </div>
+        <Avatar class="w-9! h-9!" icon="pi pi-user" shape="circle" />
 
         <div>
           <p class="text-color text-left text-sm leading-5 font-medium">

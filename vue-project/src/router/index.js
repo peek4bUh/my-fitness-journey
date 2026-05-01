@@ -2,7 +2,7 @@ import { useAuth } from '@/composables/useAuth.js'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     { path: '/', redirect: '/login' },
     {
@@ -27,25 +27,26 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('@/views/DashboardView.vue'),
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true, title: 'Dashboard' },
     },
     {
       path: '/exercises',
       name: 'exercises',
       component: () => import('@/views/ExercisesView.vue'),
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true, title: 'Exercises' },
     },
     {
       path: '/programs',
       name: 'programs',
       component: () => import('@/views/ProgramsView.vue'),
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true, title: 'Programs' },
       children: [
         {
           path: ':id',
           name: 'program-detail',
           component: () => import('@/views/ProgramDetailView.vue'),
           props: true,
+          meta: { requiresAuth: true, title: 'Program Detail' },
         },
       ],
     },
