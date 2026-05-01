@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.exercises',
     'apps.programs',
     'apps.users',
+    'apps.muscles',
 ]
 
 # https://docs.djangoproject.com/en/6.0/ref/middleware/
