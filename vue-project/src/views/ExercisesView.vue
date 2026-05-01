@@ -1,17 +1,22 @@
 <script setup>
 import ExerciseCard from '@/components/ExerciseCard.vue'
+import { useFilterSidebar } from '@/composables/useFilterSidebar'
 import AppLayout from '@/layout/AppLayout.vue'
+import FilterSidebar from '@/layout/components/FilterSidebar.vue'
 import Button from 'primevue/button'
-import MultiSelect from 'primevue/multiselect'
-import SelectButton from 'primevue/selectbutton'
+import IconField from 'primevue/iconfield'
+import InputIcon from 'primevue/inputicon'
+import InputText from 'primevue/inputtext'
 import { computed, onMounted, ref } from 'vue'
 
 import difficultyGroupData from '@/mocks/difficulties.json'
 import exercisesData from '@/mocks/exercises.json'
 import muscleGroupData from '@/mocks/muscleGroup.json'
 
+const { toggleFilterSidebar } = useFilterSidebar()
 const loading = ref(true)
 const error = ref(null)
+const searchExercise = ref('')
 
 // --- Filter states ---
 const selectedType = ref('all')
@@ -28,6 +33,15 @@ const typeOptions = [
 const difficultyGroupOptions = difficultyGroupData.data
 const muscleGroupOptions = muscleGroupData.data
 const exercises = ref(exercisesData.exercises)
+
+function matchesSearchFilter(exercise) {
+  if (!searchExercise.value) return true
+  const searchTerm = searchExercise.value.toLowerCase()
+  return (
+    (exercise.name || '').toLowerCase().includes(searchTerm) ||
+    (exercise.description || '').toLowerCase().includes(searchTerm)
+  )
+}
 
 function matchesTypeFilter(exercise) {
   if (selectedType.value === 'all') return true
@@ -60,6 +74,7 @@ function matchesMuscleFilter(exercise) {
 const filteredExercises = computed(() => {
   return exercises.value.filter(
     (exercise) =>
+      matchesSearchFilter(exercise) &&
       matchesTypeFilter(exercise) &&
       matchesDifficultyFilter(exercise) &&
       matchesMuscleFilter(exercise),
@@ -68,6 +83,7 @@ const filteredExercises = computed(() => {
 
 const clearFilters = () => {
   selectedType.value = 'all'
+  searchExercise.value = ''
   selectedDifficultyGroups.value = []
   selectedMuscleGroups.value = []
 }
@@ -141,108 +157,72 @@ onMounted(async () => {
 
     <!-- Exercises Content -->
     <div v-else>
-      <!-- Header -->
-      <div class="mb-6 hidden lg:block">
-        <h1 class="text-xl font-semibold tracking-tight md:text-2xl">Exercises</h1>
-        <p class="md:text-normal mt-0.5 text-sm text-gray-600">Browse the exercise library</p>
+      <div class="mb-6 space-y-1">
+        <h1 class="text-3xl font-extrabold">Exercises</h1>
+        <p class="text-gray-500">Explore our complete library of exercises</p>
       </div>
 
-      <!-- Filters Section -->
-      <div class="mb-6 space-y-4">
-        <div class="flex flex-wrap gap-4">
-          <!-- Exercise Type Filter - SelectButton -->
-          <div class="min-w-[280px]">
-            <label class="mb-2 block text-sm font-medium text-gray-700">Exercise Type</label>
-            <SelectButton
-              v-model="selectedType"
-              :options="typeOptions"
-              optionLabel="label"
-              optionValue="value"
-              class="w-full"
-            />
-          </div>
-
-          <!-- Difficulty Group Filter -->
-          <div class="min-w-[200px] flex-1">
-            <label class="mb-2 block text-sm font-medium text-gray-700">Exercise Difficulty</label>
-            <MultiSelect
-              v-model="selectedDifficultyGroups"
-              :options="difficultyGroupOptions"
-              optionLabel="label"
-              optionValue="value"
-              placeholder="Select difficulty groups"
-              class="w-full"
-              :maxSelectedLabels="3"
-              display="chip"
-              filter
-              :filterFields="['label']"
-            />
-          </div>
-
-          <!-- Muscle Group Filter -->
-          <div class="min-w-[200px] flex-1">
-            <label class="mb-2 block text-sm font-medium text-gray-700">Muscles Worked</label>
-            <MultiSelect
-              v-model="selectedMuscleGroups"
-              :options="muscleGroupOptions"
-              optionLabel="label"
-              optionValue="value"
-              placeholder="Select muscle groups"
-              class="w-full"
-              :maxSelectedLabels="3"
-              display="chip"
-              filter
-              :filterFields="['label']"
-            />
-          </div>
-
-          <!-- Clear Filters Button -->
-          <div class="flex items-end">
-            <Button
-              @click="clearFilters"
-              :disabled="
-                selectedType === 'all' &&
-                selectedDifficultyGroups.length == 0 &&
-                selectedMuscleGroups.length == 0
-              "
-            >
-              Clear Filters
-            </Button>
-          </div>
-        </div>
-
-        <!-- Results Count -->
-        <div class="text-sm text-gray-600">
-          Showing {{ filteredExercises.length }} of {{ exercises.length }} exercises
-        </div>
-      </div>
-
-      <!-- Exercises Grid -->
-      <div
-        v-if="filteredExercises.length > 0"
-        class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
-      >
-        <ExerciseCard
-          v-for="exercise in filteredExercises"
-          :key="exercise.id"
-          :title="exercise.name"
-          :overview="exercise.description"
-          :type="exercise.type"
-          :level="exercise.difficulty"
-          :targetMuscle="exercise.targetMuscle"
+      <!-- BARRA DE BÚSQUEDA EXTERIOR: Se oculta al llegar a XL (1280px) -->
+      <div class="mb-8 flex flex-nowrap gap-3 xl:hidden">
+        <IconField class="w-full">
+          <InputIcon class="pi pi-search" />
+          <InputText class="w-full" v-model="searchExercise" placeholder="Search..." />
+        </IconField>
+        <Button
+          @click="toggleFilterSidebar()"
+          class="px-5!"
+          label="Filters"
+          icon="pi pi-sliders-h"
+          severity="secondary"
         />
       </div>
 
-      <!-- No Results State -->
-      <div
-        v-else
-        class="flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 bg-gray-50 py-16"
-      >
-        <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-200">
-          <i class="pi pi-search before:text-3xl before:text-gray-500"></i>
+      <!-- CONTENEDOR FLEX: En XL cambia a fila para poner el sidebar a la derecha -->
+      <div class="flex flex-col gap-8 xl:flex-row">
+        <!-- GRID DE EJERCICIOS (Se expande) -->
+        <div class="flex-1">
+          <div
+            v-if="filteredExercises.length > 0"
+            class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
+          >
+            <ExerciseCard
+              v-for="exercise in filteredExercises"
+              :key="exercise.id"
+              :title="exercise.name"
+              :overview="exercise.description"
+              :type="exercise.type"
+              :level="exercise.difficulty"
+              :targetMuscle="exercise.targetMuscle"
+            />
+          </div>
+
+          <!-- Estado Vacío -->
+          <div
+            v-else
+            class="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50 py-20"
+          >
+            <i class="pi pi-search text-4xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-900">No results found</h3>
+            <p class="text-gray-500">Try changing the filters or the search query.</p>
+          </div>
         </div>
-        <h3 class="mb-2 text-lg font-medium text-gray-900">No exercises found</h3>
-        <p class="text-gray-500">Try adjusting your filters</p>
+
+        <!-- SIDEBAR: En XL aparece aquí a la derecha -->
+        <FilterSidebar
+          v-model:searchQuery="searchExercise"
+          :selectedType="selectedType"
+          :selectedDifficultyGroups="selectedDifficultyGroups"
+          :selectedMuscleGroups="selectedMuscleGroups"
+          :typeOptions="typeOptions"
+          :difficultyGroupOptions="difficultyGroupOptions"
+          :muscleGroupOptions="muscleGroupOptions"
+          :exerciseCount="filteredExercises.length"
+          :totalExerciseCount="exercises.length"
+          @update:selectedType="selectedType = $event"
+          @update:selectedDifficultyGroups="selectedDifficultyGroups = $event"
+          @update:selectedMuscleGroups="selectedMuscleGroups = $event"
+          @clear-filters="clearFilters"
+        />
       </div>
     </div>
   </AppLayout>
