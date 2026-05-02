@@ -1,7 +1,7 @@
 <script setup>
-import Backdrop from '../components/Backdrop.vue'
-import AppSidebar from './components/AppSidebar.vue'
-import AppTopbar from './components/AppTopbar.vue'
+import Backdrop from '@/components/common/Backdrop.vue'
+import AppSidebar from '@/layout/common/AppSidebar.vue'
+import AppTopbar from '@/layout/common/AppTopbar.vue'
 </script>
 
 <template>

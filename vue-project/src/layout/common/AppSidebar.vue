@@ -1,7 +1,4 @@
 <script setup>
-import SiteLogo from '@/components/SiteLogo.vue'
-import { useAuth } from '@/composables/useAuth.js'
-import { useSidebar } from '@/composables/useSidebar'
 import {
   BoxCubeIcon,
   CrossIcon,
@@ -11,7 +8,10 @@ import {
   PageIcon,
   SettingsIcon,
   UserCircleIcon,
-} from '@/icons'
+} from '@/components/icons'
+import SiteLogo from '@/components/SiteLogo.vue'
+import { useAuth } from '@/composables/useAuth.js'
+import { useSidebar } from '@/composables/useSidebar'
 import router from '@/router/index.js'
 import Avatar from 'primevue/avatar'
 import { useRoute } from 'vue-router'

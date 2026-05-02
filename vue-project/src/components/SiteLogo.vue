@@ -1,5 +1,5 @@
 <script setup>
-import DumbellIcon from '../icons/DumbellIcon.vue'
+import DumbellIcon from './icons/DumbellIcon.vue'
 </script>
 
 <template>
