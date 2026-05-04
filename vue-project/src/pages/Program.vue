@@ -1,6 +1,6 @@
 <script setup>
 import ProgramCard from '@/components/ProgramCard.vue'
-import AppLayout from '@/layout/AppLayout.vue'
+import BaseLayout from '@/layouts/BaseLayout.vue'
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 
@@ -23,7 +23,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AppLayout>
+  <BaseLayout>
     <!-- Loading State -->
     <div v-if="loading" class="space-y-6">
       <div class="mb-6">
@@ -96,5 +96,5 @@ onMounted(async () => {
         />
       </div>
     </div>
-  </AppLayout>
+  </BaseLayout>
 </template>

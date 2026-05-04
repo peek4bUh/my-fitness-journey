@@ -1,102 +1,43 @@
 <script setup>
 import ExerciseCard from '@/components/ExerciseCard.vue'
-import { useFilterSidebar } from '@/composables/useFilterSidebar'
-import AppLayout from '@/layout/AppLayout.vue'
-import FilterSidebar from '@/layout/components/FilterSidebar.vue'
+import BaseLayout from '@/layouts/BaseLayout.vue'
+import FilterDrawerLayout from '@/layouts/FilterDrawerLayout.vue'
 import Button from 'primevue/button'
 import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
 import InputText from 'primevue/inputtext'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
-import difficultyGroupData from '@/mocks/difficulties.json'
-import exercisesData from '@/mocks/exercises.json'
-import muscleGroupData from '@/mocks/muscleGroup.json'
+import { useExerciseFilters } from '@/composables/useExerciseFilters'
+import { DifficultyService } from '@/services/difficultyService'
+import { MuscleService } from '@/services/muscleService'
+import exercisesData from '../../mocks/exercises.json'
 
-const { toggleFilterSidebar } = useFilterSidebar()
+const muscleService = new MuscleService()
+const difficultyService = new DifficultyService()
+
+const exercises = ref(exercisesData.exercises)
 const loading = ref(true)
 const error = ref(null)
-const searchExercise = ref('')
-
-// --- Filter states ---
-const selectedType = ref('all')
-const selectedDifficultyGroups = ref([])
-const selectedMuscleGroups = ref([])
-
-// --- Options ---
-const typeOptions = [
-  { label: 'All', value: 'all' },
-  { label: 'Compound', value: 'compound' },
-  { label: 'Isolation', value: 'isolation' },
-]
-
-const difficultyGroupOptions = difficultyGroupData.data
-const muscleGroupOptions = muscleGroupData.data
-const exercises = ref(exercisesData.exercises)
-
-function matchesSearchFilter(exercise) {
-  if (!searchExercise.value) return true
-  const searchTerm = searchExercise.value.toLowerCase()
-  return (
-    (exercise.name || '').toLowerCase().includes(searchTerm) ||
-    (exercise.description || '').toLowerCase().includes(searchTerm)
-  )
-}
-
-function matchesTypeFilter(exercise) {
-  if (selectedType.value === 'all') return true
-  const exerciseType = (exercise.type || '').toLowerCase()
-  return exerciseType === selectedType.value.toLowerCase()
-}
-
-function matchesDifficultyFilter(exercise) {
-  if (selectedDifficultyGroups.value.length === 0) return true
-
-  const selectedDifficultyValues = selectedDifficultyGroups.value.map((item) =>
-    typeof item === 'object' ? item.value || item.label : item,
-  )
-  const exerciseDifficulty = (exercise.difficulty || '').toLowerCase()
-
-  return selectedDifficultyValues.some((selected) => exerciseDifficulty === selected.toLowerCase())
-}
-
-function matchesMuscleFilter(exercise) {
-  if (selectedMuscleGroups.value.length === 0) return true
-
-  const selectedMuscleValues = selectedMuscleGroups.value.map((item) =>
-    typeof item === 'object' ? item.value || item.label : item,
-  )
-  const exerciseMuscle = (exercise.targetMuscle || '').toLowerCase()
-
-  return selectedMuscleValues.some((selected) => exerciseMuscle === selected.toLowerCase())
-}
-
-const filteredExercises = computed(() => {
-  return exercises.value.filter(
-    (exercise) =>
-      matchesSearchFilter(exercise) &&
-      matchesTypeFilter(exercise) &&
-      matchesDifficultyFilter(exercise) &&
-      matchesMuscleFilter(exercise),
-  )
-})
-
-const clearFilters = () => {
-  selectedType.value = 'all'
-  searchExercise.value = ''
-  selectedDifficultyGroups.value = []
-  selectedMuscleGroups.value = []
-}
+const difficultyGroupOptions = ref([])
+const muscleGroupOptions = ref([])
+const {
+  searchExercise,
+  selectedType,
+  selectedDifficultyGroups,
+  selectedMuscleGroups,
+  filteredExercises,
+  clearFilters,
+  typeOptions,
+} = useExerciseFilters(exercises)
 
 onMounted(async () => {
   try {
-    // Debug: Log the data structure (optional)
-    console.log('First exercise:', exercises.value[0])
-    console.log('Difficulty group options:', difficultyGroupOptions)
-    console.log('Muscle group options:', muscleGroupOptions)
+    muscleGroupOptions.value = await muscleService.getMuscles()
+    difficultyGroupOptions.value = await difficultyService.getDifficulties()
   } catch (err) {
-    error.value = err.response?.data?.message || 'Failed to load exercises'
-    console.error(error.value)
+    console.error('Error loading data:', err)
+    error.value = 'Failed to load data.'
   } finally {
     loading.value = false
   }
@@ -104,7 +45,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AppLayout>
+  <BaseLayout>
     <!-- Loading State -->
     <div v-if="loading" class="space-y-6">
       <div class="mb-6">
@@ -208,7 +149,7 @@ onMounted(async () => {
         </div>
 
         <!-- SIDEBAR: En XL aparece aquí a la derecha -->
-        <FilterSidebar
+        <FilterDrawerLayout
           v-model:searchQuery="searchExercise"
           :selectedType="selectedType"
           :selectedDifficultyGroups="selectedDifficultyGroups"
@@ -225,5 +166,5 @@ onMounted(async () => {
         />
       </div>
     </div>
-  </AppLayout>
+  </BaseLayout>
 </template>

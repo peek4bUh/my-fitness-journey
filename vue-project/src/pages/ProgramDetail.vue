@@ -1,13 +1,13 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 import axios from 'axios'
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 
-import DataTable from 'primevue/datatable'
-import Column from 'primevue/column'
 import Button from 'primevue/button'
+import Column from 'primevue/column'
+import DataTable from 'primevue/datatable'
 
-import AppLayout from '@/layout/AppLayout.vue'
+import BaseLayout from '@/layouts/BaseLayout.vue'
 
 const route = useRoute()
 const id = route.params.id
@@ -32,7 +32,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AppLayout>
+  <BaseLayout>
     <div class="bg-gray-50 p-4 md:p-6 lg:p-8">
       <div v-if="loading" class="text-center text-gray-500">Loading...</div>
       <div v-else-if="error" class="rounded-lg border border-red-200 bg-red-50 p-4 text-red-600">
@@ -77,5 +77,5 @@ onMounted(async () => {
         </div>
       </div>
     </div>
-  </AppLayout>
+  </BaseLayout>
 </template>

@@ -1,7 +1,7 @@
 <script setup>
-import AppLayout from '@/layout/AppLayout.vue'
-import StatCard from '@/components/dashboard/StatCard.vue'
-import WorkoutItem from '@/components/dashboard/WorkoutItem.vue'
+import StatCard from '@/components/StatCard.vue'
+import WorkoutItem from '@/components/WorkoutItem.vue'
+import BaseLayout from '@/layouts/BaseLayout.vue'
 
 const recentWorkouts = [
   { name: 'Upper Body', duration: '45 min', calories: 320, time: 'Today' },
@@ -12,7 +12,7 @@ const recentWorkouts = [
 </script>
 
 <template>
-  <AppLayout>
+  <BaseLayout>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
       <StatCard title="Total Workouts" value="127" subtitle="+12% from last week" />
       <StatCard title="Calories Burned" value="45,230" subtitle="+8% from last month" />
@@ -28,5 +28,5 @@ const recentWorkouts = [
         </div>
       </div>
     </div>
-  </AppLayout>
+  </BaseLayout>
 </template>

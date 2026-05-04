@@ -1,11 +1,11 @@
 <script setup>
 import { reactive } from 'vue'
 
-import AuthLayout from '@/layout/AuthLayout.vue'
+import AuthLayout from '@/layouts/AuthLayout.vue'
 import { Form, FormField } from '@primevue/forms'
-import InputText from 'primevue/inputtext'
-import FloatLabel from 'primevue/floatlabel'
 import Button from 'primevue/button'
+import FloatLabel from 'primevue/floatlabel'
+import InputText from 'primevue/inputtext'
 
 import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
@@ -25,7 +25,7 @@ const resolver = ({ values }) => {
   return { values, errors }
 }
 
-async function onFormSubmit({ valid, values }) {
+async function onFormSubmit({ valid }) {
   if (!valid) {
     return
   }

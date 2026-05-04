@@ -1,15 +1,15 @@
 <script setup>
 import { reactive } from 'vue'
 
-import router from '@/router/index.js'
-import AuthLayout from '@/layout/AuthLayout.vue'
-import { useAuth } from '../../composables/useAuth.js'
+import { useAuth } from '@/composables/useAuth.js'
+import AuthLayout from '@/layouts/AuthLayout.vue'
+import router from '@/router.js'
 import { Form, FormField } from '@primevue/forms'
-import InputText from 'primevue/inputtext'
-import Password from 'primevue/password'
-import FloatLabel from 'primevue/floatlabel'
 import Button from 'primevue/button'
 import Checkbox from 'primevue/checkbox'
+import FloatLabel from 'primevue/floatlabel'
+import InputText from 'primevue/inputtext'
+import Password from 'primevue/password'
 
 import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
