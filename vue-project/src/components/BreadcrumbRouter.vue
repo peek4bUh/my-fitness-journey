@@ -23,6 +23,7 @@ const home = ref({
           <span class="text-primary font-semibold">{{ item.label }}</span>
         </a>
       </RouterLink>
+
       <a v-else :href="item.url" :target="item.target" v-bind="props.action">
         {{ item.label }}
       </a>
