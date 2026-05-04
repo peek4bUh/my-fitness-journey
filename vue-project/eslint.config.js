@@ -7,6 +7,7 @@ import globals from 'globals'
 export default defineConfig([
   globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
 
+  // General JS and Vue config
   {
     name: 'app/main-config',
     files: ['**/*.{js,vue}'],
@@ -26,7 +27,17 @@ export default defineConfig([
     },
   },
 
+  // Base recommended configs
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
   skipFormatting,
+
+  // Specific overrides
+  {
+    name: 'app/pages-overrides',
+    files: ['src/pages/**/*.vue'],
+    rules: {
+      'vue/multi-word-component-names': 'off',
+    },
+  },
 ])
