@@ -7,5 +7,5 @@ from apps.muscles.serializers import MuscleSerializer
 
 class MuscleList(ListAPIView):
     permission_classes = [AllowAny]
-    queryset = Muscle.objects.all()
+    queryset = Muscle.objects.all().order_by('original')
     serializer_class = MuscleSerializer
