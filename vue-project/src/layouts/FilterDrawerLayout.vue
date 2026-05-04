@@ -89,12 +89,11 @@ const sidebarClasses = computed(() => ({
         <MultiSelect
           :modelValue="selectedDifficultyGroups"
           :options="difficultyGroupOptions"
-          optionLabel="label"
-          optionValue="value"
+          optionLabel="name"
+          optionValue="name"
           placeholder="Select difficulties"
           class="w-full"
           display="chip"
-          filter
           @update:modelValue="$emit('update:selectedDifficultyGroups', $event)"
         />
       </div>
@@ -105,8 +104,8 @@ const sidebarClasses = computed(() => ({
         <MultiSelect
           :modelValue="selectedMuscleGroups"
           :options="muscleGroupOptions"
-          optionLabel="label"
-          optionValue="value"
+          optionLabel="original"
+          optionValue="original"
           placeholder="Select muscles"
           class="w-full"
           display="chip"

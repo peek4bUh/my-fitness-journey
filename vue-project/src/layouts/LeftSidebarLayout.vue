@@ -12,7 +12,7 @@ import {
 import SiteLogo from '@/components/SiteLogo.vue'
 import { useAuth } from '@/composables/useAuth.js'
 import { useSidebar } from '@/composables/useSidebar'
-import router from '@/router/index.js'
+import router from '@/router.js'
 import Avatar from 'primevue/avatar'
 import { useRoute } from 'vue-router'
 
