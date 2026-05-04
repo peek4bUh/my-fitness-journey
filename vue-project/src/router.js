@@ -1,6 +1,14 @@
 import { useAuth } from '@/composables/useAuth.js'
 import { createRouter, createWebHistory } from 'vue-router'
 
+const LoginPage = () => import('@/pages/Login.vue')
+const SignupPage = () => import('@/pages/Signup.vue')
+const ForgotPasswordPage = () => import('@/pages/ForgotPassword.vue')
+const DashboardPage = () => import('@/pages/Dashboard.vue')
+const ExercisePage = () => import('@/pages/Exercise.vue')
+const ProgramPage = () => import('@/pages/Program.vue')
+const ProgramDetailPage = () => import('@/pages/ProgramDetail.vue')
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -8,43 +16,43 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/auth/LoginView.vue'),
+      component: () => LoginPage(),
       meta: { guestOnly: true },
     },
     {
       path: '/register',
       name: 'signup',
-      component: () => import('@/views/auth/SignupView.vue'),
+      component: () => SignupPage(),
       meta: { guestOnly: true },
     },
     {
       path: '/forgot-password',
       name: 'forgotPassword',
-      component: () => import('@/views/auth/PasswordRecoveryView.vue'),
+      component: () => ForgotPasswordPage(),
       meta: { guestOnly: true },
     },
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('@/views/DashboardView.vue'),
+      component: () => DashboardPage(),
       meta: { requiresAuth: true, title: 'Dashboard' },
     },
     {
       path: '/exercises',
       name: 'exercises',
-      component: () => import('@/views/ExercisesView.vue'),
+      component: () => ExercisePage(),
       meta: { requiresAuth: true, title: 'Exercises' },
     },
     {
       path: '/programs',
       name: 'programs',
-      component: () => import('@/views/ProgramsView.vue'),
+      component: () => ProgramPage(),
       meta: { requiresAuth: true, title: 'Programs' },
       children: [
         {
           path: ':id',
           name: 'program-detail',
-          component: () => import('@/views/ProgramDetailView.vue'),
+          component: () => ProgramDetailPage(),
           props: true,
           meta: { requiresAuth: true, title: 'Program Detail' },
         },
