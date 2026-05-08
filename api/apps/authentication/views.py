@@ -1,7 +1,10 @@
 from dj_rest_auth.urls import (LoginView as DjRestAuthLoginView,
-                               LogoutView as DjRestAuthLogoutView)
+                               LogoutView as DjRestAuthLogoutView,
+                               TokenVerifyView, get_refresh_view)
+from drf_spectacular.utils import extend_schema
 
 
+@extend_schema(tags=["Auth"])
 class CustomLoginView(DjRestAuthLoginView):
     """
     Check the credentials and return the JSON Web Token if the credentials
@@ -10,6 +13,7 @@ class CustomLoginView(DjRestAuthLoginView):
     pass
 
 
+@extend_schema(tags=["Auth"])
 class CustomLogoutView(DjRestAuthLogoutView):
     """
     Invalidate the JSON Web Token if the user is authenticated.
@@ -25,3 +29,13 @@ class CustomLogoutView(DjRestAuthLogoutView):
                 methods.append(method)
 
         return methods
+
+
+@extend_schema(tags=["Auth"])
+class CustomTokenVerifyView(TokenVerifyView):
+    pass
+
+
+@extend_schema(tags=["Auth"])
+class CustomTokenRefreshView(get_refresh_view()):
+    pass
