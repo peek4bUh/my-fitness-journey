@@ -19,21 +19,11 @@ function initializeFilterSidebarState() {
     isOpen.value = !isOpen.value
   }
 
-  const openFilterSidebar = () => {
-    isOpen.value = true
-  }
-
-  const closeFilterSidebar = () => {
-    isOpen.value = false
-  }
-
   filterSidebarState = {
     isOpen,
     isMobile,
     isDesktop,
     toggleFilterSidebar,
-    openFilterSidebar,
-    closeFilterSidebar,
     handleResize,
   }
 
@@ -57,7 +47,5 @@ export function useFilterSidebar() {
     isMobile: state.isMobile,
     isDesktop: state.isDesktop,
     toggleFilterSidebar: state.toggleFilterSidebar,
-    openFilterSidebar: state.openFilterSidebar,
-    closeFilterSidebar: state.closeFilterSidebar,
   }
 }

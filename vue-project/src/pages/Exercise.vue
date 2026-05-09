@@ -1,5 +1,6 @@
 <script setup>
 import ExerciseCard from '@/components/ExerciseCard.vue'
+import { useFilterSidebar } from '@/composables/useFilterSidebar.js'
 import BaseLayout from '@/layouts/BaseLayout.vue'
 import FilterDrawerLayout from '@/layouts/FilterDrawerLayout.vue'
 import Button from 'primevue/button'
@@ -9,13 +10,14 @@ import InputText from 'primevue/inputtext'
 import { onMounted, ref } from 'vue'
 
 import { useExerciseFilters } from '@/composables/useExerciseFilters'
-import { DifficultyService } from '@/services/difficultyService'
+import { ExerciseService } from '@/services/exerciseService'
 import { MuscleService } from '@/services/muscleService'
 import exercisesData from '../../mocks/exercises.json'
 
 const muscleService = new MuscleService()
-const difficultyService = new DifficultyService()
+const exerciseService = new ExerciseService()
 
+const { toggleFilterSidebar } = useFilterSidebar()
 const exercises = ref(exercisesData.exercises)
 const loading = ref(true)
 const error = ref(null)
@@ -33,8 +35,8 @@ const {
 
 onMounted(async () => {
   try {
-    muscleGroupOptions.value = await muscleService.getMuscles()
-    difficultyGroupOptions.value = await difficultyService.getDifficulties()
+    difficultyGroupOptions.value = await exerciseService.getExerciseLevels()
+    muscleGroupOptions.value = await muscleService.getMuscleGroups()
   } catch (err) {
     console.error('Error loading data:', err)
     error.value = 'Failed to load data.'

@@ -1,18 +1,18 @@
 <script setup>
 import ProgramCard from '@/components/ProgramCard.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
-import axios from 'axios'
+import { ProgramService } from '@/services/programService'
 import { onMounted, ref } from 'vue'
 
+const programService = new ProgramService()
 const programs = ref([])
 const loading = ref(true)
 const error = ref(null)
 
 onMounted(async () => {
   try {
-    const response = await axios.get('programs')
+    const response = await programService.getPrograms()
     programs.value = response.data
-    console.log(response.data)
   } catch (err) {
     error.value = err.response?.data?.message || 'Failed to load programs'
     console.error(error.value)

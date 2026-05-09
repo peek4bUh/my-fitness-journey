@@ -13,13 +13,17 @@ import SiteLogo from '@/components/SiteLogo.vue'
 import { useAuth } from '@/composables/useAuth.js'
 import { useSidebar } from '@/composables/useSidebar'
 import router from '@/router.js'
+import { UserService } from '@/services/userService'
 import Avatar from 'primevue/avatar'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+
+const userService = new UserService()
 
 const route = useRoute()
 const isActive = (itemPath) => route.path === `/${itemPath}`
-
-const { logout, user } = useAuth()
+const user = ref(null)
+const { logout } = useAuth()
 const { isMobileOpen, toggleSidebar } = useSidebar()
 const handleLogout = async () => {
   await logout()
@@ -79,6 +83,14 @@ const menuGroups = [
     ],
   },
 ]
+
+onMounted(async () => {
+  try {
+    user.value = await userService.getUserInfo()
+  } catch (err) {
+    console.error('Failed to load user info:', err)
+  }
+})
 </script>
 
 <template>

@@ -1,5 +1,6 @@
-import { useAuth } from '@/composables/useAuth.js'
 import { createRouter, createWebHistory } from 'vue-router'
+// import { authState } from './composables/useAuth'
+import { useAuth } from './composables/useAuth'
 
 const LoginPage = () => import('@/pages/Login.vue')
 const SignupPage = () => import('@/pages/Signup.vue')
@@ -17,19 +18,19 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: () => LoginPage(),
-      meta: { guestOnly: true },
+      meta: { requiresAuth: false },
     },
     {
       path: '/register',
       name: 'signup',
       component: () => SignupPage(),
-      meta: { guestOnly: true },
+      meta: { requiresAuth: false },
     },
     {
       path: '/forgot-password',
       name: 'forgotPassword',
       component: () => ForgotPasswordPage(),
-      meta: { guestOnly: true },
+      meta: { requiresAuth: false },
     },
     {
       path: '/dashboard',
@@ -61,27 +62,17 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach(async (to, from, next) => {
-  const auth = useAuth()
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+  const { isAuthenticated } = useAuth()
 
-  // 1. Only hit the backend if we haven't checked for a session yet
-  if (!auth.isInitialCheckDone.value) {
-    await auth.checkAuth()
+  if (requiresAuth && !isAuthenticated.value) {
+    next('/login')
+  } else if (!requiresAuth && isAuthenticated.value) {
+    next('/dashboard')
+  } else {
+    next()
   }
-
-  const isLoggedIn = auth.isAuthenticated.value
-
-  // 2. Logic for Guest-only pages (Login/Register)
-  if (to.meta.guestOnly && isLoggedIn) {
-    return next('/dashboard')
-  }
-
-  // 3. Logic for Protected pages
-  if (to.meta.requiresAuth && !isLoggedIn) {
-    return { name: 'Login' }
-  }
-
-  next()
 })
 
 export default router

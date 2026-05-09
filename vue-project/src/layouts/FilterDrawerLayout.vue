@@ -8,7 +8,7 @@ import MultiSelect from 'primevue/multiselect'
 import SelectButton from 'primevue/selectbutton'
 import { computed } from 'vue'
 
-const { isOpen, closeFilterSidebar, isMobile, isDesktop } = useFilterSidebar()
+const { isOpen, toggleFilterSidebar, isMobile, isDesktop } = useFilterSidebar()
 
 const props = defineProps({
   searchQuery: { type: String, default: '' },
@@ -51,7 +51,7 @@ const sidebarClasses = computed(() => ({
   >
     <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4 xl:hidden">
       <h2 class="text-lg font-semibold">Filters</h2>
-      <Button @click="closeFilterSidebar" icon="pi pi-times" severity="secondary" text rounded />
+      <Button @click="toggleFilterSidebar" icon="pi pi-times" severity="secondary" text rounded />
     </div>
 
     <div class="hidden px-6 pt-6 pb-2 xl:block">
@@ -104,8 +104,8 @@ const sidebarClasses = computed(() => ({
         <MultiSelect
           :modelValue="selectedMuscleGroups"
           :options="muscleGroupOptions"
-          optionLabel="original"
-          optionValue="original"
+          optionLabel="name"
+          optionValue="id"
           placeholder="Select muscles"
           class="w-full"
           display="chip"

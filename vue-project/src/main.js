@@ -2,16 +2,11 @@ import './assets/main.css'
 
 import { definePreset } from '@primeuix/themes'
 import Aura from '@primeuix/themes/aura'
-import axios from 'axios'
 import PrimeVue from 'primevue/config'
 import { createApp } from 'vue'
 
 import App from './App.vue'
-import { useAuth } from './composables/useAuth'
 import router from './router'
-
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:8000/api/v1/'
 
 const Noir = definePreset(Aura, {
   semantic: {
@@ -71,22 +66,5 @@ app.use(PrimeVue, {
     },
   },
 })
-
 app.use(router)
 app.mount('#app')
-
-axios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      const { logout } = useAuth()
-      logout() // Resets local state
-
-      // Redirect to login only if we aren't already there
-      if (router.currentRoute.value.name !== 'login') {
-        router.push({ name: 'login' })
-      }
-    }
-    return Promise.reject(error)
-  },
-)
