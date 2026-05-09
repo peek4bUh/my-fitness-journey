@@ -4,10 +4,10 @@ import Card from 'primevue/card'
 defineProps({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  timeRange: { type: String, required: true }, // e.g. "45-60 min"
-  durationWeeks: { type: Number, required: true }, // e.g. 8
-  timesPerWeek: { type: Number, required: true }, // e.g. 3
-  totalExercises: { type: Number, required: true }, // e.g. 24
+  timeRange: { type: String, required: true },
+  durationWeeks: { type: Number, required: true },
+  timesPerWeek: { type: Number, required: true },
+  totalExercises: { type: Number, required: true },
 })
 </script>
 
