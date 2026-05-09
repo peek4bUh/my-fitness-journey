@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.muscles.models import MuscleGroup, MuscleGroupMuscle
+from apps.muscles.models import Muscle, MuscleGroup, MuscleGroupMuscle
 
 
 class MuscleGroupMuscleInline(admin.TabularInline):
@@ -30,3 +30,10 @@ class MuscleGroupAdmin(admin.ModelAdmin):
     def muscles_list(self, obj):
         return ', '.join(obj.muscles.values_list('original', flat=True))
     muscles_list.short_description = 'muscles'
+
+
+@admin.register(Muscle)
+class MuscleAdmin(admin.ModelAdmin):
+    list_display = ['id', 'original', 'english']
+    search_fields = ['original', 'english']
+    ordering = ['original']

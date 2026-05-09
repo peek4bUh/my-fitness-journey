@@ -2,18 +2,20 @@
 
 from rest_framework import generics, status
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 
 from apps.programs.serializers import ProgramSerializer
 from apps.programs.models import Program
 
 
+@extend_schema(tags=["Programs"])
 class ProgramView(generics.GenericAPIView):
     """View for listing all programs."""
     queryset = Program.objects.all()
     serializer_class = ProgramSerializer
 
     def get(self, request, pk=None):
-        """Retrieve programs for the authenticated user."""
+        """Retrieve programs of the current user."""
         if pk:
             # Retrieve a specific program by ID, but only if it belongs to the user
             try:
@@ -37,6 +39,7 @@ class ProgramView(generics.GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=["Programs"])
 class ProgramDetailView(generics.GenericAPIView):
     """View for retrieving, creating, updating or deleting a program."""
     serializer_class = ProgramSerializer

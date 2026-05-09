@@ -7,9 +7,9 @@ urlpatterns = [
     path("exercises/<int:pk>", views.ExerciseDetail.as_view(),
          name="exercise-detail"),
 
-    # Difficulties
-    path("difficulties", views.ExerciseDifficultyList.as_view(),
-         name="difficulty-list"),
-    path("difficulties/<int:pk>",
-         views.ExerciseDifficultyDetail.as_view(), name="difficulty-detail"),
+    # ExerciseLevels
+    path("exercise-levels", views.ExerciseLevelList.as_view(),
+         name="level-list"),
+    path("exercise-levels/<int:pk>",
+         views.ExerciseLevelDetail.as_view(), name="level-detail"),
 ]

@@ -6,6 +6,9 @@ from apps.exercises.models import Exercise
 
 class Program(models.Model):
     """Class representing a Program model"""
+    class Meta:
+        db_table = "program"
+
     user = models.ForeignKey(
         to=User,
         related_name="programs",
@@ -23,6 +26,9 @@ class Program(models.Model):
 
 class ProgramSection(models.Model):
     """Class representing a ProgramSection model"""
+    class Meta:
+        db_table = "program_section"
+
     program = models.ForeignKey(
         to=Program,
         related_name="sections",
@@ -38,6 +44,9 @@ class ProgramSection(models.Model):
 
 class ProgramExercise(models.Model):
     """Class representing a ProgramExercise model"""
+    class Meta:
+        db_table = "program_exercise"
+
     section = models.ForeignKey(
         to=ProgramSection,
         related_name="exercises",
