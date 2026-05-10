@@ -1,5 +1,25 @@
 from django.contrib import admin
-from .models import ExerciseLevel, Exercise, ExerciseMuscle
+from .models import ExerciseLevel, Exercise, ExerciseMuscle, ExerciseForce, ExerciseMechanic, ExerciseBodyRegion, ExerciseCategory
+
+
+@admin.register(ExerciseForce)
+class ExerciseForceAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+
+@admin.register(ExerciseMechanic)
+class ExerciseMechanicAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+
+@admin.register(ExerciseBodyRegion)
+class ExerciseBodyRegionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+
+@admin.register(ExerciseCategory)
+class ExerciseCategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
 
 
 @admin.register(ExerciseLevel)
@@ -14,7 +34,7 @@ class ExerciseMuscleInline(admin.TabularInline):
     """
     model = ExerciseMuscle
     extra = 0                          # No mostrar filas vacías por defecto
-    fields = ['muscle', 'role', 'order']
+    fields = ['muscle', 'role']
     autocomplete_fields = ['muscle']   # Búsqueda cómoda del músculo
 
     def get_queryset(self, request):

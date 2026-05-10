@@ -12,7 +12,12 @@ class ExerciseLevelSerializer(serializers.ModelSerializer):
 
 class ExerciseSerializer(serializers.ModelSerializer):
     level = serializers.ReadOnlyField(source='level.name')
-    target_muscle = MuscleSerializer(read_only=True)
+    force = serializers.ReadOnlyField(source='force.name')
+    mechanic = serializers.ReadOnlyField(source='mechanic.name')
+    body_region = serializers.ReadOnlyField(source='body_region.name')
+    muscle_group = serializers.ReadOnlyField(source='muscle_group.name')
+    category = serializers.ReadOnlyField(source='category.name')
+    target_muscle = serializers.ReadOnlyField(source='target_muscle.original')
     secondary_muscles = serializers.SerializerMethodField()
     tertiary_muscles = serializers.SerializerMethodField()
 
@@ -25,8 +30,9 @@ class ExerciseSerializer(serializers.ModelSerializer):
             'level',
             'force',
             'mechanic',
-            'body_region',
             'category',
+            'body_region',
+            'muscle_group',
             'target_muscle',
             'secondary_muscles',
             'tertiary_muscles',
