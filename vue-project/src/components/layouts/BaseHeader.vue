@@ -10,7 +10,7 @@ document.title = titlePage + ' | MyFitnessJourney'
 </script>
 
 <template>
-  <div
+  <header
     class="sticky top-0 z-50 flex w-full border-b border-gray-200 bg-white lg:hidden lg:bg-inherit"
   >
     <div class="flex w-full items-center justify-between px-4 py-3 sm:px-6">
@@ -25,5 +25,5 @@ document.title = titlePage + ' | MyFitnessJourney'
         <h2 class="text-lg font-semibold">MyFitnessJourney</h2>
       </div>
     </div>
-  </div>
+  </header>
 </template>

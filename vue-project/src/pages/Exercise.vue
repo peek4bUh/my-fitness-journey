@@ -1,7 +1,7 @@
 <script setup>
 import ExerciseCard from '@/components/ExerciseCard.vue'
+import FilterDrawerLayout from '@/components/layouts/FilterDrawerLayout.vue'
 import { useFilterSidebar } from '@/composables/useFilterSidebar.js'
-import FilterDrawerLayout from '@/layouts/FilterDrawerLayout.vue'
 import Button from 'primevue/button'
 import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
