@@ -1,5 +1,5 @@
 import { Endpoints } from '@/constants/endpoints'
-import apiClient from '../api.js'
+import apiClient from './index.js'
 
 export class ProgramService {
   constructor() {}
