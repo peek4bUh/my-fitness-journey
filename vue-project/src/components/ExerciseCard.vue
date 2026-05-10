@@ -25,7 +25,7 @@ const topBorderClass = computed(() => {
 
 const rootClasses = computed(
   () =>
-    `bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg border-t-4 ${topBorderClass.value}`,
+    `bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg border-t-4 ${topBorderClass.value} h-full`,
 )
 </script>
 

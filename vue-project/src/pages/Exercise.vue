@@ -128,15 +128,19 @@ onMounted(async () => {
             v-if="filteredExercises.length > 0"
             class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr"
           >
-            <ExerciseCard
+            <RouterLink
               v-for="exercise in filteredExercises"
               :key="exercise.id"
-              :title="exercise.name"
-              :overview="exercise.description"
-              :mechanic="exercise.mechanic"
-              :level="exercise.level"
-              :targetMuscle="exercise.targetMuscle"
-            />
+              :to="{ name: 'exercise-detail', params: { id: exercise.id } }"
+            >
+              <ExerciseCard
+                :title="exercise.name"
+                :overview="exercise.description"
+                :mechanic="exercise.mechanic"
+                :level="exercise.level"
+                :targetMuscle="exercise.targetMuscle"
+              />
+            </RouterLink>
           </div>
 
           <!-- Estado Vacío -->

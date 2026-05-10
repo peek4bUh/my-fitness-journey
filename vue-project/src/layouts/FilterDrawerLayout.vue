@@ -12,7 +12,7 @@ const { isOpen, toggleFilterSidebar, isMobile, isDesktop } = useFilterSidebar()
 
 const props = defineProps({
   searchQuery: { type: String, default: '' },
-  selectedType: { type: String, default: 'all' },
+  selectedType: { type: String, default: 'All' },
   selectedDifficultyGroups: { type: Array, default: () => [] },
   selectedMuscleGroups: { type: Array, default: () => [] },
   typeOptions: { type: Array, default: () => [] },
@@ -25,7 +25,7 @@ const props = defineProps({
 const canClearFilters = computed(
   () =>
     props.searchQuery !== '' ||
-    props.selectedType !== 'all' ||
+    props.selectedType !== 'All' ||
     props.selectedDifficultyGroups.length > 0 ||
     props.selectedMuscleGroups.length > 0,
 )
@@ -60,19 +60,22 @@ const sidebarClasses = computed(() => ({
 
     <div class="space-y-8 overflow-y-auto px-6 py-4">
       <!-- Search Bar -->
-      <IconField v-if="isDesktop">
-        <InputIcon class="pi pi-search" />
-        <InputText
-          :modelValue="searchQuery"
-          @update:modelValue="$emit('update:searchQuery', $event)"
-          placeholder="Exercise..."
-          class="w-full"
-        />
-      </IconField>
-
-      <!-- Exercise Type -->
       <div>
-        <label class="mb-3 block text-sm font-medium text-gray-700">Exercise Type</label>
+        <label class="mb-3 block text-sm font-medium text-gray-700">Search</label>
+        <IconField v-if="isDesktop">
+          <InputIcon class="pi pi-search" />
+          <InputText
+            :modelValue="searchQuery"
+            @update:modelValue="$emit('update:searchQuery', $event)"
+            placeholder="Exercise..."
+            class="w-full"
+          />
+        </IconField>
+      </div>
+
+      <!-- Mechanic -->
+      <div>
+        <label class="mb-3 block text-sm font-medium text-gray-700">Mechanic</label>
         <SelectButton
           :modelValue="selectedType"
           :options="typeOptions"
@@ -105,11 +108,10 @@ const sidebarClasses = computed(() => ({
           :modelValue="selectedMuscleGroups"
           :options="muscleGroupOptions"
           optionLabel="name"
-          optionValue="id"
+          optionValue="name"
           placeholder="Select muscle group"
           class="w-full"
           display="chip"
-          filter
           @update:modelValue="$emit('update:selectedMuscleGroups', $event)"
         />
       </div>
