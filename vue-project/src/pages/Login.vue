@@ -2,7 +2,7 @@
 import { reactive } from 'vue'
 
 import { useAuth } from '@/composables/useAuth.js'
-import router from '@/router.js'
+import router from '@/router/index.js'
 import { Form, FormField } from '@primevue/forms'
 import Button from 'primevue/button'
 import Checkbox from 'primevue/checkbox'

@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 
 import { useAuth } from '@/composables/useAuth.js'
-import router from '@/router.js'
+import router from '@/router/index.js'
 import { Form } from '@primevue/forms'
 import Button from 'primevue/button'
 import FloatLabel from 'primevue/floatlabel'
