@@ -58,7 +58,7 @@ const sidebarClasses = computed(() => ({
       <h2 class="text-xl font-bold">Filters</h2>
     </div>
 
-    <div class="flex-1 space-y-8 overflow-y-auto px-6 py-4">
+    <div class="space-y-8 overflow-y-auto px-6 py-4">
       <!-- Search Bar -->
       <IconField v-if="isDesktop">
         <InputIcon class="pi pi-search" />
@@ -98,15 +98,15 @@ const sidebarClasses = computed(() => ({
         />
       </div>
 
-      <!-- Target Muscles -->
+      <!-- Muscle Groups -->
       <div>
-        <label class="mb-3 block text-sm font-medium text-gray-700">Target Muscles</label>
+        <label class="mb-3 block text-sm font-medium text-gray-700">Muscle Groups</label>
         <MultiSelect
           :modelValue="selectedMuscleGroups"
           :options="muscleGroupOptions"
           optionLabel="name"
           optionValue="id"
-          placeholder="Select muscles"
+          placeholder="Select muscle group"
           class="w-full"
           display="chip"
           filter

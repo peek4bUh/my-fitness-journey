@@ -12,13 +12,12 @@ import { onMounted, ref } from 'vue'
 import { useExerciseFilters } from '@/composables/useExerciseFilters'
 import { ExerciseService } from '@/services/exerciseService'
 import { MuscleService } from '@/services/muscleService'
-import exercisesData from '../../mocks/exercises.json'
 
 const muscleService = new MuscleService()
 const exerciseService = new ExerciseService()
 
 const { toggleFilterSidebar } = useFilterSidebar()
-const exercises = ref(exercisesData.exercises)
+const exercises = ref([])
 const loading = ref(true)
 const error = ref(null)
 const difficultyGroupOptions = ref([])
@@ -35,6 +34,7 @@ const {
 
 onMounted(async () => {
   try {
+    exercises.value = await exerciseService.getExercises()
     difficultyGroupOptions.value = await exerciseService.getExerciseLevels()
     muscleGroupOptions.value = await muscleService.getMuscleGroups()
   } catch (err) {
@@ -133,8 +133,8 @@ onMounted(async () => {
               :key="exercise.id"
               :title="exercise.name"
               :overview="exercise.description"
-              :type="exercise.type"
-              :level="exercise.difficulty"
+              :mechanic="exercise.mechanic"
+              :level="exercise.level"
               :targetMuscle="exercise.targetMuscle"
             />
           </div>

@@ -6,7 +6,7 @@ import { computed, ref } from 'vue'
 const props = defineProps({
   title: { type: String, required: true },
   overview: { type: String, required: true },
-  type: { type: String, required: true },
+  mechanic: { type: String, required: true },
   level: { type: String, required: true },
   targetMuscle: { type: String, required: true },
 })
