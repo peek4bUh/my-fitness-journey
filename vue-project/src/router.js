@@ -1,61 +1,65 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import { authState } from './composables/useAuth'
 import { useAuth } from './composables/useAuth'
+
+const AuthLayout = () => import('@/layouts/AuthLayout.vue')
+const BaseLayout = () => import('@/layouts/BaseLayout.vue')
 
 const LoginPage = () => import('@/pages/Login.vue')
 const SignupPage = () => import('@/pages/Signup.vue')
 const ForgotPasswordPage = () => import('@/pages/ForgotPassword.vue')
 const DashboardPage = () => import('@/pages/Dashboard.vue')
 const ExercisePage = () => import('@/pages/Exercise.vue')
-const ProgramPage = () => import('@/pages/Program.vue')
-const ProgramDetailPage = () => import('@/pages/ProgramDetail.vue')
+const ExerciseDetailPage = () => import('@/pages/ExerciseDetail.vue')
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', redirect: '/login' },
+    { path: '/', redirect: { name: 'login' } },
     {
-      path: '/login',
-      name: 'login',
-      component: () => LoginPage(),
-      meta: { requiresAuth: false },
-    },
-    {
-      path: '/register',
-      name: 'signup',
-      component: () => SignupPage(),
-      meta: { requiresAuth: false },
-    },
-    {
-      path: '/forgot-password',
-      name: 'forgotPassword',
-      component: () => ForgotPasswordPage(),
-      meta: { requiresAuth: false },
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => DashboardPage(),
-      meta: { requiresAuth: true, title: 'Dashboard' },
-    },
-    {
-      path: '/exercises',
-      name: 'exercises',
-      component: () => ExercisePage(),
-      meta: { requiresAuth: true, title: 'Exercises' },
-    },
-    {
-      path: '/programs',
-      name: 'programs',
-      component: () => ProgramPage(),
-      meta: { requiresAuth: true, title: 'Programs' },
+      path: '/auth',
+      component: () => AuthLayout(),
       children: [
         {
-          path: ':id',
-          name: 'program-detail',
-          component: () => ProgramDetailPage(),
+          path: 'login',
+          name: 'login',
+          component: () => LoginPage(),
+        },
+        {
+          path: 'register',
+          name: 'signup',
+          component: () => SignupPage(),
+        },
+        {
+          path: 'forgot-password',
+          name: 'forgotPassword',
+          component: () => ForgotPasswordPage(),
+        },
+      ],
+    },
+    {
+      path: '/app',
+      component: () => BaseLayout(),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'dashboard',
+          name: 'dashboard',
+          component: () => DashboardPage(),
+          meta: { requiresAuth: true, title: 'Dashboard' },
+        },
+
+        {
+          path: 'exercises',
+          name: 'exercises',
+          component: () => ExercisePage(),
+          meta: { requiresAuth: true, title: 'Exercises' },
+        },
+        {
+          path: 'exercises/:id',
+          name: 'exercise-detail',
+          component: () => ExerciseDetailPage(),
           props: true,
-          meta: { requiresAuth: true, title: 'Program Detail' },
+          meta: { requiresAuth: true, title: 'Exercise Detail' },
         },
       ],
     },
@@ -67,9 +71,9 @@ router.beforeEach((to, from, next) => {
   const { isAuthenticated } = useAuth()
 
   if (requiresAuth && !isAuthenticated.value) {
-    next('/login')
+    next({ name: 'login' })
   } else if (!requiresAuth && isAuthenticated.value) {
-    next('/dashboard')
+    next({ name: 'dashboard' })
   } else {
     next()
   }

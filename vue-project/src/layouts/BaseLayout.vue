@@ -11,7 +11,7 @@ import TopbarLayout from '@/layouts/TopbarLayout.vue'
     <div class="flex-1 bg-gray-50 transition-all duration-300 ease-in-out lg:ml-80">
       <TopbarLayout />
       <div class="mx-auto max-w-(--breakpoint-3xl) p-6 lg:p-8">
-        <slot />
+        <RouterView />
       </div>
     </div>
   </div>

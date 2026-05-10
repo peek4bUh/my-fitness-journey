@@ -2,7 +2,6 @@
 import { reactive, ref } from 'vue'
 
 import { useAuth } from '@/composables/useAuth.js'
-import AuthLayout from '@/layouts/AuthLayout.vue'
 import router from '@/router.js'
 import { Form } from '@primevue/forms'
 import Button from 'primevue/button'
@@ -47,73 +46,76 @@ async function handleLogin() {
 </script>
 
 <template>
-  <AuthLayout title="Create Account" subtitle="Start your journey today">
-    <Form
-      v-slot="$form"
-      :initialValues
-      :resolver
-      @submit="handleLogin"
-      class="flex w-full max-w-md flex-col gap-8"
+  <div class="text-center">
+    <h2 class="mb-2 text-3xl font-bold text-black lg:text-4xl">Create Account</h2>
+    <p class="max-w-md text-gray-600 lg:text-lg">Start your journey today</p>
+  </div>
+
+  <Form
+    v-slot="$form"
+    :initialValues
+    :resolver
+    @submit="handleLogin"
+    class="flex w-full max-w-md flex-col gap-8"
+  >
+    <div class="flex grow flex-col gap-4">
+      <FloatLabel variant="on">
+        <IconField>
+          <InputIcon class="pi pi-user" />
+          <InputText id="username" v-model="username" autocomplete="off" class="w-full" />
+        </IconField>
+        <label for="username" class="font-normal! text-gray-500!">Username</label>
+      </FloatLabel>
+
+      <FloatLabel variant="on">
+        <IconField>
+          <InputIcon class="pi pi-at" />
+          <InputText id="email" v-model="email" autocomplete="off" class="w-full" />
+        </IconField>
+        <label for="email" class="font-normal! text-gray-500!">Email</label>
+      </FloatLabel>
+
+      <FloatLabel variant="on">
+        <IconField>
+          <InputIcon class="pi pi-lock" />
+          <Password
+            id="password"
+            v-model="password"
+            inputId="password"
+            variant="filled"
+            :feedback="false"
+            toggleMask
+            class="w-full"
+            inputClass="w-full bg-white!"
+          />
+        </IconField>
+        <label for="password" class="font-normal! text-gray-500!">Password</label>
+      </FloatLabel>
+
+      <FloatLabel variant="on">
+        <IconField>
+          <InputIcon class="pi pi-lock" />
+          <Password
+            id="password"
+            v-model="password"
+            inputId="password"
+            variant="filled"
+            :feedback="false"
+            toggleMask
+            class="w-full"
+            inputClass="w-full bg-white!"
+          />
+        </IconField>
+        <label for="password" class="font-normal! text-gray-500!">Repeat Password</label>
+      </FloatLabel>
+    </div>
+    <Button type="submit" label="Create" />
+  </Form>
+
+  <p class="text-center text-gray-600">
+    Already registered?
+    <RouterLink :to="{ name: 'login' }" class="font-medium text-black hover:underline"
+      >Login</RouterLink
     >
-      <div class="flex grow flex-col gap-4">
-        <FloatLabel variant="on">
-          <IconField>
-            <InputIcon class="pi pi-user" />
-            <InputText id="username" v-model="username" autocomplete="off" class="w-full" />
-          </IconField>
-          <label for="username" class="font-normal! text-gray-500!">Username</label>
-        </FloatLabel>
-
-        <FloatLabel variant="on">
-          <IconField>
-            <InputIcon class="pi pi-at" />
-            <InputText id="email" v-model="email" autocomplete="off" class="w-full" />
-          </IconField>
-          <label for="email" class="font-normal! text-gray-500!">Email</label>
-        </FloatLabel>
-
-        <FloatLabel variant="on">
-          <IconField>
-            <InputIcon class="pi pi-lock" />
-            <Password
-              id="password"
-              v-model="password"
-              inputId="password"
-              variant="filled"
-              :feedback="false"
-              toggleMask
-              class="w-full"
-              inputClass="w-full bg-white!"
-            />
-          </IconField>
-          <label for="password" class="font-normal! text-gray-500!">Password</label>
-        </FloatLabel>
-
-        <FloatLabel variant="on">
-          <IconField>
-            <InputIcon class="pi pi-lock" />
-            <Password
-              id="password"
-              v-model="password"
-              inputId="password"
-              variant="filled"
-              :feedback="false"
-              toggleMask
-              class="w-full"
-              inputClass="w-full bg-white!"
-            />
-          </IconField>
-          <label for="password" class="font-normal! text-gray-500!">Repeat Password</label>
-        </FloatLabel>
-      </div>
-      <Button type="submit" label="Create" />
-    </Form>
-
-    <p class="text-center text-gray-600">
-      Already registered?
-      <RouterLink :to="{ name: 'login' }" class="font-medium text-black hover:underline"
-        >Login</RouterLink
-      >
-    </p>
-  </AuthLayout>
+  </p>
 </template>

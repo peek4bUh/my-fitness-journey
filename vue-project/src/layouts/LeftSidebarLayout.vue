@@ -42,7 +42,7 @@ const menuGroups = [
       {
         icon: PageIcon,
         label: 'Programs',
-        name: 'programs',
+        name: null,
         onClick: null,
       },
       {
