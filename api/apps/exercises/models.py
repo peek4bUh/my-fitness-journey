@@ -115,6 +115,22 @@ class Exercise(models.Model):
         return self.name
 
 
+class ExerciseInstruction(models.Model):
+    class Meta:
+        db_table = "exercise_instruction"
+
+    exercise = models.ForeignKey(
+        Exercise,
+        on_delete=models.CASCADE,
+        related_name="instructions"
+    )
+    step = models.PositiveIntegerField()
+    description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.exercise.name} - Step {self.step}"
+
+
 class ExerciseMuscle(models.Model):
     class Meta:
         db_table = "exercise_muscle"

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ExerciseLevel, Exercise, ExerciseMuscle, ExerciseForce, ExerciseMechanic, ExerciseBodyRegion, ExerciseCategory
+from .models import ExerciseInstruction, ExerciseLevel, Exercise, ExerciseMuscle, ExerciseForce, ExerciseMechanic, ExerciseBodyRegion, ExerciseCategory
 
 
 @admin.register(ExerciseForce)
@@ -27,6 +27,12 @@ class ExerciseLevelAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
 
 
+class ExerciseInstructionInline(admin.TabularInline):
+    model = ExerciseInstruction
+    extra = 0  # No mostrar filas vacías por defecto
+    fields = ['step', 'description']
+
+
 class ExerciseMuscleInline(admin.TabularInline):
     """
     Permite añadir/editar músculos secundarios y terciarios
@@ -47,4 +53,4 @@ class ExerciseAdmin(admin.ModelAdmin):
     list_filter = ['level', 'target_muscle', 'force']
     search_fields = ['name', 'description']
     autocomplete_fields = ['target_muscle']
-    inlines = [ExerciseMuscleInline]
+    inlines = [ExerciseMuscleInline, ExerciseInstructionInline]

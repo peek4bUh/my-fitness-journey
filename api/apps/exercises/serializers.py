@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.exercises.models import Exercise, ExerciseLevel, ExerciseMuscle, ExerciseMuscle
+from apps.exercises.models import Exercise, ExerciseInstruction, ExerciseLevel, ExerciseMuscle, ExerciseMuscle
 from apps.muscles.serializers import MuscleSerializer
 
 
@@ -20,6 +20,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
     target_muscle = serializers.ReadOnlyField(source='target_muscle.original')
     secondary_muscles = serializers.SerializerMethodField()
     tertiary_muscles = serializers.SerializerMethodField()
+    instructions = serializers.SerializerMethodField()
 
     class Meta:
         model = Exercise
@@ -36,6 +37,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
             'target_muscle',
             'secondary_muscles',
             'tertiary_muscles',
+            'instructions',
         ]
 
     def get_secondary_muscles(self, obj):
@@ -53,3 +55,6 @@ class ExerciseSerializer(serializers.ModelSerializer):
         return MuscleSerializer(
             [em.muscle for em in tertiaries], many=True
         ).data
+
+    def get_instructions(self, obj):
+        return list(obj.instructions.order_by('step').values_list('description', flat=True))
