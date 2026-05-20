@@ -1,7 +1,5 @@
 from rest_framework import serializers
 
-from drf_spectacular.utils import extend_schema_serializer, OpenApiExample
-
 from apps.programs.models import Program, ProgramSection, ProgramExercise
 from apps.exercises.models import Exercise
 from apps.exercises.serializers import ExerciseSerializer
@@ -28,6 +26,12 @@ class ProgramExerciseSerializer(serializers.ModelSerializer):
             "rpe",
             "rest_seconds"
         ]
+        extra_kwargs = {
+            'sets': {'default': 0},
+            'reps': {'default': 0},
+            'rpe': {'default': 0},
+            'rest_seconds': {'default': 0},
+        }
 
     def create(self, validated_data):
         return ProgramExercise.objects.create(**validated_data)
@@ -59,47 +63,6 @@ class ProgramSectionSerializer(serializers.ModelSerializer):
         return section
 
 
-@extend_schema_serializer(
-    examples=[
-        OpenApiExample(
-            'Valid example 1',
-            summary='short summary',
-            value={
-                'title': 'Test Title',
-                'description': 'Test Desc',
-                'sections': [
-                    {
-                        'name': 'Test Section 1',
-                        'data': [
-                            {
-                                'exercise_id': 2,
-                                'sets': 2,
-                                'reps': 8,
-                                'load': 90,
-                                'rpe': 9,
-                                'rest_seconds': 75
-                            }
-                        ]
-                    },
-                    {
-                        'name': 'Test Section 2',
-                        'data': [
-                            {
-                                'exercise_id': 3,
-                                'sets': 4,
-                                'reps': 7,
-                                'load': 10,
-                                'rpe': 6,
-                                'rest_seconds': 90
-                            }
-                        ]
-                    }
-                ]
-            },
-            request_only=True,
-        ),
-    ]
-)
 class ProgramSerializer(serializers.ModelSerializer):
     """Serializer for Program model."""
     sections = ProgramSectionSerializer(many=True)
@@ -127,3 +90,15 @@ class ProgramSerializer(serializers.ModelSerializer):
                 )
 
         return program
+
+
+class ProgramCreateResponseSerializer(serializers.Serializer):
+    message = serializers.CharField(default='Program created successfully.')
+
+
+class ProgramUpdateResponseSerializer(serializers.Serializer):
+    message = serializers.CharField(default='Program updated successfully.')
+
+
+class ProgramDeleteResponseSerializer(serializers.Serializer):
+    message = serializers.CharField(default='Program deleted successfully.')

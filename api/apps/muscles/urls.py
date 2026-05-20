@@ -7,6 +7,8 @@ urlpatterns = [
     # Muscles
     path("muscles", views.MuscleList.as_view(), name="muscle-list"),
     path("muscles/<int:pk>", views.MuscleDetail.as_view(), name="muscle-detail"),
+    path("muscles/<int:pk>/heads",
+         views.MuscleHeadList.as_view(), name="muscle-detail"),
 
     # Muscle Groups
     path("muscle-groups", views.MuscleGroupList.as_view(),

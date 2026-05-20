@@ -1,10 +1,20 @@
 from dj_rest_auth.urls import (LoginView as DjRestAuthLoginView,
                                LogoutView as DjRestAuthLogoutView,
                                TokenVerifyView, get_refresh_view)
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiResponse
+
+from apps.authentication.serializers import LoginAccessTokenResponseSerializer
 
 
-@extend_schema(tags=["Auth"])
+@extend_schema(
+    responses={
+        201: OpenApiResponse(
+            description="Created",
+            response=LoginAccessTokenResponseSerializer
+        )
+    },
+    tags=["Auth"],
+)
 class CustomLoginView(DjRestAuthLoginView):
     """
     Check the credentials and return the JSON Web Token if the credentials
@@ -38,4 +48,5 @@ class CustomTokenVerifyView(TokenVerifyView):
 
 @extend_schema(tags=["Auth"])
 class CustomTokenRefreshView(get_refresh_view()):
+    """Takes a JWT refresh token and returns a JWT access token if the refresh token is valid."""
     pass

@@ -12,6 +12,7 @@ class ExerciseLevel(models.Model):
 
     name = models.CharField(max_length=32, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -21,8 +22,11 @@ class ExerciseForce(models.Model):
     class Meta:
         verbose_name_plural = "forces"
         db_table = "exercise_force"
+        ordering = ['id']
 
     name = models.CharField(max_length=32, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -32,8 +36,11 @@ class ExerciseMechanic(models.Model):
     class Meta:
         verbose_name_plural = "mechanics"
         db_table = "exercise_mechanic"
+        ordering = ['id']
 
     name = models.CharField(max_length=32, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -43,8 +50,11 @@ class ExerciseCategory(models.Model):
     class Meta:
         verbose_name_plural = "categories"
         db_table = "exercise_category"
+        ordering = ['id']
 
     name = models.CharField(max_length=32, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -54,8 +64,11 @@ class ExerciseBodyRegion(models.Model):
     class Meta:
         verbose_name_plural = "body regions"
         db_table = "exercise_body_region"
+        ordering = ['id']
 
     name = models.CharField(max_length=32, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -66,8 +79,8 @@ class Exercise(models.Model):
     class Meta:
         db_table = "exercise"
 
-    name = models.CharField(max_length=128, unique=True, null=True, blank=True)
-    description = models.CharField(max_length=255, null=False)
+    name = models.CharField(max_length=128, unique=True)
+    description = models.CharField(max_length=255)
     target_muscle = models.ForeignKey(
         Muscle,
         on_delete=models.CASCADE,

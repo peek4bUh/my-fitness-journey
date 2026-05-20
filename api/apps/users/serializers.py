@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
@@ -8,8 +7,12 @@ class UserSerializer(serializers.ModelSerializer):
     """Serializer for User model."""
     class Meta:  # pylint: disable=C0115
         model = User
-        fields = ["id", "username", "email", "password"]
-        extra_kwargs = {"password": {"write_only": True}}
+        fields = ["username", "email", "password"]
+        extra_kwargs = {
+            'username': {'default': 'string'},
+            'email': {'default': 'string'},
+            "password": {"write_only": True, 'default': 'string'},
+        }
 
     def create(self, validated_data):
         password = validated_data.pop("password")
@@ -19,3 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
 
         Token.objects.create(user=user)
         return user
+
+
+class UserCreateResponseSerializer(serializers.Serializer):
+    message = serializers.CharField(default='User created successfully.')

@@ -1,6 +1,4 @@
 from django.urls import path
-from dj_rest_auth.app_settings import api_settings
-from dj_rest_auth.jwt_auth import get_refresh_view
 
 from apps.authentication.views import CustomLoginView, CustomLogoutView, CustomTokenVerifyView, CustomTokenRefreshView
 

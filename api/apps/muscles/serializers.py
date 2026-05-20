@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from apps.muscles.models import Muscle, MuscleGroup
+from apps.muscles.models import Muscle, MuscleGroup, MuscleHead
 
 
 class MuscleSerializer(serializers.ModelSerializer):
     class Meta:  # pylint: disable=C0115
         model = Muscle
-        fields = "__all__"
+        fields = ['id', 'original', 'english']
 
 
 class MuscleGroupSerializer(serializers.ModelSerializer):
@@ -15,3 +15,9 @@ class MuscleGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = MuscleGroup
         fields = ['id', 'name', 'muscles', 'created_at']
+
+
+class MuscleHeadSerializer(serializers.ModelSerializer):
+    class Meta:  # pylint: disable=C0115
+        model = MuscleHead
+        fields = ['id', 'name']

@@ -1,13 +1,14 @@
 from rest_framework import serializers
+from drf_spectacular.utils import extend_schema_field
 
-from apps.exercises.models import Exercise, ExerciseInstruction, ExerciseLevel, ExerciseMuscle, ExerciseMuscle
+from apps.exercises.models import Exercise, ExerciseLevel, ExerciseMuscle, ExerciseMuscle
 from apps.muscles.serializers import MuscleSerializer
 
 
 class ExerciseLevelSerializer(serializers.ModelSerializer):
     class Meta:  # pylint: disable=C0115
         model = ExerciseLevel
-        exclude = ["created_at"]
+        exclude = ['created_at', 'updated_at']
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
@@ -40,6 +41,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
             'instructions',
         ]
 
+    @extend_schema_field(MuscleSerializer(many=True))
     def get_secondary_muscles(self, obj):
         secondaries = obj.exercise_muscles.filter(
             role=ExerciseMuscle.MuscleRole.SECONDARY
@@ -48,6 +50,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
             [em.muscle for em in secondaries], many=True
         ).data
 
+    @extend_schema_field(MuscleSerializer(many=True))
     def get_tertiary_muscles(self, obj):
         tertiaries = obj.exercise_muscles.filter(
             role=ExerciseMuscle.MuscleRole.TERTIARY
@@ -56,5 +59,6 @@ class ExerciseSerializer(serializers.ModelSerializer):
             [em.muscle for em in tertiaries], many=True
         ).data
 
+    @extend_schema_field(serializers.ListField(child=serializers.CharField()))
     def get_instructions(self, obj):
         return list(obj.instructions.order_by('step').values_list('description', flat=True))

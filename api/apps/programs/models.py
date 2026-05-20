@@ -14,11 +14,13 @@ class Program(models.Model):
         related_name="programs",
         on_delete=models.CASCADE
     )
-    title = models.CharField(verbose_name="Program title", max_length=128)
+    title = models.CharField(
+        verbose_name="Program title", max_length=128, unique=True)
     description = models.CharField(
-        verbose_name="Program description", max_length=255)
+        verbose_name="Program description", max_length=255, unique=True)
     created_at = models.DateTimeField(
         verbose_name="Creation date", auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -58,7 +60,7 @@ class ProgramExercise(models.Model):
     )
     sets = models.PositiveSmallIntegerField()
     reps = models.PositiveSmallIntegerField()
-    load = models.FloatField(null=True, blank=True)
+    load = models.FloatField()
     rpe = models.PositiveSmallIntegerField()
     rest_seconds = models.PositiveSmallIntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
