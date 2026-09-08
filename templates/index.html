@@ -1,15 +1,100 @@
+{% load static tailwind_cli %}
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyFitnessJourney</title>
+    {% tailwind_css %}
 </head>
-<body>
-    <h1>Fitness Dashboard</h1>
-    <nav>
-        <ul>
-            <li><a href="/exercises/">Catálogo de Ejercicios</a></li>
-            <li><a href="/workouts/">Mis Entrenamientos</a></li>
-        </ul>
-    </nav>
+<body class="min-h-screen bg-gray-50 font-sans antialiased">
+
+    <!-- Contenedor principal -->
+    <div class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+        
+        <!-- Header -->
+        <header class="mb-10">
+            <h1 class="text-3xl sm:text-4xl font-light text-gray-800 tracking-tight">
+                Mi <span class="font-semibold text-blue-500">Fitness</span> Journey
+            </h1>
+            <div class="mt-2 h-0.5 w-16 bg-blue-400 rounded"></div>
+            <p class="mt-3 text-sm text-gray-500">Gestiona tu progreso y entrenamientos</p>
+        </header>
+
+        <!-- Grid de secciones -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <!-- Sección 1: Catálogo de Ejercicios -->
+            <a href="{% url 'exercises_index' %}" 
+               class="group block transition-all duration-200">
+                <div class="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5 transition-all h-full">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">💪</div>
+                        <div class="flex-1">
+                            <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                                Catálogo de Ejercicios
+                            </h2>
+                            <p class="text-sm text-gray-500 mt-1">Explora y descubre nuevos ejercicios</p>
+                        </div>
+                        <span class="text-gray-300 group-hover:text-blue-400 transition-colors">→</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Sección 2: Programas -->
+            <!-- <a href="#" 
+               class="group block transition-all duration-200">
+                <div class="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5 transition-all h-full">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">📋</div>
+                        <div class="flex-1">
+                            <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                                Programas
+                            </h2>
+                            <p class="text-sm text-gray-500 mt-1">Organiza tus entrenamientos por programas</p>
+                        </div>
+                        <span class="text-gray-300 group-hover:text-blue-400 transition-colors">→</span>
+                    </div>
+                </div>
+            </a> -->
+
+            <!-- Sección 3: Mis Entrenamientos -->
+            <!-- <a href="{% url 'workouts_index' %}" 
+               class="group block transition-all duration-200">
+                <div class="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5 transition-all h-full">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">🏋️</div>
+                        <div class="flex-1">
+                            <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                                Mis Entrenamientos
+                            </h2>
+                            <p class="text-sm text-gray-500 mt-1">Registra y sigue tus sesiones de entrenamiento</p>
+                        </div>
+                        <span class="text-gray-300 group-hover:text-blue-400 transition-colors">→</span>
+                    </div>
+                </div>
+            </a> -->
+
+            <!-- Sección 4: Peso Corporal -->
+            <!-- <a href="#" 
+               class="group block transition-all duration-200">
+                <div class="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5 transition-all h-full">
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">⚖️</div>
+                        <div class="flex-1">
+                            <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                                Peso Corporal
+                            </h2>
+                            <p class="text-sm text-gray-500 mt-1">Monitorea tu progreso y tendencias de peso</p>
+                        </div>
+                        <span class="text-gray-300 group-hover:text-blue-400 transition-colors">→</span>
+                    </div>
+                </div>
+            </a> -->
+
+        </div>
+
+    </div>
+
 </body>
 </html>
