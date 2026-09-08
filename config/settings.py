@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
 
-    'mfj',
+    'apps.exercises',
+    'apps.muscles',
     'django_tailwind_cli',
 ]
 

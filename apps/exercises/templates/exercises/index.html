@@ -43,20 +43,18 @@
                         <div class="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md hover:-translate-y-0.5 transition-all h-full">
                             <div class="flex items-start gap-4">
                                 
-                                <!-- Contenido -->
+                                <!-- Content -->
                                 <div class="flex-1 min-w-0">
                                     <h2 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
                                         {{ exercise.name }}
                                     </h2>
                                     
-                                    <!-- Músculo objetivo -->
-                                    {% if exercise.muscle %}
+                                    {% if exercise.target_muscle %}
                                         <p class="text-sm text-gray-500 mt-1">
-                                            🎯 {{ exercise.muscle }}
+                                            {{ exercise.target_muscle }}
                                         </p>
                                     {% endif %}
                                     
-                                    <!-- Descripción (si existe) -->
                                     {% if exercise.description %}
                                         <p class="text-sm text-gray-400 mt-1 line-clamp-2">
                                             {{ exercise.description }}
@@ -65,33 +63,28 @@
                                     
                                     <!-- Tags -->
                                     <div class="mt-2 flex flex-wrap gap-1">
-                                        {% if exercise.tipo %}
+                                        {% if exercise.force %}
                                             <span class="text-xs px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">
-                                                {{ exercise.get_tipo_display|default:exercise.tipo }}
+                                                {{ exercise.get_force_display|default:exercise.force }}
                                             </span>
                                         {% endif %}
-                                        {% if exercise.nivel %}
+                                        {% if exercise.level %}
                                             <span class="text-xs px-2 py-0.5 
-                                                {% if exercise.nivel == 'PRINCIPIANTE' %}bg-green-50 text-green-600
-                                                {% elif exercise.nivel == 'INTERMEDIO' %}bg-yellow-50 text-yellow-600
-                                                {% elif exercise.nivel == 'AVANZADO' %}bg-red-50 text-red-600
+                                                {% if exercise.level == 'PRINCIPIANTE' %}bg-green-50 text-green-600
+                                                {% elif exercise.level == 'INTERMEDIO' %}bg-yellow-50 text-yellow-600
+                                                {% elif exercise.level == 'AVANZADO' %}bg-red-50 text-red-600
                                                 {% else %}bg-gray-50 text-gray-600{% endif %} rounded-full">
-                                                {{ exercise.get_nivel_display|default:exercise.nivel }}
+                                                {{ exercise.get_level_display|default:exercise.level }}
                                             </span>
                                         {% endif %}
                                     </div>
                                 </div>
-                                
-                                <!-- Flecha sutil (mismo estilo que las secciones) -->
-                                <span class="text-gray-300 group-hover:text-blue-400 transition-colors flex-shrink-0">
-                                    →
-                                </span>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             {% else %}
-                <!-- Mensaje cuando no hay ejercicios -->
+                <!-- No exercises found -->
                 <div class="col-span-1 md:col-span-2">
                     <div class="p-12 bg-white rounded-xl shadow-sm border border-gray-100 text-center">
                         <div class="text-6xl mb-4">🏋️</div>
