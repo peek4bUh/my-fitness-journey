@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'mfj',
+    'django_tailwind_cli',
 ]
 
 # https://docs.djangoproject.com/en/6.0/ref/middleware/
