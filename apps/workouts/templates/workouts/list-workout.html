@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyFitnessJourney</title>
+    <title>Jurnalth | Workout Log</title>
     {% tailwind_css %}
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
@@ -15,12 +15,10 @@
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <a href="{% url 'index' %}" class="hover:opacity-80 transition-opacity">
-                            <h1 class="text-2xl sm:text-4xl font-light text-gray-800 tracking-tight">
-                                My<span class="font-semibold text-blue-500">Fitness</span>Journey
-                            </h1>
+                            <h1 class="text-2xl sm:text-3xl font-semibold text-blue-500 tracking-tight">Jurnalth</h1>
                         </a>
                         <div class="mt-2 h-0.5 w-12 sm:w-16 bg-blue-400 rounded"></div>
-                        <p class="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-500">Your workout history</p>
+                        <p class="mt-2 text-xs sm:text-sm text-gray-500">Your workout history</p>
                     </div>
                     <a href="{% url 'workout_create' %}" class="rounded-lg bg-blue-600 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-700 transition-colors">
                         + Nuevo workout
@@ -32,18 +30,28 @@
                 <div class="divide-y divide-gray-100">
                     {% for workout in workouts %}
                         <div class="px-4 sm:px-5 py-4 hover:bg-gray-50 transition-colors">
-                            <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center justify-between gap-4 mb-3">
                                 <time class="text-xs sm:text-sm text-gray-400" datetime="{{ workout.date|date:'Y-m-d' }}">{{ workout.date|date:'d/m/Y' }}</time>
-                                <span class="text-xs text-gray-400">{{ workout.exercises.count }} ejercicio{{ workout.exercises.count|pluralize:"s" }}</span>
+                                <div class="flex items-center gap-1.5">
+                                    <a href="{% url 'workout_edit' workout.id %}" class="text-xs font-medium text-blue-600 hover:text-blue-700 block p-2">Editar</a>
+                                    <form method="post" action="{% url 'workout_delete' workout.id %}" onsubmit="return confirm('Delete this workout?');" class="flex">
+                                        {% csrf_token %}
+                                        <button type="submit" class="text-xs font-medium text-red-600 hover:text-red-700 p-2">Borrar</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="mt-5 overflow-x-auto">
+                            <div class="overflow-x-auto">
                                 <div class="min-w-xl space-y-2 text-sm text-gray-700">
                                     {% for exercise in workout.exercises.all %}
                                         <div class="whitespace-nowrap">{{ exercise.execution_order }} / {{ exercise.exercise_name }} / {{ exercise.volume }} / {{ exercise.rest|default:"-" }}</div>
                                     {% endfor %}
                                 </div>
                             </div>
-                            {% if workout.notes %}<p class="mt-5 text-sm text-gray-700"><span class="font-medium">Nota:</span> {{ workout.notes }}</p>{% endif %}
+                            {% if workout.notes %}
+                            <p class="mt-5 text-sm text-gray-700">
+                                <span class="font-medium">Nota:</span> {{ workout.notes }}
+                            </p>
+                            {% endif %}
                         </div>
                     {% empty %}
                         <div class="px-5 py-12 text-center">
@@ -55,7 +63,7 @@
             </div>
 
             <!-- Volver al inicio -->
-            <div class="mt-10 pt-6 border-t border-gray-200">
+            <div class="mt-10 flex justify-start border-t border-gray-200 pt-6">
                 <a href="{% url 'index' %}" class="text-sm text-gray-500 hover:text-blue-500 transition-colors">
                     ← Back to Home
                 </a>

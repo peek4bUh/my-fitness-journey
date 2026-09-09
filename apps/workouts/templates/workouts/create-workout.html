@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyFitnessJourney</title>
+    <title>Jurnalth | Add workout</title>
     {% tailwind_css %}
 </head>
 <body class="min-h-screen bg-gray-50 font-sans">
         <main class="max-w-4xl mx-auto px-4 py-6 sm:py-12">
             <header class="mb-8">
-                <a href="{% url 'workouts_index' %}" class="text-sm text-gray-500 hover:text-blue-600 transition-colors">&larr; My Workouts</a>
-                <h1 class="mt-5 text-3xl sm:text-4xl font-light text-gray-800 tracking-tight">Register Workout</h1>
-                <p class="mt-2 text-sm text-gray-500">Add the exercises, volume, and rest for your training.</p>
+                <a href="{% url 'index' %}" class="hover:opacity-80 transition-opacity">
+                    <h1 class="text-2xl sm:text-3xl font-semibold text-blue-500 tracking-tight">Jurnalth</h1>
+                </a>
+                <div class="mt-2 h-0.5 w-12 bg-blue-400 rounded"></div>
+                <p class="mt-2 text-xs sm:text-sm text-gray-500">{% if is_edit %}Actualiza la fecha, las notas o los ejercicios.{% else %}Add the exercises, volume, and rest for your training.{% endif %}</p>
             </header>
 
             <form method="post" class="space-y-6" novalidate>
@@ -57,6 +59,7 @@
                         {% for exercise_form in exercise_formset %}
                             <div class="exercise-row rounded-lg border border-gray-200 bg-gray-50 p-4">
                                 {% for hidden in exercise_form.hidden_fields %}{{ hidden }}{% endfor %}
+                                {% if exercise_form.DELETE %}<div class="hidden">{{ exercise_form.DELETE }}</div>{% endif %}
                                 <div class="grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,2fr)_1fr_1fr_auto] sm:items-end">
                                     <div>
                                         <label for="{{ exercise_form.exercise.id_for_label }}" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Name</label>
@@ -90,13 +93,19 @@
 
                 <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                     <a href="{% url 'workouts_index' %}" class="rounded-lg px-4 py-2.5 text-center text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">Cancel</a>
-                    <button type="submit" class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors">Save</button>
+                    <button type="submit" class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors">{% if is_edit %}Guardar cambios{% else %}Save{% endif %}</button>
                 </div>
             </form>
+            <div class="mt-10 flex justify-start border-t border-gray-200 pt-6">
+                <a href="{% url 'workouts_index' %}" class="text-sm text-gray-500 hover:text-blue-500 transition-colors">
+                    &larr; My Workouts
+                </a>
+            </div>
         </main>
 
         <template id="empty-exercise-form">
             <div class="exercise-row rounded-lg border border-gray-200 bg-gray-50 p-4">
+                {% if exercise_formset.empty_form.DELETE %}<div class="hidden">{{ exercise_formset.empty_form.DELETE }}</div>{% endif %}
                 <div class="grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,2fr)_1fr_1fr_auto] sm:items-end">
                     <div>
                         <label for="{{ exercise_formset.empty_form.exercise.id_for_label }}" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Exercise</label>
@@ -154,7 +163,13 @@
                 if (!row) return;
 
                 if (event.target.classList.contains("remove-exercise")) {
-                    row.remove();
+                    const deleteInput = row.querySelector("input[name$='-DELETE']");
+                    if (deleteInput) {
+                        deleteInput.checked = true;
+                        row.classList.add("hidden");
+                    } else {
+                        row.remove();
+                    }
                     renumberForms();
                 }
 

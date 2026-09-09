@@ -57,6 +57,9 @@ class WorkoutExerciseForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields["exercise"].initial = Exercise.objects.filter(
+                name=self.instance.exercise_name).first()
         for field in self.fields.values():
             field.widget.attrs["class"] = INPUT_CLASS
 
@@ -66,6 +69,7 @@ WorkoutExerciseFormSet = inlineformset_factory(
     WorkoutExercise,
     form=WorkoutExerciseForm,
     extra=0,
+    can_delete=True,
     min_num=1,
     validate_min=True,
 )

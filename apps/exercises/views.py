@@ -10,4 +10,4 @@ def exercises_index(request):
         'exercises': exercises,
         'total_exercises': exercises.count(),
     }
-    return render(request, 'exercises/index.html', context)
+    return render(request, 'exercises/list-exercise.html', context)

@@ -19,7 +19,12 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from apps.exercises.views import exercises_index
-from apps.workouts.views import workout_create, workouts_index
+from apps.workouts.views import (
+    workout_create,
+    workout_delete,
+    workout_edit,
+    workouts_index,
+)
 
 
 urlpatterns = [
@@ -29,4 +34,7 @@ urlpatterns = [
     path("exercises/", exercises_index, name="exercises_index"),
     path("workouts/", workouts_index, name="workouts_index"),
     path("workouts/new/", workout_create, name="workout_create"),
+    path("workouts/<int:workout_id>/edit/", workout_edit, name="workout_edit"),
+    path("workouts/<int:workout_id>/delete/",
+         workout_delete, name="workout_delete"),
 ]
