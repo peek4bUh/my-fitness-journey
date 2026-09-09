@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'apps.exercises',
     'apps.muscles',
+    'apps.workouts',
     'django_tailwind_cli',
 ]
 

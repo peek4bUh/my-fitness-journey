@@ -1,0 +1,177 @@
+{% load static tailwind_cli %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyFitnessJourney</title>
+    {% tailwind_css %}
+</head>
+<body class="min-h-screen bg-gray-50 font-sans">
+        <main class="max-w-4xl mx-auto px-4 py-6 sm:py-12">
+            <header class="mb-8">
+                <a href="{% url 'workouts_index' %}" class="text-sm text-gray-500 hover:text-blue-600 transition-colors">&larr; My Workouts</a>
+                <h1 class="mt-5 text-3xl sm:text-4xl font-light text-gray-800 tracking-tight">Register Workout</h1>
+                <p class="mt-2 text-sm text-gray-500">Add the exercises, volume, and rest for your training.</p>
+            </header>
+
+            <form method="post" class="space-y-6" novalidate>
+                {% csrf_token %}
+
+                {% if form.non_field_errors or exercise_formset.non_form_errors %}
+                    <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                        {{ form.non_field_errors }}
+                        {{ exercise_formset.non_form_errors }}
+                    </div>
+                {% endif %}
+
+                <section class="rounded-xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
+                    <h2 class="text-lg font-semibold text-gray-800">Workout Info</h2>
+                    <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                        <div>
+                            <label for="{{ form.date.id_for_label }}" class="block text-sm font-medium text-gray-700">Date</label>
+                            {{ form.date }}
+                            {% for error in form.date.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="{{ form.notes.id_for_label }}" class="block text-sm font-medium text-gray-700">Notas <span class="font-normal text-gray-400">(opcional)</span></label>
+                            {{ form.notes }}
+                            {% for error in form.notes.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+                        </div>
+                    </div>
+                </section>
+
+                <section class="rounded-xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
+                    <div class="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <h2 class="text-lg font-semibold text-gray-800">Exercises</h2>
+                            <p class="text-sm text-gray-500">Register the main volume for each exercise.</p>
+                        </div>
+                        <button type="button" id="add-exercise" class="self-start rounded-lg border border-blue-200 px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 transition-colors sm:self-auto">
+                            + Add exercise
+                        </button>
+                    </div>
+
+                    {{ exercise_formset.management_form }}
+                    <div id="exercise-forms" class="mt-5 space-y-4">
+                        {% for exercise_form in exercise_formset %}
+                            <div class="exercise-row rounded-lg border border-gray-200 bg-gray-50 p-4">
+                                {% for hidden in exercise_form.hidden_fields %}{{ hidden }}{% endfor %}
+                                <div class="grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,2fr)_1fr_1fr_auto] sm:items-end">
+                                    <div>
+                                        <label for="{{ exercise_form.exercise.id_for_label }}" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Name</label>
+                                        {{ exercise_form.exercise }}
+                                    </div>
+                                    <div>
+                                        <label for="{{ exercise_form.volume.id_for_label }}" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Volume</label>
+                                        {{ exercise_form.volume }}
+                                    </div>
+                                    <div>
+                                        <label for="{{ exercise_form.rest.id_for_label }}" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Rest</label>
+                                        {{ exercise_form.rest }}
+                                    </div>
+                                    <div>
+                                        <label for="{{ exercise_form.execution_order.id_for_label }}" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Execution order</label>
+                                        {{ exercise_form.execution_order }}
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <button type="button" class="move-exercise-up rounded-lg px-2 py-2 text-sm text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors" title="Move exercise up" aria-label="Move exercise up">&uarr;</button>
+                                        <button type="button" class="move-exercise-down rounded-lg px-2 py-2 text-sm text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors" title="Move exercise down" aria-label="Move exercise down">&darr;</button>
+                                        <button type="button" class="remove-exercise rounded-lg px-3 py-2 text-sm text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete exercise">Delete</button>
+                                    </div>
+                                </div>
+                                {% for field in exercise_form.visible_fields %}
+                                    {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                    <a href="{% url 'workouts_index' %}" class="rounded-lg px-4 py-2.5 text-center text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">Cancel</a>
+                    <button type="submit" class="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors">Save</button>
+                </div>
+            </form>
+        </main>
+
+        <template id="empty-exercise-form">
+            <div class="exercise-row rounded-lg border border-gray-200 bg-gray-50 p-4">
+                <div class="grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,2fr)_1fr_1fr_auto] sm:items-end">
+                    <div>
+                        <label for="{{ exercise_formset.empty_form.exercise.id_for_label }}" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Exercise</label>
+                        {{ exercise_formset.empty_form.exercise }}
+                    </div>
+                    <div>
+                        <label for="id_exercises-__prefix__-volume" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Volume</label>
+                        <input type="text" name="exercises-__prefix__-volume" id="id_exercises-__prefix__-volume" maxlength="255" placeholder="Ej. 3x6-10 o 1x5x80, 1x7x60" class="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    </div>
+                    <div>
+                        <label for="id_exercises-__prefix__-rest" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Rest</label>
+                        <input type="text" name="exercises-__prefix__-rest" id="id_exercises-__prefix__-rest" maxlength="20" placeholder="Ej. 90s" class="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    </div>
+                    <div>
+                        <label for="id_exercises-__prefix__-execution_order" class="block text-xs font-medium uppercase tracking-wide text-gray-500">Execution order</label>
+                        <input type="number" name="exercises-__prefix__-execution_order" id="id_exercises-__prefix__-execution_order" min="1" value="1" class="mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <button type="button" class="move-exercise-up rounded-lg px-2 py-2 text-sm text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors" title="Move exercise up" aria-label="Move exercise up">&uarr;</button>
+                        <button type="button" class="move-exercise-down rounded-lg px-2 py-2 text-sm text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors" title="Move exercise down" aria-label="Move exercise down">&darr;</button>
+                        <button type="button" class="remove-exercise rounded-lg px-3 py-2 text-sm text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors" title="Delete exercise">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <script>
+            const formsContainer = document.getElementById("exercise-forms");
+            const totalForms = document.getElementById("id_exercises-TOTAL_FORMS");
+            const emptyForm = document.getElementById("empty-exercise-form").innerHTML;
+
+            function renumberForms() {
+                const rows = formsContainer.querySelectorAll(".exercise-row");
+                rows.forEach((row, index) => {
+                    row.querySelectorAll("[name], [id], [for]").forEach((element) => {
+                        ["name", "id", "for"].forEach((attribute) => {
+                            const value = element.getAttribute(attribute);
+                            if (value) element.setAttribute(attribute, value.replace(/exercises-(?:\d+|__prefix__)-/, `exercises-${index}-`));
+                        });
+                    });
+
+                    row.querySelector(".move-exercise-up").disabled = index === 0;
+                    row.querySelector(".move-exercise-down").disabled = index === rows.length - 1;
+                });
+                totalForms.value = rows.length;
+            }
+
+            document.getElementById("add-exercise").addEventListener("click", () => {
+                formsContainer.insertAdjacentHTML("beforeend", emptyForm.replaceAll("__prefix__", formsContainer.children.length));
+                renumberForms();
+            });
+
+            formsContainer.addEventListener("click", (event) => {
+                const row = event.target.closest(".exercise-row");
+                if (!row) return;
+
+                if (event.target.classList.contains("remove-exercise")) {
+                    row.remove();
+                    renumberForms();
+                }
+
+                if (event.target.classList.contains("move-exercise-up")) {
+                    const previousRow = row.previousElementSibling;
+                    if (previousRow) formsContainer.insertBefore(row, previousRow);
+                    renumberForms();
+                }
+
+                if (event.target.classList.contains("move-exercise-down")) {
+                    const nextRow = row.nextElementSibling;
+                    if (nextRow) formsContainer.insertBefore(nextRow, row);
+                    renumberForms();
+                }
+            });
+
+            renumberForms();
+        </script>
+    </body>
+</html>
