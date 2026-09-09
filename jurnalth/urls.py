@@ -24,6 +24,7 @@ from apps.workouts.views import (
     workout_delete,
     workout_edit,
     workouts_index,
+    last_exercise_data,
 )
 
 
@@ -37,4 +38,6 @@ urlpatterns = [
     path("workouts/<int:workout_id>/edit/", workout_edit, name="workout_edit"),
     path("workouts/<int:workout_id>/delete/",
          workout_delete, name="workout_delete"),
+    path("workouts/exercises/<int:exercise_id>/last-data/",
+         last_exercise_data, name="last_exercise_data"),
 ]

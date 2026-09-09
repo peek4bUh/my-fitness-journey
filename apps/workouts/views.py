@@ -1,8 +1,11 @@
 from django.db import transaction
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
+from apps.exercises.models import Exercise
+
 from .forms import WorkoutExerciseFormSet, WorkoutForm
-from .models import Workout
+from .models import Workout, WorkoutExercise
 
 
 def workouts_index(request):
@@ -59,3 +62,19 @@ def workout_delete(request, workout_id):
     if request.method == 'POST':
         workout.delete()
     return redirect('workouts_index')
+
+
+def last_exercise_data(request, exercise_id):
+    exercise = get_object_or_404(Exercise, pk=exercise_id)
+    workout_exercise = (WorkoutExercise.objects
+                        .filter(exercise_name=exercise.name)
+                        .order_by('-workout__date', '-created_at')
+                        .first())
+
+    if not workout_exercise:
+        return JsonResponse({'volume': '', 'rest': ''})
+
+    return JsonResponse({
+        'volume': workout_exercise.volume,
+        'rest': workout_exercise.rest,
+    })
