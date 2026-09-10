@@ -117,14 +117,9 @@
 
                 <div class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
                     <a href="{% url 'workouts_index' %}" class="rounded-md px-4 py-2.5 text-center text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors">Cancel</a>
-                    <button type="submit" class="rounded-md cursor-pointer bg-gray-900 px-5 py-2.5 text-sm font-medium text-white">{% if is_edit %}Guardar cambios{% else %}Save{% endif %}</button>
+                    <button type="submit" class="rounded-sm cursor-pointer bg-gray-900 px-5 py-2.5 text-sm font-medium text-white">{% if is_edit %}Guardar cambios{% else %}Save{% endif %}</button>
                 </div>
             </form>
-            <div class="mt-10 flex justify-start border-t border-gray-200 pt-6">
-                <a href="{% url 'workouts_index' %}" class="text-sm text-gray-500 hover:text-black transition-colors">
-                    &larr; My Workouts
-                </a>
-            </div>
         </main>
 
         <template id="empty-exercise-form">

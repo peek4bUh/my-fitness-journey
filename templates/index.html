@@ -4,34 +4,7 @@
     {% include "header.html" %}
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <a href="{% url 'exercises_index' %}" class="group block">
-            <div class="h-full rounded-sm border border-gray-200 p-5 transition-colors hover:border-gray-900 hover:bg-gray-50">
-                <div class="flex items-start gap-4">
-                    <div class="flex-1">
-                        <h2 class="text-lg font-semibold text-gray-900">
-                            Exercises
-                        </h2>
-                        <p class="mt-1 text-sm text-gray-500">
-                            Browse and discover new exercises
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a href="{% url 'workouts_index' %}" class="group block">
-            <div class="h-full rounded-sm border border-gray-200 p-5 transition-colors hover:border-gray-900 hover:bg-gray-50">
-                <div class="flex items-start gap-4">
-                    <div class="flex-1">
-                        <h2 class="text-lg font-semibold text-gray-900">
-                            Workouts
-                        </h2>
-                        <p class="mt-1 text-sm text-gray-500">
-                            Register your workouts and track your progress
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </a>
+        {% include "components/menu-item.html" with path_name="exercises_index" title="Exercises" description="Browse and discover new exercises" %}
+        {% include "components/menu-item.html" with path_name="workouts_index" title="Workouts" description="Register your workouts and track your progress" %}
     </div>
 {% endblock %}
