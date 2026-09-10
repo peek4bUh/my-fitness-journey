@@ -7,7 +7,7 @@
     <title>Jurnalth | Workout Log</title>
     {% tailwind_css %}
 </head>
-<body class="min-h-screen bg-gray-50 font-sans">
+<body class="min-h-screen font-sans text-gray-900">
         <!-- Contenedor principal -->
         <div class="max-w-4xl mx-auto px-4 py-6 sm:py-12">
             <!-- Header con navegación -->
@@ -15,48 +15,60 @@
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <a href="{% url 'index' %}" class="hover:opacity-80 transition-opacity">
-                            <h1 class="text-2xl sm:text-3xl font-semibold text-blue-500 tracking-tight">Jurnalth</h1>
+                            <h1 class="text-2xl sm:text-3xl font-semibold text-gray-950 tracking-tight">Jurnalth</h1>
                         </a>
-                        <div class="mt-2 h-0.5 w-12 sm:w-16 bg-blue-400 rounded"></div>
+                        <div class="mt-2 h-0.5 w-12 sm:w-16 bg-gray-900"></div>
                         <p class="mt-2 text-xs sm:text-sm text-gray-500">Your workout history</p>
                     </div>
-                    <a href="{% url 'workout_create' %}" class="rounded-lg bg-blue-600 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-700 transition-colors">
+                    <a href="{% url 'workout_create' %}" class="border border-gray-900 bg-gray-900 px-4 py-2.5 text-center text-sm font-medium text-white hover:bg-black transition-colors">
                         New workout
                     </a>
                 </div>
             </header>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="divide-y divide-gray-100">
+            <div class="border-y border-gray-200 overflow-hidden">
+                <div class="divide-y divide-gray-200">
                     {% for workout in workouts %}
-                        <div class="px-4 sm:px-5 py-4 hover:bg-gray-50 transition-colors">
-                            <div class="flex items-center justify-between gap-4 mb-3">
-                                <time class="text-xs sm:text-sm text-gray-400" datetime="{{ workout.date|date:'Y-m-d' }}">{{ workout.date|date:'d/m/Y' }}</time>
-                                <div class="flex items-center gap-1.5">
-                                    <a href="{% url 'workout_edit' workout.id %}" class="text-xs font-medium text-blue-600 hover:text-blue-700 block p-2">Editar</a>
+                        <div class="workout-record border-l-2 border-transparent px-4 py-4 transition-all duration-200 hover:border-gray-900 hover:bg-gray-50 sm:px-5">
+                            <div class="flex items-center justify-between gap-4">
+                                <time class="text-sm font-medium text-gray-700" datetime="{{ workout.date|date:'Y-m-d' }}">{{ workout.date|date:'Y-m-d' }}</time>
+                                <div class="flex items-center gap-1">
+                                    <button type="button" class="workout-toggle cursor-pointer flex h-8 w-8 items-center justify-center rounded-sm text-gray-400 transition-all duration-200 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2" aria-expanded="false" aria-controls="workout-details-{{ workout.id }}" aria-label="Toggle workout details">
+                                    <svg class="workout-chevron h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                        <path d="m5 7.5 5 5 5-5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    </button>
+                                    <a href="{% url 'workout_edit' workout.id %}" class="rounded-sm px-2 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-950">Editar</a>
                                     <form method="post" action="{% url 'workout_delete' workout.id %}" onsubmit="return confirm('Delete this workout?');" class="flex">
                                         {% csrf_token %}
-                                        <button type="submit" class="text-xs font-medium text-red-600 hover:text-red-700 p-2">Borrar</button>
+                                        <button type="submit" class="cursor-pointer rounded-sm px-2 py-1 text-xs font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-950">Borrar</button>
                                     </form>
                                 </div>
                             </div>
-                            <div class="overflow-x-auto">
-                                <div class="min-w-xl space-y-2 text-sm text-gray-700">
-                                    {% for exercise in workout.exercises.all %}
-                                        <div class="whitespace-nowrap">{{ exercise.execution_order }} / {{ exercise.exercise_name }} / {{ exercise.volume }} / {{ exercise.rest|default:"-" }}</div>
-                                    {% endfor %}
+
+                            <div id="workout-details-{{ workout.id }}" class="workout-details grid grid-rows-[0fr] opacity-0 transition-all duration-300" aria-hidden="true">
+                                <div class="overflow-hidden">
+                                    <div class="pt-4">
+                                        <div class="overflow-x-auto">
+                                            <div class="min-w-xl space-y-2 text-sm text-gray-700">
+                                                {% for exercise in workout.exercises.all %}
+                                                    <div class="whitespace-nowrap">{{ exercise.execution_order }} / {{ exercise.exercise_name }} / {{ exercise.volume }} / {{ exercise.rest|default:"-" }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        {% if workout.notes %}
+                                        <p class="mt-5 text-sm text-gray-700">
+                                            <span class="font-medium">Nota:</span> {{ workout.notes }}
+                                        </p>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
-                            {% if workout.notes %}
-                            <p class="mt-5 text-sm text-gray-700">
-                                <span class="font-medium">Nota:</span> {{ workout.notes }}
-                            </p>
-                            {% endif %}
                         </div>
                     {% empty %}
                         <div class="px-5 py-12 text-center">
                             <p class="text-sm text-gray-500">No workouts registered yet.</p>
-                            <a href="{% url 'workout_create' %}" class="mt-3 inline-block text-sm font-medium text-blue-600 hover:text-blue-700">Register the first one &rarr;</a>
+                            <a href="{% url 'workout_create' %}" class="mt-3 inline-block text-sm font-medium text-gray-800 hover:text-black">Register the first one &rarr;</a>
                         </div>
                     {% endfor %}
                 </div>
@@ -64,10 +76,27 @@
 
             <!-- Volver al inicio -->
             <div class="mt-10 flex justify-start border-t border-gray-200 pt-6">
-                <a href="{% url 'index' %}" class="text-sm text-gray-500 hover:text-blue-500 transition-colors">
+                    <a href="{% url 'index' %}" class="text-sm text-gray-500 hover:text-black transition-colors">
                     ← Back to Home
                 </a>
             </div>
         </div>
+        <script>
+            document.querySelectorAll(".workout-toggle").forEach((toggle) => {
+                toggle.addEventListener("click", () => {
+                    const details = document.getElementById(toggle.getAttribute("aria-controls"));
+                    const chevron = toggle.querySelector(".workout-chevron");
+                    const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+
+                    toggle.setAttribute("aria-expanded", String(!isExpanded));
+                    details.setAttribute("aria-hidden", String(isExpanded));
+                    details.classList.toggle("grid-rows-[1fr]", !isExpanded);
+                    details.classList.toggle("grid-rows-[0fr]", isExpanded);
+                    details.classList.toggle("opacity-100", !isExpanded);
+                    details.classList.toggle("opacity-0", isExpanded);
+                    chevron.classList.toggle("rotate-180", !isExpanded);
+                });
+            });
+        </script>
     </body>
 </html>

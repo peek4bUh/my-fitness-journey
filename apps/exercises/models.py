@@ -80,7 +80,7 @@ class Exercise(models.Model):
         db_table = "exercise"
 
     name = models.CharField(max_length=128, unique=True)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True, null=True)
     target_muscle = models.ForeignKey(
         Muscle,
         on_delete=models.CASCADE,

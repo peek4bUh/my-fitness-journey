@@ -16,7 +16,8 @@ def workouts_index(request):
 def workout_create(request):
     if request.method == 'POST':
         form = WorkoutForm(request.POST)
-        exercise_formset = WorkoutExerciseFormSet(request.POST)
+        exercise_formset = WorkoutExerciseFormSet(
+            request.POST, form_kwargs={'is_edit': False})
         if form.is_valid() and exercise_formset.is_valid():
             with transaction.atomic():
                 workout = form.save()
@@ -25,7 +26,8 @@ def workout_create(request):
             return redirect('workouts_index')
     else:
         form = WorkoutForm()
-        exercise_formset = WorkoutExerciseFormSet()
+        exercise_formset = WorkoutExerciseFormSet(
+            form_kwargs={'is_edit': False})
 
     return render(request, 'workouts/create-workout.html', {
         'form': form,
@@ -39,7 +41,7 @@ def workout_edit(request, workout_id):
     if request.method == 'POST':
         form = WorkoutForm(request.POST, instance=workout)
         exercise_formset = WorkoutExerciseFormSet(
-            request.POST, instance=workout)
+            request.POST, instance=workout, form_kwargs={'is_edit': True})
         if form.is_valid() and exercise_formset.is_valid():
             with transaction.atomic():
                 form.save()
@@ -47,7 +49,8 @@ def workout_edit(request, workout_id):
             return redirect('workouts_index')
     else:
         form = WorkoutForm(instance=workout)
-        exercise_formset = WorkoutExerciseFormSet(instance=workout)
+        exercise_formset = WorkoutExerciseFormSet(
+            instance=workout, form_kwargs={'is_edit': True})
 
     return render(request, 'workouts/create-workout.html', {
         'form': form,

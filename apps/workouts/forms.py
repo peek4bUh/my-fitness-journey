@@ -6,9 +6,9 @@ from apps.exercises.models import Exercise
 from .models import Workout, WorkoutExercise
 
 INPUT_CLASS = (
-    "mt-1 block w-full rounded-lg border border-gray-200 bg-white px-3 py-2 "
-    "text-sm text-gray-800 focus:border-blue-500 focus:outline-none "
-    "focus:ring-1 focus:ring-blue-500"
+    "mt-1 block w-full rounded-sm border border-gray-200 bg-white px-3 py-2 "
+    "text-sm text-gray-800 focus:border-gray-700 focus:outline-none "
+    "focus:ring-0"
 )
 
 
@@ -31,6 +31,7 @@ class WorkoutExerciseForm(forms.ModelForm):
     exercise = forms.ModelChoiceField(
         queryset=Exercise.objects.order_by("name"),
         empty_label="Selecciona un ejercicio",
+        widget=forms.HiddenInput,
     )
     volume = forms.CharField(
         max_length=255,
@@ -55,8 +56,10 @@ class WorkoutExerciseForm(forms.ModelForm):
             instance.save()
         return instance
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, is_edit=False, **kwargs):
         super().__init__(*args, **kwargs)
+        if not is_edit:
+            self.fields.pop("execution_order")
         if self.instance and self.instance.pk:
             self.fields["exercise"].initial = Exercise.objects.filter(
                 name=self.instance.exercise_name).first()
@@ -70,6 +73,6 @@ WorkoutExerciseFormSet = inlineformset_factory(
     form=WorkoutExerciseForm,
     extra=0,
     can_delete=True,
-    min_num=1,
-    validate_min=True,
+    min_num=0,
+    validate_min=False,
 )

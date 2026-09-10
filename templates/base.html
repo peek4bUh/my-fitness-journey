@@ -1,0 +1,15 @@
+{% load static tailwind_cli %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Jurnalth{% endblock %}</title>
+    {% tailwind_css %}
+</head>
+<body class="min-h-screen font-sans bg-primary">
+    <main class="mx-auto max-w-4xl px-4 py-8 sm:py-12">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
