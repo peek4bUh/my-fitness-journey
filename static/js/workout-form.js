@@ -57,22 +57,7 @@ function syncVolumeFromSets(row) {
 function renumberSets(row) {
     row.querySelectorAll(".set-row").forEach((set, index) => {
         set.querySelector(".set-number").textContent = index + 1;
-        updateSetCompletionState(set);
     });
-}
-
-function updateSetCompletionState(set) {
-    const reps = set.querySelector(".set-reps")?.value.trim();
-    const weight = set.querySelector(".set-weight")?.value.trim();
-    const checkbox = set.querySelector(".set-completed");
-    const label = checkbox?.closest("label");
-    if (!checkbox || !label) return;
-
-    const canComplete = Boolean(reps && weight);
-    checkbox.disabled = !canComplete;
-    if (!canComplete) checkbox.checked = false;
-    label.classList.toggle("cursor-pointer", canComplete);
-    label.classList.toggle("cursor-not-allowed", !canComplete);
 }
 
 function renumberForms() {
@@ -98,10 +83,7 @@ function addSelectedExercise() {
     if (!exerciseIds.length) return;
 
     exerciseIds.forEach((exerciseId, index) => {
-        let row = [...formsContainer.querySelectorAll(".exercise-row")]
-            .find((candidate) => !candidate.querySelector("[name$='-exercise']").value);
-
-        if (!row) row = addEmptyRow();
+        const row = addEmptyRow();
 
         const exerciseField = row.querySelector("[name$='-exercise']");
         exerciseField.value = exerciseId;
@@ -192,17 +174,11 @@ formsContainer.addEventListener("click", (event) => {
     if (event.target.classList.contains("add-set")) {
         const rows = row.querySelector(".set-rows");
         rows.insertAdjacentHTML("beforeend", `
-            <div class="set-row grid grid-cols-[3rem_minmax(0,1fr)_minmax(0,1fr)_4rem] items-center py-2 transition-colors hover:bg-gray-50">
-                <span class="set-number px-2 text-sm text-gray-500"></span>
-                <input type="number" min="1" class="set-reps mx-2 min-w-0 rounded-sm border border-gray-200 px-2 py-1.5 text-sm focus:border-gray-700 focus:outline-none focus:ring-0">
-                <input type="number" step="0.5" class="set-weight mx-2 min-w-0 rounded-sm border border-gray-200 px-2 py-1.5 text-sm focus:border-gray-700 focus:outline-none focus:ring-0">
-                <div class="flex items-center justify-end gap-1">
-                    <label class="inline-flex h-7 w-7 cursor-pointer items-center justify-center" title="Mark set as done">
-                        <input type="checkbox" disabled class="set-completed h-4 w-4 rounded-sm border-gray-300 text-gray-900 focus:border-gray-700 focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50">
-                        <span class="sr-only">Mark set as done</span>
-                    </label>
-                    <button type="button" class="remove-set inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm text-sm font-medium text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-900" title="Delete set" aria-label="Delete set">×</button>
-                </div>
+            <div class="set-row flex items-center py-2 transition-colors hover:bg-gray-50">
+                <p class="set-number w-12 shrink-0 text-sm text-gray-500"></p>
+                <p class="min-w-0 grow basis-0"><input type="number" min="1" class="set-reps w-full min-w-0 rounded-sm border border-gray-200 px-2 py-1.5 text-sm focus:border-gray-700 focus:outline-none focus:ring-0"></p>
+                <p class="min-w-0 grow basis-0 px-2"><input type="number" step="0.5" class="set-weight w-full min-w-0 rounded-sm border border-gray-200 px-2 py-1.5 text-sm focus:border-gray-700 focus:outline-none focus:ring-0"></p>
+                <p class="flex w-8 shrink-0 justify-center"><button type="button" class="remove-set inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm text-sm font-medium text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-900" title="Delete set" aria-label="Delete set">×</button></p>
             </div>`);
         renumberSets(row);
     }
@@ -235,8 +211,6 @@ formsContainer.addEventListener("change", (event) => {
 
 formsContainer.addEventListener("input", (event) => {
     if (event.target.matches(".set-weight, .set-reps")) {
-        const set = event.target.closest(".set-row");
-        updateSetCompletionState(set);
         syncVolumeFromSets(event.target.closest(".exercise-row"));
     }
     if (event.target.matches("input[name$='-volume'], input[name$='-rest']")) {
@@ -250,5 +224,4 @@ workoutForm.addEventListener("submit", () => {
 
 restoreWorkoutState();
 renumberForms();
-formsContainer.querySelectorAll(".set-row").forEach(updateSetCompletionState);
 addSelectedExercise();

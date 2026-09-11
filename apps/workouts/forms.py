@@ -43,11 +43,10 @@ class WorkoutExerciseForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(attrs={"placeholder": "Ej. 90s"}),
     )
-    execution_order = forms.IntegerField(min_value=1, initial=1)
 
     class Meta:
         model = WorkoutExercise
-        fields = ("volume", "rest", "execution_order")
+        fields = ("volume", "rest")
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -58,8 +57,6 @@ class WorkoutExerciseForm(forms.ModelForm):
 
     def __init__(self, *args, is_edit=False, **kwargs):
         super().__init__(*args, **kwargs)
-        if not is_edit:
-            self.fields.pop("execution_order")
         if self.instance and self.instance.pk:
             self.fields["exercise"].initial = Exercise.objects.filter(
                 name=self.instance.exercise_name).first()

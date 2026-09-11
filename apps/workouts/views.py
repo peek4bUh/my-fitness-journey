@@ -11,7 +11,7 @@ from .models import Workout, WorkoutExercise
 def workouts_index(request):
     workouts = Workout.objects.prefetch_related('exercises').all()
     actions = [
-        {'route': 'workout_create', 'label': 'New workout'},
+        {'route': 'workout_create', 'label': 'New'},
     ]
 
     return render(request, 'workouts/list-workout.html', {

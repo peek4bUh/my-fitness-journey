@@ -29,7 +29,6 @@ class WorkoutExercise(models.Model):
     exercise_name = models.CharField(max_length=100)
     volume = models.CharField(max_length=255)
     rest = models.CharField(max_length=20, blank=True)
-    execution_order = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

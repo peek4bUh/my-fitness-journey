@@ -10,17 +10,17 @@
             {% for workout in workouts %}
             <div class="workout-record border-b border-gray-200 border-l-2 border-l-transparent px-4 py-4 transition-colors duration-200 last:border-b-0 hover:border-l-black hover:bg-gray-50 sm:px-5">
                     <div class="flex items-center justify-between gap-4">
-                        <time class="text-sm font-medium text-gray-700" datetime="{{ workout.date|date:'Y-m-d' }}">{{ workout.date|date:'Y-m-d' }}</time>
+                        <time class="text-sm font-bold text-gray-600">{{ workout.date|date:'Y-m-d' }}</time>
                         <div class="flex items-center gap-1">
                             <button type="button" class="workout-toggle cursor-pointer flex h-8 w-8 items-center justify-center rounded-sm text-gray-400 transition-all duration-200 hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2" aria-expanded="false" aria-controls="workout-details-{{ workout.id }}" aria-label="Toggle workout details">
                             <svg class="workout-chevron h-4 w-4 transition-transform duration-200" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                 <path d="m5 7.5 5 5 5-5" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                             </button>
-                            <a href="{% url 'workout_edit' workout.id %}" class="rounded-sm px-2 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-950">Editar</a>
+                            <a href="{% url 'workout_edit' workout.id %}" class="rounded-sm px-2 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-950">Edit</a>
                             <form method="post" action="{% url 'workout_delete' workout.id %}" onsubmit="return confirm('Delete this workout?');" class="flex">
                                 {% csrf_token %}
-                                <button type="submit" class="cursor-pointer rounded-sm px-2 py-1 text-xs font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-950">Borrar</button>
+                                <button type="submit" class="cursor-pointer rounded-sm px-2 py-1 text-xs font-medium text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-950">Delete</button>
                             </form>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                                 <div class="overflow-x-auto">
                                     <div class="min-w-xl space-y-2 text-sm text-gray-700">
                                         {% for exercise in workout.exercises.all %}
-                                            <div class="whitespace-nowrap">{{ exercise.execution_order }} / {{ exercise.exercise_name }} / {{ exercise.volume }} / {{ exercise.rest|default:"-" }}</div>
+                                            <div class="whitespace-nowrap">{{ exercise.exercise_name }} / {{ exercise.volume }} / {{ exercise.rest|default:"-" }}</div>
                                         {% endfor %}
                                     </div>
                                 </div>
